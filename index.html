@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html ng-app="patcherApp">
+<head>
+	<title>Camelot Unchained Patcher</title>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cinzel">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Alegreya+Sans">
+	<link rel="stylesheet" type="text/css" href="styles/gallery.prefixed.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/preferred-playtime.css">
+</head>
+<body ng-controller="PatcherCtrl">
+	<div id="wrap">
+		<div id="navigation">
+			<div id="logo"></div>
+			<div id="build">Build v1.4</div>
+			<ul id="channels" ng-show="channels" ng-cloak>
+				<li ng-repeat="c in channels" ng-class="{active: selectedChannelIndex == $index}">
+					<button ng-click="selectChannel($index, c.channelID)" ng-bind="c.channelName"></button>
+				</li>
+			</ul>
+			<ul id="external-links">
+				<li><a href="http://camelotunchained.com" target="_blank">Main Website</a></li>
+				<li><a href="https://forums.camelotunchained.com/topic/5824-patch-notes/" target="_blank">Patch Notes</a></li>
+				<li><a href="http://camelotunchained.com/v2/category/news/" target="_blank">News</a></li>
+				<li><a href="https://store.camelotunchained.com" target="_blank">CSE Store</a></li>
+				<!--<li><a href="#" ng-click="showFAQ()">P.A.T.S FAQ</a></li>-->
+				<li><a href="http://camelotunchained.com/v2/Alpha%20Manual%20AT%20V0.3.pdf" target="_blank">Alpha Manual</a></li>
+			</ul>
+		</div>
+		<div id="reconnectinginfo" ng-show="isReconnectingToServer()">
+			<span id="time-till-reconnect">
+				<span ng-show="getTimeToNextReconnect() > 0" ng-bind="getTimeToNextReconnect() | hoursMinutesSeconds"></span>
+				<span ng-show="getTimeToNextReconnect() <= 0">Now</span>
+			</span>
+		</div>
+		<div id="content">
+			<div id="banner">
+				<div id="banners">
+					<div class="gallery autoplay items-{{banners.length}} fade-animation" ng-hide="!bannersVisible" ng-cloak>
+						<div id="item-{{ $index }}" class="control-operator" ng-repeat="banner in banners track by $index"></div>
+						<figure class="item" ng-repeat="banner in banners track by $index" ng-bind-html="banner | trustAsHtml"></figure>
+						<div class="controls">
+							<a href="#item-{{ $index }}" class="control-button" ng-repeat="banner in banners track by $index">&#9830;</a>
+						</div>
+					</div>
+				</div>
+				<div id="scheduled-test" class="fade-animation" ng-hide="!nextTest" ng-cloak>
+					<span ng-bind="nextTest.type | spaceBeforeCapitalLetter "></span><span>:</span>
+					<span ng-bind="nextTest.startDate | date : 'MMM d, y h:mm a'"></span>
+				</div>
+			</div>
+			<div id="bottom">
+				<div id="reconnecting" ng-show="isReconnectingToServer()"></div>
+				<div id="last-updated" class="fade-animation" ng-hide="!lastUpdated" ng-cloak>
+					<span ng-show="lastUpdated">Last Updated: </span>
+					<span ng-bind="lastUpdated | date : 'medium'"></span>
+				</div>
+				<div id="loading-bar">
+					<div id="loading-bar-complete"></div>
+					<div id="loading-bar-frame"></div>
+					<div id="download" ng-show="downloadRemaining">
+						<span id="download-percent-remaining" ng-cloak><span ng-bind="downloadProgressPercent"></span>%</span>
+						<span id="download-hours-remaining" ng-show="secondsRemaining" ng-cloak><span ng-bind="secondsRemaining | hoursMinutesSeconds"></span> left</span>
+						<span id="download-files-remaining" ng-cloak><span ng-bind="completedFiles"></span> / <span ng-bind="totalFiles"></span> files</span>
+						<span id="download-bytes-remaining" ng-cloak><span ng-bind="convertBytesToString(downloadEstimate - downloadRemaining)"></span> / <span ng-bind="convertBytesToString(downloadEstimate)"></span></span>
+						<span id="download-speed" ng-show="downloadRate" ng-cloak><span ng-bind="convertBytesToString(downloadRate)"></span>/s</span>
+					</div>
+				</div>
+				<div id="login" ng-show="!user.isLoggedIn">
+					<form>
+						<input id="email" type="text" autocomplete="off" placeholder="Email" ng-model="user.email" required focus-on="focusEmail"></input>
+						<input id="password" type="password" placeholder="Password" ng-model="user.password" required focus-on="focusPassword"></input>
+						<br />
+						<input id="remember" type="checkbox" ng-model="user.rememberMe"></input>
+						<label id="remember-label" for="remember">Remember my email</label>
+						<span id="forgot"><a href="https://api.citystateentertainment.com/Account/ForgottenPassword" target="_blank">Forgot?</a></span>
+						<button id="btn-login" ng-click="login(user)" ng-disabled="form.$invalid"></button>
+						<label id="crashlog-label">CSE will collect logs in the event of a crash</label>
+					</form>
+				</div>
+				<div id="play" ng-show="user.isLoggedIn" ng-cloak>
+					<div id="welcome"></div>
+					<input type="text" id="logged-in-name" disabled ng-value="user.screenName" />
+					<div ng-show="channel">
+						<button id="btn-disabled" ng-show="channel.isPlaying || channel.isUpdating" ng-bind="buttonText"></button>
+						<button id="btn-install" ng-show="channel.isNotInstalled" ng-click="installChannel(channel)"></button>
+						<button id="btn-play-now" ng-show="channel.isInstalled" ng-click="launchChannel($event, channel)"></button>
+						<a id="btn-uninstall" href="#" class="noselect" ng-click="uninstallChannel(channel)" ng-show="channel.isInstalled">Uninstall</a>
+					</div>
+				</div>
+				<div id="server">
+					<div id="server-select" class="wrapper-dropdown">
+						<div ng-show="selectedServer">
+							<span ng-bind="selectedServer.name"></span>
+							<span> - </span>
+							<span ng-bind="getAccessLevel(selectedServer.accessLevel)" ng-show="hasAccessLevel(selectedServer.accessLevel)"></span>
+							<span ng-show="hasAccessLevel(selectedServer.accessLevel)"> - </span>
+							<span class="server-online" ng-if="selectedServer.isOnline">Online</span>
+							<span class="server-offline" ng-if="!selectedServer.isOnline">Offline</span>
+							<span class="server-player-count-ratio"><span ng-bind="(selectedServer.playerCounts.arthurians + selectedServer.playerCounts.tuathaDeDanann + selectedServer.playerCounts.vikings) || 0"></span> / <span ng-bind="selectedServer.playerMaximum || 0"></span> players</span>
+						</div>
+						<ul class="dropdown" ng-show="servers">
+							<li ng-repeat="server in servers">
+								<a href="#" ng-click="selectServer(server, true)">
+									<span ng-bind="server.name"></span>
+									<span> - </span>
+									<span ng-bind="getAccessLevel(server.accessLevel)" ng-show="hasAccessLevel(server.accessLevel)"></span>
+									<span ng-show="hasAccessLevel(server.accessLevel)"> - </span>
+									<span class="server-online" ng-if="server.isOnline">Online</span>
+									<span class="server-offline" ng-if="!server.isOnline">Offline</span>
+									<span class="server-player-count-ratio"><span ng-bind="(server.playerCounts.arthurians + server.playerCounts.tuathaDeDanann + server.playerCounts.vikings) || 0"></span> / <span ng-bind="server.playerMaximum || 0"></span> players</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<ul id="server-realms">
+						<li>
+							<img src="images/serverlist-picture3.jpg" />
+							<span><span ng-bind="selectedServer.playerCounts.arthurians || 0"></span> <span class="realm-name">Arthurians</span></span></span>
+						</li>
+						<li>
+							<img src="images/serverlist-picture1.jpg" />
+							<span><span ng-bind="selectedServer.playerCounts.tuathaDeDanann || 0"></span> <span class="realm-name">Tuatha D&#233; Danann</span></span>
+						</li>
+						<li>
+							<img src="images/serverlist-picture2.jpg" />
+							<span><span ng-bind="selectedServer.playerCounts.vikings || 0"></span> <span class="realm-name">Vikings</span></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="euala-modal-overlay" ng-show="isEualaModalVisible">
+		<div id="euala-modal">
+			<iframe src="http://camelotunchained.com/v2/euala.html" width="100%" height="100%" frameborder="0"></iframe>
+			<button id="btn-accept" ng-click="acceptEUALA()">Accept</button>
+			<button id="btn-decline" ng-click="logout()">Decline</button>
+		</div>
+	</div>
+	<div id="faq-modal-overlay" ng-show="isFaqModalVisible">
+		<div id="faq-modal">
+			<iframe src="http://camelotunchained.com/v2/pats-faq/" width="100%" height="100%" frameborder="0"></iframe>
+			<button id="btn-close" ng-click="hideFAQ()">Close</button>
+		</div>
+	</div>
+	<div id="preferred-playtime" ng-show="isPreferredPlayTimeModalVisible">
+		<div id="preferred-playtime-modal">
+			<h1>Which ONE time zone's tests do you wish to participate in?</h1>
+			<h3>Weekday regional tests will generally start at 1900/7PM in the selected time zone. </h3>
+			<h3>Weekend tests will generally start about 1200/12PM in the selected time zone.</h3>
+			<h3> All-access tests are not time zone locked.</h3>
+			<div class="responsive">
+				<ul class="content">
+					<!-- EST -->
+					<li ng-click="setPreferredPlayTime('EST')">
+						<div class="card-front">
+							<h2><b>Eastern Standard Time</b></h2>
+							<p>UTC-4: East Coast of United States, Canada and Latin America.</p>
+						</div>
+						<div class="card-back">
+  				    <h2><b>Select Eastern</b></h2>
+  				    <p>EDT/EST | GMT - 4/5</p>
+						</div>
+					</li>
+					<!-- PST -->
+					<li ng-click="setPreferredPlayTime('PST')">
+						<div class="card-front">
+							<h2><b>Pacific Standard Time</b></h2>
+							<p>UTC-7: West Coast of the United States, Canada and Latin America.</p>
+						</div>
+						<div class="card-back">
+  				    <h2><b>Select Pacific</b></h2>
+  				    <p>PDT/PST | GMT - 7/8</p>
+						</div>
+					</li>
+					<!-- EET -->
+					<!-- <li ng-click="setPreferredPlayTime('EET')">
+						<div class="card-front">
+							<h2><b>Eastern Europe Time</b></h2>
+							<p>Athens, Bucharest, Cairo, Cape Town, Cyprus, Estonia, Finland, Greece, Harare, Helsinki, Israel, Instanbul, Latvia, Pretoria</p>
+						</div>
+						<div class="card-back">
+  				    <h2><b>Select Eastern Europe</b></h2>
+  				    <p>EET / GMT + 3</p>
+						</div>
+					</li> -->
+					<!-- WET -->
+					<li ng-click="setPreferredPlayTime('WET')">
+						<div class="card-front">
+							<h2><b>Western Europe Time</b></h2>
+							<p>UTC+0: Please note that for our Backers in other time zones such as BST, IST, etc., to add/subtract the appropriate time from the UTC.</p>
+						</div>
+						<div class="card-back">
+  				    <h2><b>Select Western Europe</b></h2>
+  				    <p>GMT / UTC</p>
+						</div>
+					</li>
+					<!-- ASIA -->
+					<!-- <li ng-click="setPreferredPlayTime('Asia')">
+						<div class="card-front">
+							<h2><b>Asia-Pacific Time</b></h2>
+							<p>Beijing, Brisbane, Canberra, Guam, Hong Kong, Kuala Lumpar, Manila, Melbourne, Perth, Singapore, Sydney, Osaka, Seoul, Tokyo, Yakutsk</p>
+						</div>
+						<div class="card-back">
+  				    <h2><b>Select ASIA</b></h2>
+  				    <p>GMT + 8 - GMT + 10</p>
+						</div>
+					</li> -->
+					<!-- NONE -->
+					<li ng-click="setPreferredPlayTime('None')">
+						<div class="card-front">
+							<h2><b>Not Now</b></h2>
+							<p>I do not want to set my preferred play time now.</p>
+						</div>
+						<div class="card-back">
+  				    <h2><b>Select None</b></h2>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="scripts/underscore.js"></script>
+	<script src="scripts/jquery.js"></script>
+	<script src="scripts/angular.js"></script>
+	<script src="scripts/angular-animate.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/app/controllers/patcher.js"></script>
+	<script src="scripts/app/directives/focusOn.js"></script>
+	<script src="scripts/app/filters/hoursMinutesSeconds.js"></script>
+	<script src="scripts/app/filters/spaceBeforeCapitalLetter.js"></script>
+	<script src="scripts/app/filters/trustAsHtml.js"></script>
+	<script src="scripts/app/services/content.js"></script>
+	<script src="scripts/app/services/game.js"></script>
+	<script src="scripts/app/services/playtime.js"></script>
+	<script src="scripts/app/services/patcher.js"></script>
+</body>
+</html>

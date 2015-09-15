@@ -1,0 +1,25 @@
+{
+  "name": "cu-patcher-ui",
+  "version": "1.0.0",
+  "description": "Camelot Unchained Patcher UI Project.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CUModSquad/cu-patcher-ui.git"
+  },
+  "keywords": [
+    "Camelot",
+    "Unchained",
+    "CU",
+    "CamelotUnchained"
+  ],
+  "author": "codecorsair <jb@codecorsair.com>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/CUModSquad/cu-patcher-ui/issues"
+  },
+  "homepage": "https://github.com/CUModSquad/cu-patcher-ui#readme"
+}
