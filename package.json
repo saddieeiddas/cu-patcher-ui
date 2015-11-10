@@ -1,25 +1,38 @@
 {
   "name": "cu-patcher-ui",
-  "version": "1.0.0",
-  "description": "Camelot Unchained Patcher UI Project.",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CUModSquad/cu-patcher-ui.git"
-  },
+  "version": "0.1.0",
+  "description": "Camelot Unchained Patcher UI",
+  "license": "MPL-2.0",
+  "main": "src/ts/main.tsx",
+  "author": "City State Entertainment <support@citystateentertainment.com>",
+  "contributors": [
+    "JB (codecorsair) <jb@codecorsair.com>"
+  ],
+  "private": true,
   "keywords": [
     "Camelot",
     "Unchained",
-    "CU",
-    "CamelotUnchained"
+    "cu",
+    "cu-ui"
   ],
-  "author": "codecorsair <jb@codecorsair.com>",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/CUModSquad/cu-patcher-ui/issues"
+  "files": [
+    "lib/",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csegames/cu-ui.git"
   },
-  "homepage": "https://github.com/CUModSquad/cu-patcher-ui#readme"
+  "dependencies": {
+    "cu-core": "^0.1.3",
+    "react": "^0.14.2",
+    "reflux": "^0.3.0",
+    "reflux-tsd": "github:saddieeiddas/reflux-tsd"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "cu-build-tools": "^0.1.8"
+  }
 }

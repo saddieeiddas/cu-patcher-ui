@@ -1,0 +1,43 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+@import 'constants';
+@import 'mixins';
+
+html,body, #app {
+  height: 100%;
+  margin: 0;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+h4 {
+  margin: 0;
+}
+
+#PatcherApp {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+@import 'header';
+@import 'sidebar';
+@import 'content';
+@import 'footer';

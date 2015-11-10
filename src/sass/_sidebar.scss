@@ -1,0 +1,17 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+#Sidebar {
+  position: absolute;
+  top: $header-height + $margin-size;
+  left: $margin-size * 2;
+  background: rgba(0, 200, 75, 0.25);
+}
+
+#Sidebar .content {
+  width: $sidebar-content-width;
+  margin: $margin-size;
+}
