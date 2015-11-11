@@ -15,7 +15,7 @@ export enum HeaderRoute {
 };
 
 export class HeaderProps {
-  public onRouteChanged : (header: HeaderRoute) => void;
+  public changeRoute : (header: HeaderRoute) => void;
 };
 
 export class Header extends React.Component<HeaderProps, any> {
@@ -29,7 +29,7 @@ export class Header extends React.Component<HeaderProps, any> {
   }
 
   internalLink(e: any) {
-    this.props.onRouteChanged(e.target.dataset.route);
+    this.props.changeRoute(e.target.dataset.route);
   }
 
   externalLink(e: any) {
@@ -45,7 +45,7 @@ export class Header extends React.Component<HeaderProps, any> {
           <li onClick={this.internalLink} data-route={HeaderRoute.News}>News</li>
           <li onClick={this.internalLink} data-route={HeaderRoute.Support}>Support</li>
           <li onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>Getting Started</li>
-          <li onClick={this.externalLink}  data-href='http://camelotunchained.com/v2/'>CSE Store</li>
+          <li onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>CSE Store</li>
           <li onClick={this.internalLink} data-route={HeaderRoute.Chat}>Chat</li>
         </ul>
       </div>

@@ -42,7 +42,7 @@ class PatcherApp extends React.Component<any, PatcherAppState> {
   render() {
     return (
       <div id={this.name}>
-        <Header onRouteChanged={this.onHeaderRouteChanged} />
+        <Header changeRoute={this.onHeaderRouteChanged} />
         <Sidebar />
         <Content route={this.state.route} />
         <Footer />
