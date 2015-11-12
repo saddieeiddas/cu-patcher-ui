@@ -29,25 +29,25 @@ export class PatcherAPI {
     } else {
       // Install a dummy API (for testing)
       this._api = {
-          userEmail: "someone@somewhere.com",
-          loginToken: "dasdakljdajdodaksjdasjd",
-          screenName: "Someone Else",
-          channelData: [
-            { channelID: 4 },
-            { channelID: 10 },
-            { channelID: 5 }
-          ],
-          patcherState: 1,
-          downloadRemaining: 50,
-          downloadEstimate: 100,
-          numberOfFiles: 1000,
-          completedFiles: 734,
-          hasReadFAQ: false,
-          ValidateClient: function() { return true; },
-          InvalidateClient: function() {},
-          UninstallChannel: function() {},
-          LaunchChannel: function() {},
-          MarkFAQAsRead: function() {}
+        userEmail: "someone@somewhere.com",
+        loginToken: "dasdakljdajdodaksjdasjd",
+        screenName: "Someone Else",
+        channelData: [
+          { channelID: 4 },
+          { channelID: 10 },
+          { channelID: 5 }
+        ],
+        patcherState: 1,
+        downloadRemaining: 50,
+        downloadEstimate: 100,
+        numberOfFiles: 1000,
+        completedFiles: 734,
+        hasReadFAQ: false,
+        ValidateClient: function() { return true; },
+        InvalidateClient: function() {},
+        UninstallChannel: function() {},
+        LaunchChannel: function() {},
+        MarkFAQAsRead: function() {}
       };
     }
   }
