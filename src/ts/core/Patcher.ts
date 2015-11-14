@@ -12,8 +12,19 @@ export interface User {
   rememberMe: boolean;
 }
 
+export enum ChannelStatus {
+  Install, 
+  Validating, 
+  Installing, 
+  UpdateQueued, 
+  Ready, 
+  UninstallQueued
+}
+
 export interface Channel {
-  channelID: number;
+  channelName: string; 
+  channelID: number; 
+  channelStatus: ChannelStatus;
 }
 
 const API : string = "patcherAPI";
@@ -130,7 +141,7 @@ export class PatcherAPI {
   installChannel(channel:Channel) :void {
     this._api.UpdateClient(channel.channelID|0);
   }
-  launchChannelfunction(channel:Channel, params:any) {
+  launchChannelfunction(channel:Channel, params:string) {
     this._api.LaunchChannel(channel.channelID|0, params);
   }
   uninstallChannel(channel:Channel) {
