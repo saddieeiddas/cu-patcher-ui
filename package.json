@@ -6,7 +6,8 @@
   "main": "src/ts/main.tsx",
   "author": "City State Entertainment <support@citystateentertainment.com>",
   "contributors": [
-    "JB (codecorsair) <jb@codecorsair.com>"
+    "JB (codecorsair) <jb@codecorsair.com>",
+    "Stacey Schlenker (Sschlenker) <cloudsift@gmail.com>"
   ],
   "private": true,
   "keywords": [
