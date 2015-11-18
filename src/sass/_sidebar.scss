@@ -8,10 +8,18 @@
   position: absolute;
   top: $header-height + $margin-size;
   left: $margin-size * 2;
-  background: rgba(0, 200, 75, 0.25);
+  width: 350px;
 }
 
 #Sidebar .content {
   width: $sidebar-content-width;
   margin: $margin-size;
+}
+
+.loginbox {
+  padding: 10px;
+}
+
+.btn-flat {
+  color: #9B9B9B;
 }

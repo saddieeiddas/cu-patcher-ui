@@ -4,24 +4,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-body {
-  background: url(../images/test-bg.png) no-repeat;
-  background-size: cover;
-}
-
 #Header {
   flex: 0 1 $header-height - $padding-size * 2;
   padding: $padding-size;
-  background: linear-gradient(rgba(0,0,0, 0.6) 7%, rgba(0,0,0,0.1) 100%);
-  
-  &::before {
-    position: absolute;
-    display: block;
-    content: ' ';
-    width: 100%;
-    background-size: cover;
-    backdrop-filter: blur(5px);
-  }
 }
 
 #Header ul {

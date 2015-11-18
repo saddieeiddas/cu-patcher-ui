@@ -38,7 +38,7 @@ export class Header extends React.Component<HeaderProps, any> {
 
   render() {
     return (
-      <div id={this.name}>
+      <div id={this.name} className='glass'>
         <ul>
           <li onClick={this.internalLink} data-route={HeaderRoute.Main}>Camelot Unchained</li>
           <li onClick={this.internalLink} data-route={HeaderRoute.PatchNotes}>Patch Notes</li>

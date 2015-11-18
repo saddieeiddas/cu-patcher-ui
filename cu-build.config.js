@@ -10,4 +10,10 @@ module.exports = {
   type: 'library',
   path: __dirname,
   name: name,
+  bundle: {
+    copy: [
+      'src/**/!(*.js|*.jsx|*.ts|*.tsx|*.ui|*.styl|*.scss)',
+      'src/include/**'
+    ]
+  }
 };

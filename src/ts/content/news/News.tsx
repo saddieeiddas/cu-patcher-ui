@@ -9,7 +9,10 @@ import * as React from 'react';
 export class NewsProps {
 };
 
-export class News extends React.Component<NewsProps, any> {
+export class NewsState {
+}
+
+export class News extends React.Component<NewsProps, NewsState> {
   public name = 'News';
 
   constructor(props: NewsProps) {

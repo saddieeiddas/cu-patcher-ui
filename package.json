@@ -30,6 +30,7 @@
     "cu-core": "^0.1.3",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-tap-event-plugin": "^0.2.1",
     "reflux": "^0.3.0",
     "reflux-tsd": "github:saddieeiddas/reflux-tsd"
   },
