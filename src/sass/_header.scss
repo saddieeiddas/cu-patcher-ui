@@ -25,13 +25,15 @@
   
   .nav-item {
     padding: 0 1em;
-    height: 35px;
+    height: 45px;
+    line-height: 35px;
+    min-width: 100px;
+    text-align: center;
     color: $header-text-color;
     cursor: pointer;
     
     &:hover {
-          background: radial-gradient(circle at bottom center,
-           rgba(122, 63, 0, 0.9), rgba(0,0,0,0.8) 75%);
+      background: radial-gradient(ellipse at bottom center, rgba(122, 63, 0, 1.0) 5px, rgba(122, 63, 0, 0.6), rgba(0,0,0,0.0) 75%);
     }
   }
 
