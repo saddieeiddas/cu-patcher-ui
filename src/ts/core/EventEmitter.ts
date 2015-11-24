@@ -89,7 +89,7 @@ export default class EventEmitter {
    * @param topic {string}         Topic name
    * @param data {any}  The data being passed (depends on topic)
    */
-  emit(topic: string, data: any): void {
+  emit(topic: string, data?: any): void {
     const listeners: Listener[] = this.events[topic];
     if (listeners && listeners.length) {
       for (let i = 0; i < listeners.length; i++) {
