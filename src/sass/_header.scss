@@ -5,20 +5,34 @@
  */
 
 #Header {
-  flex: 0 1 $header-height - $padding-size * 2;
+  display: flex;
   padding: $padding-size;
 }
 
-#Header ul {
-  margin: 30px 0px 0px 0px;
-  padding: 0;
-  list-style: none;
-  float: right;
+.nav-wrap {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
 }
 
-#Header ul li {
-  padding: .2em 1em;
-  display: inline;
-  color: $header-text-color;
-  cursor: pointer;
+#Header .nav {
+  display: flex;
+  flex: 1;
+  margin-bottom: -($padding-size);
+  justify-content: flex-end;
+  line-height: none;
+  list-style: none;
+  
+  .nav-item {
+    padding: 0 1em;
+    height: 35px;
+    color: $header-text-color;
+    cursor: pointer;
+    
+    &:hover {
+          background: radial-gradient(circle at bottom center,
+           rgba(122, 63, 0, 0.9), rgba(0,0,0,0.8) 75%);
+    }
+  }
+
 }
