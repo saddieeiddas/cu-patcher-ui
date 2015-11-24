@@ -39,15 +39,17 @@ export class Header extends React.Component<HeaderProps, any> {
   render() {
     return (
       <div id={this.name} className='glass'>
-        <ul>
-          <li onClick={this.internalLink} data-route={HeaderRoute.Main}>Camelot Unchained</li>
-          <li onClick={this.internalLink} data-route={HeaderRoute.PatchNotes}>Patch Notes</li>
-          <li onClick={this.internalLink} data-route={HeaderRoute.News}>News</li>
-          <li onClick={this.internalLink} data-route={HeaderRoute.Support}>Support</li>
-          <li onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>Getting Started</li>
-          <li onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>CSE Store</li>
-          <li onClick={this.internalLink} data-route={HeaderRoute.Chat}>Chat</li>
-        </ul>
+        <div className="nav-wrap">
+          <ul className="nav">
+            <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Main}>Camelot Unchained</li>
+            <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.PatchNotes}>Patch Notes</li>
+            <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.News}>News</li>
+            <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Support}>Support</li>
+            <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>Getting Started</li>
+            <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>CSE Store</li>
+            <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Chat}>Chat</li>
+          </ul>
+        </div>
       </div>
     );
   }
