@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import * as cu from 'cu-core';
+import {channelId} from 'camelot-unchained';
 import * as React from 'react';
 import Sidebar from './sidebar/Sidebar';
 import {Header, HeaderRoute} from './header/Header';
@@ -12,7 +12,7 @@ import Content from './content/Content';
 import Footer from './footer/Footer';
 
 export class PatcherAppState {
-  public channel: cu.channelId;
+  public channel: channelId;
   public route: string;
 };
 
@@ -27,7 +27,7 @@ class PatcherApp extends React.Component<any, PatcherAppState> {
 
   initialState() : PatcherAppState {
     return {
-      channel: cu.channelId.NONE,
+      channel: channelId.NONE,
       route: '' + HeaderRoute.Main
     }
   }

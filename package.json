@@ -27,7 +27,7 @@
     "url": "https://github.com/csegames/cu-patcher-ui.git"
   },
   "dependencies": {
-    "cu-core": "^0.1.3",
+    "camelot-unchained": "latest",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-tap-event-plugin": "^0.2.1",
@@ -36,6 +36,6 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "cu-build-tools": "^0.1.8"
+    "cu-build-tools": "latest"
   }
 }
