@@ -32,6 +32,8 @@
     "react-dom": "^0.14.2",
     "react-tap-event-plugin": "^0.2.1",
     "reflux": "^0.3.0",
+    "node-xmpp-client": "2.1.0", 
+    "eventemitter3": "^1.1.1",
     "reflux-tsd": "github:saddieeiddas/reflux-tsd"
   },
   "devDependencies": {

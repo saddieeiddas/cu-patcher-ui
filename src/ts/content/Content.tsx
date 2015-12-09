@@ -6,6 +6,7 @@
 
 import * as React from 'react';
 import {HeaderRoute} from '../header/Header';
+import Chat from './chat/Chat';
 import Hero from './main/Hero';
 import News from './news/News';
 import PatchNotes from './patchNotes/PatchNotes';
@@ -13,6 +14,7 @@ import Support from './support/Support';
 
 export class ContentProps {
   public route: string;
+  changeRoute: (route: HeaderRoute) => void;
 };
 
 export class Content extends React.Component<ContentProps, any> {
@@ -23,13 +25,17 @@ export class Content extends React.Component<ContentProps, any> {
     super(props);
   }
 
+  changeRoute(route: HeaderRoute) {
+    this.props.changeRoute(route);
+  }
+
   render() {
     switch(parseInt(this.props.route) as HeaderRoute) {
       case HeaderRoute.Main: this.content = <Hero />; break;
       case HeaderRoute.News: this.content = <News />; break;
       case HeaderRoute.PatchNotes: this.content = <PatchNotes />; break;
       case HeaderRoute.Support: this.content = <Support />; break;
-      case HeaderRoute.Chat: // slide over chat
+      case HeaderRoute.Chat: this.content = <Chat changeRoute={this.changeRoute.bind(this)}/>; break; 
     }
 
     return (
