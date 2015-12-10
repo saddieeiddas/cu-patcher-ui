@@ -31,7 +31,7 @@ class ChatInput extends React.Component<ChatInputProps, ChatInputState> {
     }
   }
   getInputNode() : any {
-    return React.findDOMNode(this.refs['new-text'])
+    return this.refs['new-text'];
   }
   render() {
     return (

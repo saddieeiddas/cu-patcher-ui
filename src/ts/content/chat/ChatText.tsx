@@ -26,12 +26,11 @@ export default class ChatText extends React.Component<ChatTextProps, ChatTextSta
     this.state = new ChatTextState();
   }
   scroll() : void {
-    const chatbox : any = this.refs['chatbox'];
-    const node : any = React.findDOMNode(chatbox);
-    if (node.lastElementChild) {
-      if (this.scrollTop === undefined || (this.scrollTop - node.scrollTop) <= AUTOSCROLL_FUZZYNESS) {
-        node.lastElementChild.scrollIntoView();
-        this.scrollTop = node.scrollTop;      
+    const chatBox : any = this.refs['chatbox'];
+    if (chatBox.lastElementChild) {
+      if (this.scrollTop === undefined || (this.scrollTop - chatBox.scrollTop) <= AUTOSCROLL_FUZZYNESS) {
+        chatBox.lastElementChild.scrollIntoView();
+        this.scrollTop = chatBox.scrollTop;      
       }      
     }
   }
