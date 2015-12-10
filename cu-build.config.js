@@ -6,8 +6,8 @@
 
 var name = 'cu-patcher-ui';
 
-module.exports = {
-  type: 'library',
+var config = {
+  type: 'module',
   path: __dirname,
   name: name,
   bundle: {
@@ -17,3 +17,14 @@ module.exports = {
     ]
   }
 };
+
+// load user config and merge it with default config if it exists
+var extend = require('extend');
+var fs = require('fs');
+var userConfig = {};
+if (fs.existsSync(__dirname + '/user-cu-build.config.js')) {
+  userConfig = require(__dirname + '/user-cu-build.config.js');
+}
+config = extend(true, config, userConfig);
+
+module.exports = config;

@@ -37,7 +37,8 @@
     "reflux-tsd": "github:saddieeiddas/reflux-tsd"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "cu-build-tools": "latest"
+    "cu-build-tools": "latest",
+    "extend": "^3.0.0",
+    "gulp": "^3.9.0"
   }
 }
