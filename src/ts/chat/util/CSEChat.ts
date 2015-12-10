@@ -14,7 +14,6 @@ import messageType from '../constants/messageType';
 
 class CSEChat  {
 
-  //rooms:Room[];
   client: xmpp.Client;
   config: Config;
   eventEmitter: EventEmitter = new EventEmitter();
