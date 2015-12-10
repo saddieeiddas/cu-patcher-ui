@@ -17,16 +17,16 @@ export interface ChatInputProps {
 }
 
 class ChatInput extends React.Component<ChatInputProps, ChatInputState> {
-  _hPM : any;
+  _privateMessageHandler : any;
   constructor(props: ChatInputProps) {
     super(props);
-    this._hPM = events.on('cse-chat-private-message', (name: string) => {
+    this._privateMessageHandler = events.on('cse-chat-private-message', (name: string) => {
       this.privateMessage(name);
     });
   }
   componentWillUnmount() {
-    if (this._hPM) {
-      events.off(this._hPM);
+    if (this._privateMessageHandler) {
+      events.off(this._privateMessageHandler);
     }
   }
   getInputNode() : any {
