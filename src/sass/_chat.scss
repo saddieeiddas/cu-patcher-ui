@@ -1,0 +1,312 @@
+#Content>.cse-chat.chat-container {
+
+  /* Cover Background */
+  display: block;
+  position: absolute;
+  z-index: 16;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 40px;
+  padding-left: 70px;
+  background-color: rgba(0,0,0,0.75);
+  line-height: 1em;
+  text-align: left;     /* override #Content style */
+
+  .chat-frame {
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-shadow: -6px -5px 102px 8px rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.8);
+
+    .chat-info {
+
+      min-width: 200px;
+      width: 200px;
+      background-color: rgba(255,255,255,0.15);
+      flex-grow: 0;
+      display: flex;
+      flex-flow: column nowrap;
+
+      .chat-tabs {
+
+        /* Tab bar (rooms, users and settings) */
+        min-height: 45px;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        margin: 0;
+        flex-grow: 0;
+
+        /* Basic tab style */
+        .chat-tab {
+          color: white;
+          background-color: rgba(0,0,0,1);
+          flex-grow: 1;
+          background-repeat: no-repeat;
+          background-position: center;
+          opacity: 0.5;
+          cursor: pointer;
+        }
+
+        /* Selected tab style */
+        .chat-tab.chat-tab-selected {
+          background-color: transparent;
+          color: white;
+          opacity: 1;
+        }
+
+        /* Tab Icons */
+        .chat-tab.chat-rooms {
+          background-image: url('../images/chat/chats.png');
+        }
+        .chat-tab.chat-users {
+          background-image: url('../images/chat/users.png');
+        }
+        .chat-tab.chat-settings {
+          background-image: url('../images/chat/settings.png');
+        }
+      }
+
+      .chat-tab-content.chat-rooms::-webkit-scrollbar {
+        width: 6px;
+      }
+      .chat-tab-content.chat-rooms::-webkit-scrollbar-thumb {
+        background-color: rgba(128,128,128,0.1);
+      }
+
+      .chat-tab-content.chat-rooms {
+
+        flex-grow: 1;
+        overflow-y: overlay;
+        overflow-x: hidden;
+
+        .chat-room:hover .chat-room-close {
+          background-image: url("../images/chat/x.png");
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+
+        /* Room Details (in Rooms list) */
+        .chat-room {
+          height: 42px;
+          display: flex;
+          cursor: pointer;
+          position: relative;
+
+          .chat-room-close {
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            left: 0px;
+            top: 0px;
+          }
+
+          /* Dummy Icon (TODO?) */
+          .chat-room-icon {
+            flex-grow: 0;
+            width: 30px;
+            height: 30px;
+            margin: 6px;
+            background-color: rgb(128,128,128);
+          }
+
+          ul {
+            /* Room Name & Player Count */
+            flex-grow: 1;
+            width: 1px;        /* grow to max avail width */
+            text-align: left;
+            list-style: none;
+            padding: 0 5px;
+            margin: 6px 0;
+
+            .chat-room-name {
+              font-weight: bold;
+              color: white;
+              font-size: 15px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .chat-room-players {
+              color: rgb(128,128,128);
+              font-size: 12px;
+              padding-top: 4px;
+            }
+          }
+          .chat-hidden {
+            flex-grow: 0;
+            width: 0px;
+          }
+          .chat-unread {
+            flex-grow: 0;
+            background-color: #b40000;
+            border-radius: 10px;
+            height: 16px;
+            margin: 13px 5px;
+            padding: 1px 5px;
+            color: white;
+            font-size: 10px;
+            position: relative;
+            text-align: center;
+            min-width: 2em;
+          }
+        }
+
+        .chat-room-selected, .chat-room:hover {
+          background-color: $chat-info-selected-bgc;
+        }
+      }
+
+      .chat-room-join-button {
+        flex-grow: 0;
+        margin: 1em 1.5em;
+        color: #909090;
+        cursor: pointer;
+      }
+    }
+
+    /* User Entry (In Users List) */
+    .chat-tab-content.chat-users {
+      overflow-y: auto;
+      flex-grow: 1;
+      margin: 0.5em 0;
+
+      .chat-info-user {
+        color: white;
+        padding: 0.5em;
+        cursor: pointer;
+      }
+      .chat-info-user:hover {
+        background-color: $chat-info-selected-bgc;
+      }
+    }
+
+    /* Settings Styles */
+    chat-tab-content.chat-settings {
+    }
+
+    .chat-content {
+
+      /* Chat Content */
+      flex-grow: 1;
+      width: 100px;
+        /* ^^^
+         * without this, content will expand to fit the chat lines if chat contains long words
+         * such as urls.  100px is arbitrarily small, flex-grow: 1 will expand it to fit the
+         * available space.  There may be an official flex way of specifying this.
+         */
+      display: flex;
+      flex-flow: column nowrap;
+      background-color: rgba(64,64,64,0.1);
+
+      .chat-text::-webkit-scrollbar-thumb {
+        background: rgba(128, 128, 128, 0.3);
+      }
+      .chat-text::-webkit-scrollbar {
+        width: 16px;
+      }
+
+      .chat-text {
+        flex-grow: 1;
+        margin: 0.5em;
+        overflow-y: auto;
+        overflow-x: visible;
+
+        .chat-line {
+          text-align: left;
+          margin: 0.2em;
+          opacity: 0.7;
+          line-height: 1.3em;
+          
+          /* wrap at character level */
+          overflow-wrap: break-word;
+          white-space: pre-line;
+          word-break: break-all;
+
+          .chat-line-nick {
+            color: $chat-line-nick-color;
+            cursor: pointer;
+          }
+          .chat-line-message {
+            margin-left: 0.5em;
+            color: $chat-line-message-color;
+          }
+          .chat-line-entry {
+            color: $chat-line-entry-color;
+          }
+          .chat-line-exit {
+            color: $chat-line-exit-color;
+          }
+          .chat-line-system {
+            color: $chat-line-system-color;
+          }
+
+        }
+      }
+
+      .chat-input {
+        flex-grow: 0;
+        height: 38px;
+        display: flex;
+        margin: 0;
+
+        input { 
+          margin: 0 5px;
+          height: 38px;
+          flex-grow: 1;
+          background-color: rgba(128,128,128,0.2);
+          border: 0;
+          padding: 0 10px;
+          color: silver;
+          font-size: 16px;
+        }
+
+        input:focus, button:focus {
+          outline-width: 0;
+        }
+
+        label {
+          color: #303030;
+        }
+
+        label.active {
+          display: none;
+        }
+
+      }
+
+    }
+  }
+
+  .chat-close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("../images/chat/close.png");
+    height: 45px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 70px;
+    margin-top: 40px;
+    cursor: pointer;
+  }
+
+  .chat-disconnect {
+    position: absolute;
+    bottom: 0;
+    width: 70px;
+    height: 16px;
+    opacity: 0.2;
+    cursor: pointer;
+    left: 0;
+    text-align: center;
+    color: white;
+    font-size: 10px;
+  }
+
+}

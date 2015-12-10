@@ -1,0 +1,48 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+import * as React from 'react';
+import Room from './Room';
+import ChatRoomInfo from './ChatRoomInfo';
+import RoomId from './RoomId';
+
+export class RoomsState {
+}
+export class RoomsProps {
+  key: string;
+  rooms: ChatRoomInfo[];
+  current: RoomId;      // current room
+  select: (roomId: RoomId) => void;
+  leave: (roomId: RoomId) => void;
+}
+
+export default class Rooms extends React.Component<RoomsProps, RoomsState> {
+  constructor(props: RoomsProps) {
+    super(props);
+  }
+  render() {
+    const content : JSX.Element[] = [];
+    const rooms = this.props.rooms;
+    for (let i = 0; i < rooms.length; i++) {
+      content.push(
+        <Room
+          key={i}
+          roomId={rooms[i].roomId} 
+          players={rooms[i].players} 
+          unread={rooms[i].unread}
+          selected={rooms[i].roomId.same(this.props.current)}
+          select={this.props.select}
+          leave={this.props.leave}
+        />
+      );
+    }
+    return (
+      <div className="chat-tab-content chat-rooms">
+        {content}
+      </div>
+    );
+  }
+}

@@ -71,6 +71,15 @@ input {
   color: #fff;
 }
 
+.no-select {
+  -webkit-user-select: none;
+}
+.allow-select {
+  -webkit-user-select: all;
+}
+.allow-select-text {
+  -webkit-user-select: text;
+}
 
 @font-face {
   font-family: 'Material Icons';
@@ -99,3 +108,4 @@ input {
 @import 'sidebar';
 @import 'content';
 @import 'footer';
+@import 'chat';
