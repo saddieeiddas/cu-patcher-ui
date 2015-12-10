@@ -1,0 +1,1 @@
+start "" CamelotUnchained.exe canPatchSelf=0 outputUI=0
