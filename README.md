@@ -29,6 +29,12 @@ gulp
 ```
 gulp build
 ```
+* server - load the `dist` folder into a local server to view in browser
+```
+gulp server
+# or to build & watch & run server
+gulp --server
+```
 
 
 ### Software Requirements
