@@ -35,6 +35,11 @@ const ChatStore : any = Reflux.createStore({
 
   connect: function(rooms: string[]) {
 
+    if (this.chat) {
+      console.warn("ChatActions.connect() called when already connected.");
+      return;
+    }
+
     this.chat = new CSEChat(this.config);
 
     this.errorListener = this.chat.on('error', (err:any) => {
@@ -76,23 +81,35 @@ const ChatStore : any = Reflux.createStore({
 
   // ChatAction.sendMessageToRoom(...)
   onSendMessageToRoom: function(message:string, roomName:string) {
-    if (!this.chat || !this.connected) return;
+    if (!this.chat || !this.connected) {
+      console.warn("ChatActions.sendMessageToRoom() called when not connected.");
+      return;
+    }
     this.chat.sendMessageToRoom(message,roomName);
   },
 
   // ChatAction.sendMessageToUser(...)
   onSendMessageToUser: function(message:string, userName:string) {
-    if (!this.chat || !this.connected) return;
+    if (!this.chat || !this.connected) {
+      console.warn("ChatActions.sendMessageToUser() called when not connected.");
+      return;
+    }
     this.chat.sendMessageToUser(message,userName);
   },
 
   onJoinRoom: function(roomName: string) {
-    if (!this.chat) return;
+    if (!this.chat) {
+      console.warn("ChatActions.joinRoom() called when not connected.");
+      return;
+    }
     this.chat.joinRoom(roomName + this.chat.config.serviceAddress);
   },
 
   onLeaveRoom: function(roomName: string) {
-    if (!this.chat) return;
+    if (!this.chat) {
+      console.warn("ChatActions.leaveRoom() called when not connected.");
+      return;
+    }
     this.chat.leaveRoom(roomName + this.chat.config.serviceAddress);
   },
 
