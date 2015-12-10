@@ -7,7 +7,7 @@
 var name = 'cu-patcher-ui';
 
 module.exports = {
-  type: 'library',
+  type: 'module',
   path: __dirname,
   name: name,
   bundle: {
