@@ -10,7 +10,7 @@ class ChatConfig {
     this.load();
   }
   load() : void {
-    // TODO
+    // TODO : Waiting for patcher UI chat settings details
   }
 }
 
