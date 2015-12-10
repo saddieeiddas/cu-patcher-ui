@@ -82,7 +82,7 @@
 					<div id="welcome"></div>
 					<input type="text" id="logged-in-name" disabled ng-value="user.screenName" />
 					<div ng-show="channel">
-						<button id="btn-disabled" ng-show="channel.isPlaying || channel.isUpdating" ng-bind="buttonText"></button>
+						<button id="btn-disabled" ng-show="channel.isPlaying || channel.isUpdating || channel.hasUpdateFailed" ng-bind="buttonText"></button>
 						<button id="btn-install" ng-show="channel.isNotInstalled" ng-click="installChannel(channel)"></button>
 						<button id="btn-play-now" ng-show="channel.isInstalled" ng-click="launchChannel($event, channel)"></button>
 						<a id="btn-uninstall" href="#" class="noselect" ng-click="uninstallChannel(channel)" ng-show="channel.isInstalled">Uninstall</a>

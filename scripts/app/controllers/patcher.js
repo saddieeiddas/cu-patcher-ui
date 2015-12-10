@@ -272,6 +272,7 @@ patcherApp.controller('PatcherCtrl',
             case 5: return 'Launching';
             case 6: return 'Playing';
             case 7: return 'Uninstall Queued';
+            case 8: return 'Update Failed';
         }
     };
 
@@ -297,6 +298,8 @@ patcherApp.controller('PatcherCtrl',
             $scope.channel.isInstalled = channel.channelStatus == 4;
 
             $scope.channel.isPlaying = channel.channelStatus == 5 || channel.channelStatus == 6;
+
+            $scope.channel.hasUpdateFailed = channel.channelStatus == 8;
 
             var downloadRemaining = Patcher.getDownloadRemaining();
 
