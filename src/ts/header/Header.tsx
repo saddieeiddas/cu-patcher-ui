@@ -45,8 +45,8 @@ export class Header extends React.Component<HeaderProps, any> {
             <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.PatchNotes}>Patch Notes</li>
             <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.News}>News</li>
             <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Support}>Support</li>
-            <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>Getting Started</li>
-            <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>CSE Store</li>
+            <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>Getting Started <i className="tiny material-icons">open_in_new</i></li>
+            <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>CSE Store <i className="tiny material-icons">open_in_new</i></li>
             <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Chat}>Chat</li>
           </ul>
         </div>

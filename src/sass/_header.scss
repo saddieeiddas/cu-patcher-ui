@@ -35,6 +35,11 @@
     &:hover {
       background: radial-gradient(ellipse at bottom center, rgba(122, 63, 0, 1.0) 5px, rgba(122, 63, 0, 0.6), rgba(0,0,0,0.0) 75%);
     }
+    
+    .tiny {
+      position: relative;
+      top: 2px;
+    }
   }
 
 }
