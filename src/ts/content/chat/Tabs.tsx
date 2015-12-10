@@ -22,7 +22,7 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
     const content : JSX.Element[] = [];
     const tabs = ['rooms', 'users', 'settings'];
     for (let i = 0; i < tabs.length; i++) {
-      content.push(<Tab key={tabs[i]} id={tabs[i]} select={this.props.select.bind(this)} selected={this.props.current === tabs[i]}/>)
+      content.push(<Tab key={tabs[i]} id={tabs[i]} select={this.props.select} selected={this.props.current === tabs[i]}/>)
     }
     return (
       <ul className="chat-tabs">

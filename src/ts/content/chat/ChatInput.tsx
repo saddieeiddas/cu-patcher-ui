@@ -23,6 +23,7 @@ class ChatInput extends React.Component<ChatInputProps, ChatInputState> {
     this._privateMessageHandler = events.on('cse-chat-private-message', (name: string) => {
       this.privateMessage(name);
     });
+    this.enterToSend = this.enterToSend.bind(this);
   }
   componentWillUnmount() {
     if (this._privateMessageHandler) {
@@ -36,7 +37,7 @@ class ChatInput extends React.Component<ChatInputProps, ChatInputState> {
     return (
       <div className="chat-input input-field">
         <label htmlFor="chat-text">Say something!</label>
-        <input id="chat-text" ref="new-text" onKeyUp={this.enterToSend.bind(this)} type="text"/>
+        <input id="chat-text" ref="new-text" onKeyUp={this.enterToSend} type="text"/>
       </div>
     );
   }

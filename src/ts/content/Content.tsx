@@ -23,6 +23,7 @@ export class Content extends React.Component<ContentProps, any> {
 
   constructor(props: ContentProps) {
     super(props);
+    this.changeRoute = this.changeRoute.bind(this);
   }
 
   changeRoute(route: HeaderRoute) {
@@ -35,7 +36,7 @@ export class Content extends React.Component<ContentProps, any> {
       case HeaderRoute.News: this.content = <News />; break;
       case HeaderRoute.PatchNotes: this.content = <PatchNotes />; break;
       case HeaderRoute.Support: this.content = <Support />; break;
-      case HeaderRoute.Chat: this.content = <Chat changeRoute={this.changeRoute.bind(this)}/>; break; 
+      case HeaderRoute.Chat: this.content = <Chat changeRoute={this.changeRoute}/>; break; 
     }
 
     return (

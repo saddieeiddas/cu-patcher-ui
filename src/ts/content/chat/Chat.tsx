@@ -27,7 +27,7 @@ export class ChatProps {
 
 class Chat extends React.Component<ChatProps, ChatState> {
   public name = 'Chat';
-  _evh: any[] = [];
+  _eventHandlers: any[] = [];
   constructor(props: ChatProps) {
     super(props);
     this.state = new ChatState();
@@ -35,14 +35,21 @@ class Chat extends React.Component<ChatProps, ChatState> {
     if (!this.state.chat) {
       this.state.chat = new ChatSession();
     }
-    this._evh.push(events.on('chat-session-update', this.update.bind(this)));
+    this.update = this.update.bind(this);
+    this.selectRoom = this.selectRoom.bind(this);
+    this.slashCommand = this.slashCommand.bind(this);
+    this.leaveRoom = this.leaveRoom.bind(this);
+    this.send = this.send.bind(this);
+    this.disconnect = this.disconnect.bind(this);
+    this.close = this.close.bind(this);
+
+    // handle updates to chat session
+    this._eventHandlers.push(events.on('chat-session-update', this.update));
   }
 
   componentWillMount() : void {
     // hook up to chat 
     this.state.chat.connect();
-
-    // TODO: Should we pre-create rooms for rooms we are trying to join?
   }
   componentDidMount() : void {
     if (!this.state.chat.currentRoom) {
@@ -91,7 +98,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
   }
 
   componentWillUnmount() {
-    this._evh.forEach((value: any) => {
+    this._eventHandlers.forEach((value: any) => {
       events.off(value);
     });
   }
@@ -100,22 +107,22 @@ class Chat extends React.Component<ChatProps, ChatState> {
   render() {
     return (
       <div className="cse-chat chat-container no-select">
-        <div className="chat-disconnect" onClick={this.disconnect.bind(this)}>{this.state.chat.latency}</div>
+        <div className="chat-disconnect" onClick={this.disconnect}>{this.state.chat.latency}</div>
         <div className="chat-frame">
           <Info
             chat={this.state.chat} 
             currentRoom={this.state.chat.currentRoom} 
-            selectRoom={this.selectRoom.bind(this)}
-            leaveRoom={this.leaveRoom.bind(this)}
+            selectRoom={this.selectRoom}
+            leaveRoom={this.leaveRoom}
             />
           <Content
             currentRoom={this.state.chat.currentRoom}
             messages={this.state.chat.currentRoom ? this.getCurrentRoom().messages : undefined}
-            send={this.send.bind(this)}
-            slashCommand={this.slashCommand.bind(this)}
+            send={this.send}
+            slashCommand={this.slashCommand}
             />
         </div>
-        <div className="chat-close" onClick={this.close.bind(this)}></div>
+        <div className="chat-close" onClick={this.close}></div>
       </div>
     );
   }

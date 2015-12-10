@@ -24,12 +24,13 @@ class Content extends React.Component<ContentProps, ContentState> {
   state: ContentState = new ContentState();
   constructor(props: ContentProps) {
     super(props);
+    this.send = this.send.bind(this);
   }
   render() {
     return (
       <div className="chat-content">
         <ChatText messages={this.props.messages} currentRoom={this.props.currentRoom}/>
-        <ChatInput label="SEND" send={this.send.bind(this)} slashCommand={this.props.slashCommand}/>
+        <ChatInput label="SEND" send={this.send} slashCommand={this.props.slashCommand}/>
       </div>
     );
   }

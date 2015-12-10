@@ -17,11 +17,15 @@ export interface JoinRoomButtonProps {
 }
 
 export default class JoinRoomButton extends React.Component<JoinRoomButtonProps, JoinRoomButtonState> {
+  constructor(props : JoinRoomButtonProps) {
+    super(props);
+    this.promptRoom = this.promptRoom.bind(this);
+  }
   render() {
     return (
       <div
         className="chat-room-join-button"
-        onClick={this.promptRoom.bind(this)}>+ Join Room</div>
+        onClick={this.promptRoom}>+ Join Room</div>
       );
   }
 

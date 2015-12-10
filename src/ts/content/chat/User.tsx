@@ -27,12 +27,13 @@ export interface UserProps {
 export class User extends React.Component<UserProps, UserState> {
   constructor(props: UserProps) {
     super(props);
+    this.PM = this.PM.bind(this);
   }
   render() {
     let classes : string[] = [ 'chat-info-user' ];
     if (this.props.selected) classes.push('chat-info-user-selected');
     return (
-      <div className={classes.join(' ')} onClick={this.PM.bind(this)}>
+      <div className={classes.join(' ')} onClick={this.PM}>
         {this.props.info.name}
       </div>
     );

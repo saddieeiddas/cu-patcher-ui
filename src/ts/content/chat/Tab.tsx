@@ -18,13 +18,14 @@ export interface TabProps {
 export default class Tab extends React.Component<TabProps, TabState> {
   constructor(props: TabProps) {
     super(props);
+    this.select = this.select.bind(this);
   }
   render() {
     const classes : string[] = [ "chat-tab" ];
     if (this.props.selected) classes.push("chat-tab-selected");
     classes.push('chat-' + this.props.id);
     return (
-      <li className={ classes.join(' ') } onClick={this.select.bind(this)}></li>
+      <li className={ classes.join(' ') } onClick={this.select}></li>
     );
   }
   select() : void {

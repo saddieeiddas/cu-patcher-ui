@@ -25,6 +25,10 @@ export interface InfoProps {
 
 export default class Info extends React.Component<InfoProps, InfoState> {
   state: InfoState = new InfoState();
+  constructor(props: InfoProps) {
+    super(props);
+    this.select = this.select.bind(this);
+  }
   render() {
     let content : JSX.Element[] = [];
     switch(this.state.currentTab) {
@@ -48,7 +52,7 @@ export default class Info extends React.Component<InfoProps, InfoState> {
     }
     return (
       <div className="chat-info">
-        <Tabs current={this.state.currentTab} select={this.select.bind(this)}/>
+        <Tabs current={this.state.currentTab} select={this.select}/>
         {content}
       </div>
     );

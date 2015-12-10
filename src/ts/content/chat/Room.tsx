@@ -23,6 +23,8 @@ export interface RoomProps {
 class Room extends React.Component<RoomProps, RoomState> {
   constructor(props: RoomProps) {
     super(props);
+    this.select = this.select.bind(this);
+    this.leave = this.leave.bind(this);
   }
   render() {
     let players : JSX.Element = undefined;
@@ -34,8 +36,8 @@ class Room extends React.Component<RoomProps, RoomState> {
       players = <li className="chat-room-players">(private)</li>;
     }
     return (
-      <div className={classes.join(' ')} onClick={this.select.bind(this)}>
-        <div className="chat-room-close" onClick={this.leave.bind(this)}></div>
+      <div className={classes.join(' ')} onClick={this.select}>
+        <div className="chat-room-close" onClick={this.leave}></div>
         <div className="chat-room-icon"></div>
         <ul>
           <li className="chat-room-name">{this.props.roomId.name}</li>
