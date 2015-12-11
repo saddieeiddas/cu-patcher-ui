@@ -40,6 +40,7 @@ const ChatStore : any = Reflux.createStore({
       return;
     }
 
+    this.config.generateResource('patcher');
     this.chat = new CSEChat(this.config);
 
     this.errorListener = this.chat.on('error', (err:any) => {

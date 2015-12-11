@@ -64,11 +64,12 @@ class Config {
   }
 
   getResource() : string {
-    if (this.resource === undefined) {
-      // use blank resource (server generated resource)
-      this.resource = "";
-    }
-    return this.resource;
+    return this.resource || '';
+  }
+
+  generateResource(prefix?: string) {
+    this.resource = (prefix || 'chat') + '-' + Date.now();
+    this.jid = this.getUsername() + '@' + this.address + '/' + this.getResource();
   }
 }
 
