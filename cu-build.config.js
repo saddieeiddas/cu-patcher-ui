@@ -15,6 +15,9 @@ var config = {
       'src/**/!(*.js|*.jsx|*.ts|*.tsx|*.ui|*.styl|*.scss)',
       'src/include/**'
     ]
+  },
+  server: {
+    root: __dirname + "/publish/interface/cu-patcher-ui/"
   }
 };
 
