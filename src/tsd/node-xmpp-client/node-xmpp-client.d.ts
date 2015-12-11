@@ -7,6 +7,7 @@ declare module xmpp  {
   class Client {
     reconnect: boolean;
     prototype: any;
+    jid: any;
 
     constructor (websocket: any, attrs?: any);
 

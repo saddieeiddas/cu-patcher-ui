@@ -64,11 +64,12 @@ class Config {
   }
 
   getResource() : string {
-    if (!this.resource) {
-      // generate a unique resource
-      this.resource = 'chat-' + Date.now();
-    }
-    return this.resource;
+    return this.resource || '';
+  }
+
+  generateResource(prefix?: string) {
+    this.resource = (prefix || 'chat') + '-' + Date.now();
+    this.jid = this.getUsername() + '@' + this.address + '/' + this.getResource();
   }
 }
 
