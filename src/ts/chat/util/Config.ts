@@ -64,9 +64,9 @@ class Config {
   }
 
   getResource() : string {
-    if (!this.resource) {
-      // generate a unique resource
-      this.resource = 'chat-' + Date.now();
+    if (this.resource === undefined) {
+      // use blank resource (server generated resource)
+      this.resource = "";
     }
     return this.resource;
   }

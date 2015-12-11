@@ -120,6 +120,11 @@ class CSEChat  {
     });
 
     this.client.on('online', () => {
+
+      // handle server assigned resource
+      this.config.resource = this.client.jid._resource;
+      this.config.jid = this.client.jid.toString();
+
       this.eventEmitter.emit('online');
       // send global presence
       this.client.send(new Element('presence', {type: 'available'}).c('show').t('chat'));
