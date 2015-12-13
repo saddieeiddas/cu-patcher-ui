@@ -20,6 +20,23 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
   constructor(props: ChatLineProps) {
     super(props);
   }
+  makeLinks(text: string) : JSX.Element[] {
+    const re : RegExp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    const html : JSX.Element[] = [];
+    let next : number = 0;
+    let match : RegExpExecArray;
+    for (match = re.exec(text); match; match = re.exec(text)) {
+      if (match.index > next) {
+        html.push(<span className="chat-line-message">{text.substr(next, match.index - next)}</span>);
+      }
+      html.push(<a className="chat-line-message" target="_blank" href={match[0]}>{match[0]}</a>);
+      next = match.index + match[0].length;
+    }
+    if (next < text.length) {
+      html.push(<span className="chat-line-message">{text.substr(next)}</span>);
+    }
+    return html;
+  }
   render() {
     let element: any;
     switch(this.props.message.type) {
@@ -41,7 +58,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
         element = (
           <div className="chat-line">
             <span className="chat-line-nick" onClick={this.PM.bind(this)}>{this.props.message.nick}:</span>
-            <span className="chat-line-message">{this.props.message.text}</span>
+            {this.makeLinks(this.props.message.text)}
           </div>
         );
         break;
@@ -49,7 +66,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
         element = (
           <div className="chat-line chat-private">
             <span className="chat-line-nick">{this.props.message.nick}:</span>
-            <span className="chat-line-message">{this.props.message.text}</span>
+            {this.makeLinks(this.props.message.text)}
           </div>
         );
         break;

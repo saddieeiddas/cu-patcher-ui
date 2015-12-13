@@ -231,10 +231,16 @@
           .chat-line-nick {
             color: $chat-line-nick-color;
             cursor: pointer;
+            margin-right: 0.5em;
           }
           .chat-line-message {
-            margin-left: 0.5em;
             color: $chat-line-message-color;
+          }
+          a.chat-line-message {
+            color: $chat-line-message-link-color;
+          }
+          a.chat-line-message:hover {
+            color: $chat-line-message-link-hover-color;
           }
           .chat-line-entry {
             color: $chat-line-entry-color;
