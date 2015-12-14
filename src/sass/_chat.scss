@@ -226,7 +226,6 @@
           /* wrap at character level */
           overflow-wrap: break-word;
           white-space: pre-line;
-          word-break: break-all;
 
           .chat-line-nick {
             color: $chat-line-nick-color;
