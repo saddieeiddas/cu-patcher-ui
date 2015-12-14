@@ -7,6 +7,7 @@
 import * as React from 'react';
 import { chatType, ChatMessage } from './ChatMessage';
 import * as events from '../../core/events';
+import URLRegExp from './URLRegExp';
 
 export interface ChatLineState {
 }
@@ -21,19 +22,20 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
     super(props);
   }
   makeLinks(text: string) : JSX.Element[] {
-    const re : RegExp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
-    const html : JSX.Element[] = [];
-    let next : number = 0;
-    let match : RegExpExecArray;
+    const re: RegExp = URLRegExp.create();
+    const html: JSX.Element[] = [];
+    let next: number = 0;
+    let match: RegExpExecArray;
+    let key: number = 0;
     for (match = re.exec(text); match; match = re.exec(text)) {
       if (match.index > next) {
-        html.push(<span className="chat-line-message">{text.substr(next, match.index - next)}</span>);
+        html.push(<span key={key++} className="chat-line-message">{text.substr(next, match.index - next)}</span>);
       }
-      html.push(<a className="chat-line-message" target="_blank" href={match[0]}>{match[0]}</a>);
+      html.push(<a key={key++} className="chat-line-message" target="_blank" href={match[0]}>{match[0]}</a>);
       next = match.index + match[0].length;
     }
     if (next < text.length) {
-      html.push(<span className="chat-line-message">{text.substr(next)}</span>);
+      html.push(<span key={key++} className="chat-line-message">{text.substr(next)}</span>);
     }
     return html;
   }
