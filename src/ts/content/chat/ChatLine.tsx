@@ -21,6 +21,12 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
   constructor(props: ChatLineProps) {
     super(props);
   }
+  fixupLink(url: string) : string {
+    if (url.startsWith('www.')) {
+      url = 'http://' + url;
+    }
+    return url;
+  }
   makeLinks(text: string) : JSX.Element[] {
     const re: RegExp = URLRegExp.create();
     const html: JSX.Element[] = [];
@@ -31,7 +37,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
       if (match.index > next) {
         html.push(<span key={key++} className="chat-line-message">{text.substr(next, match.index - next)}</span>);
       }
-      html.push(<a key={key++} className="chat-line-message" target="_blank" href={match[0]}>{match[0]}</a>);
+      html.push(<a key={key++} className="chat-line-message" target="_blank" href={this.fixupLink(match[0])}>{match[0]}</a>);
       next = match.index + match[0].length;
     }
     if (next < text.length) {
