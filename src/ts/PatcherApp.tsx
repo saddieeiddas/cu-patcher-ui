@@ -10,6 +10,7 @@ import Sidebar from './sidebar/Sidebar';
 import {Header, HeaderRoute} from './header/Header';
 import Content from './content/Content';
 import Footer from './footer/Footer';
+import ChatWindow from './content/chat/ChatWindow';
 
 export class PatcherAppState {
   public channel: channelId;
@@ -46,6 +47,7 @@ class PatcherApp extends React.Component<any, PatcherAppState> {
         <Sidebar />
         <Content changeRoute={this.onHeaderRouteChanged} route={this.state.route} />
         <Footer />
+        <ChatWindow />
       </div>
     );
   }
