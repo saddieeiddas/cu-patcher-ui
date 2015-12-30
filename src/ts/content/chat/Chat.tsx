@@ -22,7 +22,7 @@ export class ChatState {
 }
 
 export class ChatProps {
-  changeRoute: (route: HeaderRoute) => void;
+  hideChat: () => void;
 }
 
 class Chat extends React.Component<ChatProps, ChatState> {
@@ -94,7 +94,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
 
   close() : void {
     (window as any)["_cse_chat_session"] = this.state.chat;
-    this.props.changeRoute(HeaderRoute.Main);
+    this.props.hideChat();
   }
 
   componentWillUnmount() {

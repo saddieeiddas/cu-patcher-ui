@@ -5,6 +5,7 @@
  */
 
 import * as React from 'react';
+import * as events from '../core/events';
 
 export enum HeaderRoute {
   Main,
@@ -26,6 +27,7 @@ export class Header extends React.Component<HeaderProps, any> {
 
     this.internalLink = this.internalLink.bind(this);
     this.externalLink = this.externalLink.bind(this);
+    this.showChat = this.showChat.bind(this);
   }
 
   internalLink(e: any) {
@@ -34,6 +36,10 @@ export class Header extends React.Component<HeaderProps, any> {
 
   externalLink(e: any) {
     window.open(e.target.dataset.href, '_blank');
+  }
+
+  showChat() {
+    events.fire('show-chat', {});
   }
 
   render() {
@@ -47,7 +53,7 @@ export class Header extends React.Component<HeaderProps, any> {
             <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Support}>Support</li>
             <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>Getting Started <i className="tiny material-icons">open_in_new</i></li>
             <li className="nav-item" onClick={this.externalLink} data-href='http://camelotunchained.com/v2/'>CSE Store <i className="tiny material-icons">open_in_new</i></li>
-            <li className="nav-item" onClick={this.internalLink} data-route={HeaderRoute.Chat}>Chat</li>
+            <li className="nav-item" onClick={this.showChat}>Chat</li>
           </ul>
         </div>
       </div>
