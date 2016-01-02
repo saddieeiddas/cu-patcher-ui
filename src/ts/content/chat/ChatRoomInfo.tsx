@@ -40,6 +40,7 @@ export default class ChatRoomInfo {
     this.messages.push(
       <ChatLine key={this.key++} message={message}/>
     );
+    message.checkIsNewDay(this.messages.length > 1 ? this.messages[this.messages.length - 2].props.message.when : undefined);
     // manage scrollback buffer size
     if (this.messages.length > chatConfig.SCROLLBACK_BUFFER_SIZE) {
       this.messages.shift();

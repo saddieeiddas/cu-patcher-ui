@@ -267,6 +267,11 @@
           .chat-line-system {
             color: $chat-line-system-color;
           }
+          .chat-timestamp {
+            color: $chat-line-timestamp-color;
+            margin-right: 0.5em;
+            font-size: 80%;
+          }
 
         }
       }
