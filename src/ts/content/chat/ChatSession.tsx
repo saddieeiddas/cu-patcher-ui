@@ -101,7 +101,8 @@ export default class ChatSession {
             args.type === messageType.MESSAGE_CHAT ? chatType.PRIVATE : chatType.GROUP,
             args.roomName,
             args.sender.sender,
-            args.message
+            args.message,
+            args.time
           )
         );
         break;

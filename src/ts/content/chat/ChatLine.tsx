@@ -45,8 +45,16 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
     }
     return html;
   }
-  render() {
-    let element: any;
+  timestamp(message: ChatMessage): string {
+    let s: string = "";
+    const d: Date = message.when;
+    if (message.isNewDay()) s += d.toLocaleDateString() + " ";
+    s += d.toLocaleTimeString();
+    return s;
+  }
+  render(): JSX.Element {
+    let element: JSX.Element;
+    let timestamp : JSX.Element = <span className="chat-timestamp">{ this.timestamp(this.props.message) }</span>;
     switch(this.props.message.type) {
       case chatType.AVAILABLE:
         element = (
@@ -65,6 +73,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
       case chatType.GROUP:
         element = (
           <div className="chat-line">
+            {timestamp}
             <span className="chat-line-nick" onClick={this.PM.bind(this)}>{this.props.message.nick}:</span>
             {this.makeLinks(this.props.message.text)}
           </div>
@@ -73,6 +82,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
       case chatType.PRIVATE:
         element = (
           <div className="chat-line chat-private">
+            {timestamp}
             <span className="chat-line-nick">{this.props.message.nick}:</span>
             {this.makeLinks(this.props.message.text)}
           </div>
@@ -82,6 +92,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
       case chatType.BROADCAST:
         element = (
           <div className="chat-line">
+            {timestamp}
             <span className="chat-line-system">{this.props.message.text}</span>
           </div>
         );
@@ -89,6 +100,7 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
       default:
         element = (
           <div className="chat-line">
+            {timestamp}
             <span className="chat-line-system">[ Unrecognised chat message type ]</span>
             <span className="chat-line-message">{JSON.stringify(this.props.message)}</span>
           </div>

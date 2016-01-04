@@ -19,12 +19,26 @@ class ChatMessage {
   public nick: string;
   public text: string;
   public isCSE: boolean;
-  constructor(type: number, roomName: string, nick: string = null, text: string = null, isCSE: boolean = false) {
+  public when: Date;
+  private _newDay: boolean;
+  constructor(type: number, roomName: string, nick: string = null, text: string = null, isCSE: boolean = false, time: Date = new Date()) {
     this.type = type;
     this.roomName = roomName.toLowerCase();
     this.nick = nick.toLowerCase();
     this.text = text;
     this.isCSE = isCSE;
+    this.when = time;
+    this._newDay = false;      // we don't know yet, assumed not
+  }
+  isNewDay(): boolean {
+    return this._newDay;
+  }
+  checkIsNewDay(prev: Date): void {
+    if (!prev || prev.toLocaleDateString() !== this.when.toLocaleDateString()) {
+      // message is for a new day, flag it as such
+      // first message in a room is always flagged as a new day
+      this._newDay = true;
+    }
   }
 }
 
