@@ -1,0 +1,114 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+
+#cse-patcher-patch-button {
+  position: relative;
+  height: 60px;
+  width: 300px;
+  margin: 0px 0px 20px 0px;
+  
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .z1 {
+    z-index: 6;
+  }
+  
+  .z2 {
+    z-index: 7;
+  }
+  
+  .z3 {
+    z-index: 8;
+  }
+  
+  .fill {
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 50px;
+    margin: 5px;
+  }
+  
+  .text {
+    -webkit-user-select: none;
+    cursor: default !important;
+    position: relative;
+    height: 50px;
+    margin: 5px 10px;
+  }
+  
+  .progress-text {
+    height: 14px;
+  }
+  
+  .header {
+    font-weight: 700;
+    color: $color3;
+    font-size: 10px;
+  }
+  
+  .body {
+    color: $color5;
+    font-size: 10px;
+  }
+  
+  .install-download-btn {
+    width: 290px;
+    margin: 5px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: 700;
+  }
+  
+  .uninstalled {
+    background-color: $color3;
+    color: $color1;
+    &:hover {
+      background-color: lighten($color3, 5%);
+    }
+  }
+  
+  .installing {
+    background-color: lighten($color4, 20%);
+    color: lighten($color4, 50%);
+  }
+  
+  .downloading {
+    background-color: $color4;
+    color: $color1;
+    &:hover {
+      background-color: lighten($color4, 5%);
+    }
+  }
+  
+  .ready {
+    background-color: $color5;
+    color: $color4;
+    &:hover {
+      background-color: lighten($color5, 5%);
+    }
+  }
+  
+  .launching {
+    background-color: $color4;
+    color: $color1;
+    &:hover {
+      background-color: lighten($color4, 5%);
+    }
+  }
+  
+  .update {
+    background-color: $color3;
+    color: $color1;
+    &:hover {
+      background-color: lighten($color3, 5%);
+    }
+  }
+}

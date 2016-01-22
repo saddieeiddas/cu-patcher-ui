@@ -5,16 +5,16 @@
  */
 
 import * as events from '../../core/events';
-import { CSEChat, Config } from '../../chat/util/CSEChat';
+import { CSEChat, Config } from '../../chat/CSEChat';
 import { ChatMessage, chatType } from './ChatMessage';
 import { UserInfo } from './User';
 import ChatRoomInfo from './ChatRoomInfo';
 import RoomId from './RoomId';
-import ChatActions from '../../chat/actions/ChatActions';
-import ChatStore from '../../chat/stores/ChatStore';
-import messageType from '../../chat/constants/messageType';
+import ChatActions from '../../chat/ChatActions';
+import ChatStore from '../../chat/ChatStore';
+import messageType from '../../chat/messageType';
 
-export default class ChatSession {
+class ChatSession {
 
   rooms: ChatRoomInfo[] = [];
   currentRoom: RoomId = undefined;
@@ -239,3 +239,5 @@ export default class ChatSession {
     }
   }
 }
+
+export default ChatSession;

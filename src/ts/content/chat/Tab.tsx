@@ -15,7 +15,7 @@ export interface TabProps {
   selected?: boolean;
 }
 
-export default class Tab extends React.Component<TabProps, TabState> {
+class Tab extends React.Component<TabProps, TabState> {
   constructor(props: TabProps) {
     super(props);
     this.select = this.select.bind(this);
@@ -32,3 +32,5 @@ export default class Tab extends React.Component<TabProps, TabState> {
     this.props.select(this.props.id);
   }
 }
+
+export default Tab;

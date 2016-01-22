@@ -6,7 +6,25 @@
 
 /// <reference path="../tsd/tsd.d.ts" />
 
-import PatcherApp from './PatcherApp';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-ReactDom.render(<PatcherApp />, document.getElementById('app'));
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import * as thunkMiddleware from 'redux-thunk';
+
+import reducer from './redux/modules/reducer';
+import PatcherApp from './PatcherApp';
+
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware
+)(createStore);
+
+let store = createStoreWithMiddleware(reducer);
+let root = document.getElementById('cse-patcher');
+
+ReactDom.render(
+  <Provider store={store}>
+    <PatcherApp />
+  </Provider>,
+  root
+);

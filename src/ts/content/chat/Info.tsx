@@ -23,7 +23,7 @@ export interface InfoProps {
   leaveRoom: (roomId: RoomId) => void;
 }
 
-export default class Info extends React.Component<InfoProps, InfoState> {
+class Info extends React.Component<InfoProps, InfoState> {
   state: InfoState = new InfoState();
   constructor(props: InfoProps) {
     super(props);
@@ -63,3 +63,5 @@ export default class Info extends React.Component<InfoProps, InfoState> {
     }
   }
 }
+
+export default Info;

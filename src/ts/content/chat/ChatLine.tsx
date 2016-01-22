@@ -17,12 +17,12 @@ export interface ChatLineProps {
   key: number;
 }
 
-export default class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
+class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
   constructor(props: ChatLineProps) {
     super(props);
   }
   fixupLink(url: string) : string {
-    if (url.startsWith('www.')) {
+    if (url.indexOf('www.') == 0) {
       url = 'http://' + url;
     }
     return url;
@@ -112,3 +112,5 @@ export default class ChatLine extends React.Component<ChatLineProps, ChatLineSta
     events.fire('cse-chat-private-message', this.props.message.nick);
   }
 }
+
+export default ChatLine;

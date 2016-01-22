@@ -1,0 +1,126 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+#cse-patcher-news {
+
+  .cse-patcher-news-item {
+    display: inline-block;
+    margin-bottom: 8px;
+    width: calc(100% - 4px);
+    overflow: hidden;
+    text-align: left;
+    margin: 4px;
+  }
+  
+  .card {
+    position: relative;
+    background-color: $color4;
+    padding: 0px;
+  }
+  
+  .card-content {
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 15px 20px 15px 15px;
+  }
+  
+  .card-reveal {
+    overflow: hidden;
+  }
+  
+  .card-image {
+    height: 250px;
+    
+    img {
+      position: relative;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+    }
+  }
+  
+  .material-icons {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+  }
+  
+  .date {
+    font-size: 12px;
+  }
+  
+  .card-title {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+  
+  .front-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .card-reveal {
+    background-color: $color4;
+  }
+  
+  figure {
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  figcaption {
+    margin-top: 15px;
+  }
+  
+  @media screen and (min-width: 1300px) {
+  .cse-patcher-news-item  {
+      width: calc(33.33% - 8px);
+    }
+  }
+  
+  @media screen and (min-width: 900px) and (max-width: 1299px) {
+  .cse-patcher-news-item  {
+      width: calc(50% - 8px);
+    }
+  }
+  
+  .full-page {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    z-index: 16;
+    overflow: hidden;
+    background-color: rgba($color: $color2, $alpha: 0.5);
+    
+    .article-content {
+      position: relative;
+      background-color: $color4;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin: 75px 0px 0px 330px;
+      height: calc(100% - 80px);
+    }
+    
+    .material-icons {
+      cursor: pointer;
+      position: fixed;
+      top: 90px;
+    }
+    
+    .card-title {
+      font-size: 24px;
+    }
+  }
+}
+
+
+

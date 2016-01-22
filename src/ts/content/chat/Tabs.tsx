@@ -14,7 +14,7 @@ export class TabsProps {
   select: (tab: string) => void;
 }
 
-export default class Tabs extends React.Component<TabsProps, TabsState> {
+class Tabs extends React.Component<TabsProps, TabsState> {
   constructor(props: TabsProps) {
     super(props);
   }
@@ -31,3 +31,5 @@ export default class Tabs extends React.Component<TabsProps, TabsState> {
     );
   }
 }
+
+export default Tabs;

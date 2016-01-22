@@ -8,13 +8,13 @@ import * as React from 'react';
 import * as events from '../../core/events';
 import { UserInfo } from './User';
 
-export interface ChatInputState {
-}
+export interface ChatInputState {};
+
 export interface ChatInputProps {
   label: string;
   send: (text: string) => void;
   slashCommand: (command: string) => void;
-}
+};
 
 class ChatInput extends React.Component<ChatInputProps, ChatInputState> {
   _privateMessageHandler : any;

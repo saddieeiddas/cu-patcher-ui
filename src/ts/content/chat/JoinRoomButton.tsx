@@ -16,7 +16,7 @@ export interface JoinRoomButtonProps {
   join: (roomId: RoomId) => void;
 }
 
-export default class JoinRoomButton extends React.Component<JoinRoomButtonProps, JoinRoomButtonState> {
+class JoinRoomButton extends React.Component<JoinRoomButtonProps, JoinRoomButtonState> {
   constructor(props : JoinRoomButtonProps) {
     super(props);
     this.promptRoom = this.promptRoom.bind(this);
@@ -34,3 +34,5 @@ export default class JoinRoomButton extends React.Component<JoinRoomButtonProps,
     this.props.join(new RoomId(room, chatType.GROUP));
   }
 }
+
+export default JoinRoomButton;

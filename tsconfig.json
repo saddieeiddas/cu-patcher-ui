@@ -5,7 +5,8 @@
         "removeComments": false,
         "outDir": "./tmp",
         "sourceMap": false,
-        "jsx": "react"
+        "jsx": "react",
+        "module": "commonjs"
     },
     "formatCodeOptions": {
         "indentSize": 2,

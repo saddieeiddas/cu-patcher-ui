@@ -16,7 +16,7 @@ export class UsersProps {
   room: ChatRoomInfo;
 }
 
-export default class Users extends React.Component<UsersProps, UsersState> {
+class Users extends React.Component<UsersProps, UsersState> {
   constructor(props: UsersProps) {
     super(props);
   }
@@ -28,3 +28,5 @@ export default class Users extends React.Component<UsersProps, UsersState> {
     );
   }
 }
+
+export default Users;

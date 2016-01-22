@@ -6,12 +6,12 @@
 
 import * as React from 'react';
 import ChatLine from './ChatLine';
-import { User, UserInfo } from './User';
-import { ChatMessage, chatType } from './ChatMessage';
-import { chatConfig } from './ChatConfig';
+import User, {UserInfo} from './User';
+import {ChatMessage, chatType} from './ChatMessage';
+import {chatConfig} from './ChatConfig';
 import RoomId from './RoomId';
 
-export default class ChatRoomInfo {
+class ChatRoomInfo {
   messages: JSX.Element[] = [];
   users: JSX.Element[] = [];
   key: number = 0;
@@ -54,3 +54,5 @@ export default class ChatRoomInfo {
     this.unread = 0;
   }
 }
+
+export default ChatRoomInfo;

@@ -4,9 +4,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-@import 'materialize';
 @import 'constants';
 @import 'mixins';
+@import 'shapes';
 
 html,body, #app {
   height: 100%;
@@ -14,6 +14,7 @@ html,body, #app {
   overflow: hidden;
   background: url(../images/bg.png) no-repeat center center fixed;
   background-size: cover;
+  color: $color1;
 }
 
 ::-webkit-scrollbar {
@@ -22,11 +23,11 @@ html,body, #app {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.0);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba($color: $color5, $alpha: 0.9);
 }
 
 h4 {
@@ -60,15 +61,8 @@ h4 {
   height: 100%;
 }
 
-.glass {
-  border: 1px solid rgba(0,0,0,0.1);
-  background: rgba(0,0,0, 0.6);
-  backdrop-filter: brightness(1.5) blur(5px);
-  box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.7);
-}
-
 input {
-  color: #fff;
+  color: $color1;
 }
 
 .no-select {
@@ -104,8 +98,57 @@ input {
   -webkit-font-smoothing: antialiased;
 }
 
+.no-margin-bottom {
+  margin-bottom: 0px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.no-select {
+  -webkit-user-select: none;
+}
+
+.card-panel {
+  background-image: url('../images/cu-logo-small-white.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.quickselect-default {
+  background-color: transparent;
+  margin: 0;
+  display: none;
+  min-width: 100%;
+  max-height: 650px;
+  overflow-y: auto;
+  opacity: 1;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  -webkit-user-select: none !important;
+  cursor: pointer !important;
+}
+
+.quickselect-auto-width {
+  width: 100%; 
+}
+
 @import 'header';
 @import 'sidebar';
+@import 'channelselect';
+@import 'serverselect';
+@import 'characterselect';
 @import 'content';
 @import 'footer';
 @import 'chat';
+@import 'news';
+@import 'patchbutton';
+@import 'login';
+@import 'alerts';

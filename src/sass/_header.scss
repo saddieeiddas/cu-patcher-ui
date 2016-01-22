@@ -3,43 +3,44 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-
-#Header {
-  display: flex;
-  padding: $padding-size;
+ 
+#cse-patcher-header {
+  z-index: 15;
 }
 
-.nav-wrap {
-  display: flex;
-  flex: 1;
-  align-items: flex-end;
+.cu-logo {
+  position: relative;
+  top: 10px;
+  cursor: pointer !important;
+  margin-left: 10px;
 }
 
-#Header .nav {
-  display: flex;
-  flex: 1;
-  margin-bottom: -($padding-size);
-  justify-content: flex-end;
-  line-height: none;
-  list-style: none;
-  
-  .nav-item {
-    padding: 0 1em;
-    height: 45px;
-    line-height: 35px;
-    min-width: 100px;
-    text-align: center;
-    color: $header-text-color;
-    cursor: pointer;
-    
-    &:hover {
-      background: radial-gradient(ellipse at bottom center, rgba(122, 63, 0, 1.0) 5px, rgba(122, 63, 0, 0.6), rgba(0,0,0,0.0) 75%);
-    }
-    
-    .tiny {
-      position: relative;
-      top: 2px;
+nav {
+  background-color: $card-bg;
+  ul {
+    li {
+      .active {
+        background-color: rgba(0, 0, 0, 0.4)
+      }
     }
   }
+}
 
+#cse-patcher-windowheader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 17;
+  
+  ul {
+    list-style: none;
+    margin: 2.5px 2.5px;
+    
+    li {
+      float: right;
+      margin: 0px 4px;
+    }
+  }
 }
