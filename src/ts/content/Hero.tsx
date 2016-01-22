@@ -19,8 +19,10 @@ class Hero extends React.Component<HeroProps, HeroState> {
   render() {
     return (
       <div id={this.name} className='main-content'>
-        <h1>{this.name}</h1>
-        <p>content</p>
+        <div className='content-area'>
+          <h2>{this.name}</h2>
+          <p>content</p>
+        </div>
       </div>
     );
   }

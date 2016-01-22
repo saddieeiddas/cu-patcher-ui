@@ -34,10 +34,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   render() {
     return (
-      <div id={this.name} className='glass navbar-fixed'>
+      <div id={this.name} className='navbar-fixed'>
         <nav>
         <div className='nav-wrapper'>
-          <a className='brand-logo cu-logo' onClick={this.internalLink.bind(this, HeaderRoute.MAIN)}><img src='images/cu_logo.png' /></a>
+          <a className='brand-logo cu-logo' onClick={this.internalLink.bind(this, HeaderRoute.MAIN)}><img src='images/cu-logo-white.png' /></a>
           <ul id='nav-mobile' className='right'>
             <li className={this.props.activeRoute == HeaderRoute.PATCHNOTES ? 'active' : ''}><a onClick={this.internalLink.bind(this, HeaderRoute.PATCHNOTES)}>Patch Notes</a></li>
             <li className={this.props.activeRoute == HeaderRoute.NEWS ? 'active' : ''}><a onClick={this.internalLink.bind(this, HeaderRoute.NEWS)}>News</a></li>

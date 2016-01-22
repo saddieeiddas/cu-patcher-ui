@@ -4,18 +4,4 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-.main-content {
-  position: fixed;
-  z-index: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  text-align: center;
-}
 
-.content-area {
-  margin: 75px 0px 0px 330px;
-  color: white;
-  overflow: auto;
-}

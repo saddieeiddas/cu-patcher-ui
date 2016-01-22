@@ -7,28 +7,28 @@
 .server-select.quickselect-active {
   cursor: pointer !important;
   &:hover {
-    background-color: lighten(rgba(30, 28, 30.5, 0.5), 5%);
+    background-color: lighten($color4, 5%);
   }
   h5 {
     margin: 0.41rem 0 0.328rem 0;
     -webkit-user-select: none !important;
   }
   h5.server {
-    color: white;
+    color: $color1;
   }
   h5.label {
-    color: lighten(rgba(60, 59, 61, 1), 10%);
+    color: lighten($color4, 30%);
     padding: 2.5px;
   }
 }
 
 .server-select.quickselect-list {
   padding: 2.5px;
-  background-color: rgba(30, 28, 30.5, 0.95);
-  color: white;
+  background-color: $color4;
+  color: $color1;
   cursor: pointer !important;
   &:hover {
-    background-color: lighten(rgba(30, 28, 30.5, 0.95), 5%);
+    background-color: lighten($color4, 5%);
   }
   h5 {
     font-size: 16px;
@@ -62,7 +62,7 @@
 
 .server-details {
   display: inline-block;
-  color: white;
+  color: $color1;
 }
 
 .online {

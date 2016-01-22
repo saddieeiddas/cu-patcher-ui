@@ -6,25 +6,20 @@
 
 import * as React from 'react';
 
-export class NewsProps {
-};
+export interface NewsProps {};
 
-export class NewsState {
-}
+export interface NewsState {};
 
 class News extends React.Component<NewsProps, NewsState> {
-  public name = 'News';
-
+  public name: string = 'cse-patcher-news';
+  
   constructor(props: NewsProps) {
     super(props);
   }
-
+  
   render() {
     return (
-      <div id={this.name} className='main-content'>
-        <h2>{this.name}</h2>
-        <p>content</p>
-      </div>
+      
     );
   }
 };

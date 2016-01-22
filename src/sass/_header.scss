@@ -11,6 +11,7 @@
 .cu-logo {
   position: relative;
   top: 10px;
+  cursor: pointer !important;
 }
 
 nav {
@@ -23,7 +24,6 @@ nav {
     }
   }
 }
-
 
 #cse-patcher-windowheader {
   position: fixed;

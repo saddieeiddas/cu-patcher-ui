@@ -6,7 +6,7 @@
 
 .login-status-modal {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.0);
+  background-color: transparent;
   left: 0;
   right: 0;
   top: 0;
@@ -19,21 +19,21 @@
   height: 50px;
   margin: 0 auto;
   position: absolute;
-  background: $color4;
+  background: $card-bg;
   left: 50%;
   top: 50%;
   margin-left: -125px;
   margin-top: -25px;
   z-index: 21;
   line-height: initial;
-  color: white;
+  color: $color1;
   text-align: center;
   .progress {
     width: 100px;
   }
   
   .authenticating {
-    color: white;
+    color: $color1;
     animation: pulse 2s linear infinite;
   }
   

@@ -19,8 +19,10 @@ class Support extends React.Component<SupportProps, any> {
   render() {
     return (
       <div id={this.name} className='main-content'>
-        <h2>{this.name}</h2>
-        <p>content</p>
+        <div className='content-area'>
+          <h2>{this.name}</h2>
+          <p>content</p>
+        </div>
       </div>
     );
   }
