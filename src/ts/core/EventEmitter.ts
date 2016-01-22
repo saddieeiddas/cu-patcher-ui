@@ -19,7 +19,7 @@ class Listener {
   }
 }
 
-export default class EventEmitter {
+class EventEmitter {
   events: any;
   constructor() {
     this.events = {};
@@ -104,3 +104,5 @@ export default class EventEmitter {
     }
   }
 }
+
+export default EventEmitter;

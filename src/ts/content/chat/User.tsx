@@ -24,7 +24,7 @@ export interface UserProps {
   selected?: boolean;
 }
 
-export class User extends React.Component<UserProps, UserState> {
+class User extends React.Component<UserProps, UserState> {
   constructor(props: UserProps) {
     super(props);
     this.PM = this.PM.bind(this);
@@ -42,3 +42,5 @@ export class User extends React.Component<UserProps, UserState> {
     events.fire('cse-chat-private-message', this.props.info.name);
   }
 }
+
+export default User;

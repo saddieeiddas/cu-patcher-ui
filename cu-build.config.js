@@ -14,7 +14,8 @@ var config = {
     copy: [
       'src/**/!(*.js|*.jsx|*.ts|*.tsx|*.ui|*.styl|*.scss)',
       'src/include/**'
-    ]
+    ],
+    browserify: true
   },
   server: {
     root: __dirname + "/publish/interface/cu-patcher-ui/"

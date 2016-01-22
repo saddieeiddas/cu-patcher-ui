@@ -19,7 +19,7 @@ export class RoomsProps {
   leave: (roomId: RoomId) => void;
 }
 
-export default class Rooms extends React.Component<RoomsProps, RoomsState> {
+class Rooms extends React.Component<RoomsProps, RoomsState> {
   constructor(props: RoomsProps) {
     super(props);
   }
@@ -46,3 +46,5 @@ export default class Rooms extends React.Component<RoomsProps, RoomsState> {
     );
   }
 }
+
+export default Rooms;

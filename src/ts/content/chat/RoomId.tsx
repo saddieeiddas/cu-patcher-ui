@@ -6,7 +6,7 @@
 
 import { chatType } from './ChatMessage';
 
-export default class RoomId {
+class RoomId {
   type: chatType;
   name: string;
   constructor(name: string, type: chatType) {
@@ -19,3 +19,5 @@ export default class RoomId {
       && this.name === roomId.name;
   }
 }
+
+export default RoomId;

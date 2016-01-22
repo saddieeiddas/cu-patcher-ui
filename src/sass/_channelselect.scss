@@ -1,0 +1,46 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+ 
+.channel-select.quickselect-active {
+  cursor: pointer !important;
+  &:hover {
+    background-color: lighten($sidebar-bg, 5%);
+  }
+  h5 {
+    display: inline-block;
+    margin: 0.41rem 0 0.328rem 0;
+  }
+  h5.channel {
+    color: white;
+  }
+  h5.label {
+    color: lighten(rgba(60, 59, 61, 1), 10%);
+    padding: 2.5px;
+  }
+}
+
+.quickselect-active {
+  position: relative;
+  cursor: pointer !important;
+  &:after {
+    content: '';
+    background-image: url('../images/dropdown.png');
+    position: absolute;
+    right: 2.5px;
+    bottom: 10px;
+    width: 26px;
+    height: 14px;
+  }
+}
+
+.channel-select.quickselect-list {
+  padding: 10px;
+  background-color: $sidebar-bg-solid;
+  color: white;
+  &:hover {
+    background-color: lighten($sidebar-bg-solid, 10%);
+  }
+}

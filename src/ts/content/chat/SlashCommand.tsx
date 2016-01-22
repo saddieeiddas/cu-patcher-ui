@@ -6,11 +6,11 @@
 
 import * as events from '../../core/events';
 import ChatSession from './ChatSession';
-import ChatActions from '../../chat/actions/ChatActions';
+import ChatActions from '../../chat/ChatActions';
 import RoomId from './RoomId';
 import { ChatMessage, chatType } from './ChatMessage';
 
-export default class SlashCommand {
+class SlashCommand {
   name: string;
   args: string;
   argv: string[];
@@ -44,3 +44,5 @@ export default class SlashCommand {
     }
   }
 }
+
+export default SlashCommand;

@@ -11,7 +11,7 @@ import ChatLine from './ChatLine';
 import { ChatMessage } from './ChatMessage';
 import RoomId from './RoomId';
 
-export class ContentState {
+export interface ContentState {
 }
 export interface ContentProps {
   messages: JSX.Element[];              // ChatLine elements to render
@@ -21,11 +21,10 @@ export interface ContentProps {
 }
 
 class Content extends React.Component<ContentProps, ContentState> {
-  state: ContentState = new ContentState();
-  constructor(props: ContentProps) {
-    super(props);
-    this.send = this.send.bind(this);
+  send = (text: string) : void => {
+    this.props.send(this.props.currentRoom, text);
   }
+  
   render() {
     return (
       <div className="chat-content">
@@ -33,9 +32,6 @@ class Content extends React.Component<ContentProps, ContentState> {
         <ChatInput label="SEND" send={this.send} slashCommand={this.props.slashCommand}/>
       </div>
     );
-  }
-  send(text: string) : void {
-    this.props.send(this.props.currentRoom, text);
   }
 }
 

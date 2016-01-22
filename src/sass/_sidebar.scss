@@ -4,22 +4,91 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#Sidebar {
-  position: absolute;
+#cse-patcher-sidebar {
+  position: fixed;
   top: $header-height + $margin-size;
   left: $margin-size * 2;
-  width: 350px;
+  width: 300px;
+  z-index: 10;
+  .card-panel {
+    background-color: $sidebar-bg;
+  }
 }
 
-#Sidebar .content {
+.sign-in {
+  position: relative;
+  right: -35px;
+  top: 9px;
+}
+
+#cse-patcher-sidebar .content {
   width: $sidebar-content-width;
   margin: $margin-size;
 }
 
-.loginbox {
-  padding: 10px;
+.btn-flat {
+  color: $color5;
 }
 
-.btn-flat {
-  color: #9B9B9B;
+.btn {
+  background-color: $color1;
+  &:hover {
+    background-color: lighten($color1, 5%);
+  }
+}
+
+.forgot-password {
+  position: relative;
+  top: -7px;
+  font-size: 14px;
+  .btn-flat {
+    color: #9B9B9B;
+  }
+}
+
+#cse-patcher-login {
+  .input-field {
+    padding: 0;
+  }
+}
+
+.no-padding {
+  padding: 0;
+}
+
+#cse-patcher-server-counts {
+  position: relative;
+  left: 5px;
+}
+
+@mixin server-count($url) {
+  position: relative;
+  display: inline-block;
+  background-image: url($url);
+  background-size: cover;
+  width: 91px;
+  height: 91px;
+  margin: 3px;
+  -webkit-user-select: none !important;
+  cursor: default !important;
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+  }
+}
+
+.art-counts {
+  @include server-count('../images/art-counts.png');
+}
+
+.tdd-counts {
+  @include server-count('../images/tdd-counts.png');
+}
+
+.vik-counts {
+  @include server-count('../images/vik-counts.png');
 }

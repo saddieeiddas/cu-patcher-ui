@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-class ChatConfig {
+export class ChatConfig {
   SCROLLBACK_BUFFER_SIZE: number = 1024;
   constructor() {
     this.load();
@@ -14,9 +14,4 @@ class ChatConfig {
   }
 }
 
-const chatConfig = new ChatConfig();
-
-export {
-  ChatConfig,
-  chatConfig
-};
+export const chatConfig = new ChatConfig();

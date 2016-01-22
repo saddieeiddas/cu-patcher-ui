@@ -18,7 +18,7 @@ export interface ChatTextProps {
 
 const AUTOSCROLL_FUZZYNESS : number = 12;
 
-export default class ChatText extends React.Component<ChatTextProps, ChatTextState> {
+class ChatText extends React.Component<ChatTextProps, ChatTextState> {
   scrollTop: number = undefined;
   currentRoom: RoomId = undefined;
   constructor(props: ChatTextProps) {
@@ -58,3 +58,5 @@ export default class ChatText extends React.Component<ChatTextProps, ChatTextSta
     );
   }
 }
+
+export default ChatText;
