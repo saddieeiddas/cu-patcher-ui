@@ -13,11 +13,11 @@ export interface RenderedObject {
 
 export interface WPData {
   id: number,
-  date: Date,
+  date: string,
   guid: RenderedObject
   link: string,
-  modified: Date,
-  modified_gmt: Date,
+  modified: string,
+  modified_gmt: string,
   slug: string,
   title: RenderedObject,
   author: number,
@@ -72,7 +72,7 @@ const FETCH_NEXT_PAGE = 'cse-patcher/news/FETCH_NEXT_PAGE';
 const FETCH_PAGE_SUCCESS = 'cse-patcher/news/FETCH_NEWS_SUCCESS';
 const FETCH_PAGE_FAILED = 'cse-patcher/news/FETCH_NEWS_FAILED';
 
-const postsPerPage = 6;
+const postsPerPage = 12;
 
 // sync actions
 export function requestPage(page: number) {
@@ -133,7 +133,7 @@ const initialState = {
   isFetching: false,
   didInvalidate: false,
   lastUpdated: <Date>null,
-  nextPage: 0,
+  nextPage: 1,
   posts: <Array<any>>[]
 }
 

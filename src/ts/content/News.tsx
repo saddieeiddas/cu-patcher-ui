@@ -23,25 +23,56 @@ export interface NewsState {};
 class News extends React.Component<NewsProps, NewsState> {
   public name: string = 'cse-patcher-news';
   
-  componentDidMount() {
-    if (this.props.posts.length == 0) {
-      this.props.fetchPage(this.props.nextPage);
-    }
+  fetchNextPage = () => {
+    if (this.props.isFetching) return;
+    this.props.fetchPage(this.props.nextPage);
   }
   
   renderNewsItem = (post: Post) => {
     return (
-      <div className='col s4 m4 l3' key={post.id}>
+      <li className='cse-patcher-news-item' key={post.id}>
         <NewsItem post={post} />
-      </div>
+      </li>
     );
   }
   
+  componentDidMount() {
+    if (this.props.posts.length == 0) {
+      this.fetchNextPage();
+    }
+  }
+  
   render() {
+    
+    let spinner: any = <div />;
+    if (this.props.isFetching) {
+      spinner = (
+        <div className="preloader-wrapper small active">
+          <div className="spinner-layer spinner-green-only">
+            <div className="circle-clipper left">
+              <div className="circle"></div>
+            </div><div className="gap-patch">
+              <div className="circle"></div>
+            </div><div className="circle-clipper right">
+              <div className="circle"></div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    
+    let newsItems = this.props.posts.map(this.renderNewsItem);
     return (
       <div id={this.name} className='main-content'>
-        <div className='content-area row'>
-          {this.props.posts.map(this.renderNewsItem)}
+        <div className='content-area'>
+          <ul>
+            {newsItems}
+          </ul>
+          {spinner}
+          <p><a href='#' onClick={this.fetchNextPage}>Load More</a></p>
+          <p />
+          <p />
+          <p />
         </div>
       </div>
     );

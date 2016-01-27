@@ -54,16 +54,19 @@ class WindowHeader extends React.Component<WindowHeaderProps, WindowHeaderState>
     return (
       <div id={this.name}>
         <ul>
-          <li><a href='#' onClick={patcher.closeWindow} className='tooltipped' data-position='bottom'
-            data-delay='150' data-tooltip='close'><img src='images/close.png' /></a></li>
-          <li><a href='#' onClick={patcher.maximizeWindow} className='tooltipped' data-position='bottom'
-            data-delay='150' data-tooltip='maximize'><img src='images/max.png' /></a></li>
-          <li><a href='#' onClick={patcher.minimizeWindow} className='tooltipped' data-position='bottom'
-            data-delay='150' data-tooltip='minimize'><img src='images/min.png' /></a></li>
-          <li><a href='#' onClick={this.openSettings} className='tooltipped' data-position='bottom'
-            data-delay='150' data-tooltip='settings'><img src='images/settings.png' /></a></li>
-          <li><a href='#' onClick={this.mute} className='tooltipped' data-position='bottom'
-            data-delay='150' data-tooltip={muteTooltip}>{muteIcon}</a></li>
+          <li><a href='#' onClick={patcher.closeWindow}><img src='images/close.png' /></a></li>
+          <li><a href='#' onClick={patcher.maximizeWindow}><img src='images/max.png' /></a></li>
+          <li><a href='#' onClick={patcher.minimizeWindow}><img src='images/min.png' /></a></li>
+          <li>
+            <a href='#' onClick={this.openSettings} className='hint--right hint--bounce' data-hint='settings'>
+              <img src='images/settings.png' />
+            </a>
+          </li>
+          <li>
+            <a href='#' onClick={this.mute} className='hint--right hint--bounce' data-hint={muteTooltip}>
+              {muteIcon}
+            </a>
+          </li>
         </ul>
         <Animate animationEnter='bounceInUp' animationLeave='bounceOutDown'
           durationEnter={700} durationLeave={500}>
