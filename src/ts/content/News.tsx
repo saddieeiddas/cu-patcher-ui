@@ -6,6 +6,9 @@
 
 import * as React from 'react';
 
+import NewsItem from './NewsItem';
+import {Post} from '../redux/modules/news';
+
 export interface NewsProps {
   isFetching: boolean;
   didInvalidate: boolean;
@@ -26,12 +29,19 @@ class News extends React.Component<NewsProps, NewsState> {
     }
   }
   
+  renderNewsItem = (post: Post) => {
+    return (
+      <div className='col s4 m4 l3' key={post.id}>
+        <NewsItem post={post} />
+      </div>
+    );
+  }
+  
   render() {
     return (
       <div id={this.name} className='main-content'>
-        <div className='content-area'>
-          <h2>{this.name}</h2>
-          <p>content</p>
+        <div className='content-area row'>
+          {this.props.posts.map(this.renderNewsItem)}
         </div>
       </div>
     );

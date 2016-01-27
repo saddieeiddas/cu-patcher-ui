@@ -7119,7 +7119,7 @@ nav ul a span.badge {
   }
 }
 
-@media only screen and (min-width: 993px) {
+@media only screen and (min-width: 1150px) {
   .row .col.l1 {
     width: 8.3333333333%;
     margin-left: auto;

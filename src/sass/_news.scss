@@ -5,5 +5,23 @@
  */
 
 #cse-patcher-news {
+  overflow-y: auto;
+}
+
+.cse-patcher-news-item {
+  //width: 300px;
+  margin: 10px;
+  height: 300px;
+  background-color: $color4;
+  overflow: hidden;
+  text-align: left;
   
+  .card-title {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+  
+  .card-reveal {
+    background-color: $color4;
+  }
 }
