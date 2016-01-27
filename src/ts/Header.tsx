@@ -6,29 +6,30 @@
 
 import * as React from 'react';
 
-export enum HeaderRoute {
-  MAIN,
-  PATCHNOTES,
-  NEWS,
-  SUPPORT,
-  CHAT
-};
+import {Routes} from './redux/modules/locations';
 
 export interface HeaderProps {
-  changeRoute : (header: HeaderRoute) => void;
-  activeRoute: HeaderRoute;
+  changeRoute: (route: Routes) => void;
+  openChat: () => void;
+  activeRoute: Routes;
 };
 
 export interface HeaderState {};
 
 class Header extends React.Component<HeaderProps, HeaderState> {
   public name = 'cse-patcher-header';
+  
+  static propTypes = {
+    changeRoute: React.PropTypes.func.isRequired,
+    openChat: React.PropTypes.func.isRequired,
+    activeRoute: React.PropTypes.number.isRequired
+  }
 
   externalLink = (url: string) => {
     window.open(url, '_blank');
   }
-
-  internalLink = (route: HeaderRoute) => {
+  
+  internalLink = (route: Routes) => {
     this.props.changeRoute(route);
   }
 
@@ -37,14 +38,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       <div id={this.name} className='navbar-fixed'>
         <nav>
         <div className='nav-wrapper'>
-          <a className='brand-logo cu-logo' onClick={this.internalLink.bind(this, HeaderRoute.MAIN)}><img src='images/cu-logo-white.png' /></a>
+          <a className='brand-logo cu-logo' onClick={this.internalLink.bind(this, Routes.HERO)}><img src='images/cu-logo-white.png' /></a>
           <ul id='nav-mobile' className='right'>
-            <li className={this.props.activeRoute == HeaderRoute.PATCHNOTES ? 'active' : ''}><a onClick={this.internalLink.bind(this, HeaderRoute.PATCHNOTES)}>Patch Notes</a></li>
-            <li className={this.props.activeRoute == HeaderRoute.NEWS ? 'active' : ''}><a onClick={this.internalLink.bind(this, HeaderRoute.NEWS)}>News</a></li>
-            <li className={this.props.activeRoute == HeaderRoute.SUPPORT ? 'active' : ''}><a onClick={this.internalLink.bind(this, HeaderRoute.SUPPORT)}>Support</a></li>
+            <li className={this.props.activeRoute == Routes.PATCHNOTES ? 'active' : ''}><a onClick={this.internalLink.bind(this, Routes.PATCHNOTES)}>Patch Notes</a></li>
+            <li className={this.props.activeRoute == Routes.NEWS ? 'active' : ''}><a onClick={this.internalLink.bind(this, Routes.NEWS)}>News</a></li>
+            <li className={this.props.activeRoute == Routes.SUPPORT ? 'active' : ''}><a onClick={this.internalLink.bind(this, Routes.SUPPORT)}>Support</a></li>
             <li><a onClick={this.externalLink.bind(this, 'http://camelotunchained.com/v2/')} className='external-link'>Getting Started</a></li>
             <li><a onClick={this.externalLink.bind(this, 'http://camelotunchained.com/v2/')}>CSE Store</a></li>
-            <li><a onClick={this.internalLink.bind(this, HeaderRoute.CHAT)}>Chat</a></li>
+            <li><a onClick={this.props.openChat}>Chat</a></li>
           </ul>
         </div>
         </nav>

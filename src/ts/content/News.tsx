@@ -6,20 +6,34 @@
 
 import * as React from 'react';
 
-export interface NewsProps {};
+export interface NewsProps {
+  isFetching: boolean;
+  didInvalidate: boolean;
+  lastUpdated: Date;
+  nextPage: number;
+  posts: Array<any>;
+  fetchPage: (page: number) => any;
+};
 
 export interface NewsState {};
 
 class News extends React.Component<NewsProps, NewsState> {
   public name: string = 'cse-patcher-news';
   
-  constructor(props: NewsProps) {
-    super(props);
+  componentDidMount() {
+    if (this.props.posts.length == 0) {
+      this.props.fetchPage(this.props.nextPage);
+    }
   }
   
   render() {
     return (
-      
+      <div id={this.name} className='main-content'>
+        <div className='content-area'>
+          <h2>{this.name}</h2>
+          <p>content</p>
+        </div>
+      </div>
     );
   }
 };
