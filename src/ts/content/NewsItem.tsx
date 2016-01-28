@@ -65,7 +65,7 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
     let images = c.getElementsByTagName('img');
     let imgSrc: any = 'images/other-bg.png';
     let imgClass: any = 'wide';
-    let imgWidth: any = 200;
+    let imgWidth: any = 500;
     if (images.length > 0) {
       let img = images[images.length-1];
       imgSrc = img.src;
@@ -78,7 +78,7 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
       <div>
         <div className='card'>
           <div className='card-image waves-effect waves-block waves-light'>
-            <img className={`activator ${imgClass}`} src={imgSrc} style={{'margin-left': `-${imgWidth/2}px`}} />
+            <img className={`activator ${imgClass}`} src={imgSrc} style={{marginLeft: `-${imgWidth/2}px`}} />
           </div>
           <div className='card-content'>
             <span className='card-title activator grey-text front-title'
