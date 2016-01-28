@@ -18,16 +18,20 @@ let channels = channelsReducer;
 import newsReducer from './news';
 let news = newsReducer;
 
+import patcherAlertsReducer from './patcherAlerts';
+let alerts = patcherAlertsReducer;
+
 export default combineReducers({
   location,
   chat,
   channels,
   news,
+  alerts,
 });
 
 
 /**
- * State
+ * Global State
  * {
  *    location: {
  *      location: Route,  -- header route location (default Routes.HERO)
@@ -44,7 +48,14 @@ export default combineReducers({
  *      didInvalidate: boolean, -- did the user or app request a refresh of data? (default false)
  *      lastUpdated: Date, -- date of last update to news (default null),
  *      nextPage: number, -- next page to be fetched by the fetchNextPage action (default 0)
- *      posts: Array<any>, -- array of post to be displayed
+ *      posts: Array<Post>, -- array of post to be displayed (default [])
+ *      error?: ResponseError, -- last response error if any (default undefined)
+ *    },
+ *    alerts: {
+ *      isFetching: boolean, -- are we currently fetching alert data? (default false)
+ *      lastUpdated: Date, -- date of the last update to alerts (default null)
+ *      alerts: Array<PatcherAlert>, -- array of alerts to be displayed (default [])
+ *      error?: ResponseError, -- last response error if any (default undefined)
  *    }
  * }
  */

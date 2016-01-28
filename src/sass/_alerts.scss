@@ -4,9 +4,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import {Promise} from 'es6-promise';
-import 'isomorphic-fetch';
-
-export interface Alert {
-  
+.alert {
+  background-color: $color5 !important;
+  color: $color4 !important;
+  text-align: center;
+  padding: 2px;
+  list-style: none;
 }

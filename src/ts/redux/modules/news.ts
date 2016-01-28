@@ -7,6 +7,9 @@
 import {Promise} from 'es6-promise';
 import 'isomorphic-fetch';
 
+import ResponseError from '../../core/ResponseError';
+import {fetchJSON} from '../../core/fetchHelpers';
+
 export interface RenderedObject {
   rendered: string
 }
@@ -90,7 +93,7 @@ export function fetchPageSuccess(posts: Array<any>) {
   };
 }
 
-export function fetchPageFailed(error: Error) {
+export function fetchPageFailed(error: ResponseError) {
   return {
     type: FETCH_PAGE_FAILED,
     error: error
@@ -98,21 +101,6 @@ export function fetchPageFailed(error: Error) {
 }
 
 // async actions
-
-function checkStatus(response: any) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    let error = new Error(response.statusText);
-    (<any>error).response = response;
-    throw error;
-  }
-}
-
-function parseJSON(response: any) {
-  return response.json();
-}
-
 function makePostsUrl(page: number): string {
   return `http://camelotunchained.com/v2/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}?callback=foo`;
 }
@@ -120,11 +108,9 @@ function makePostsUrl(page: number): string {
 export function fetchPage(page: number) {
   return (dispatch: (action: any) => any) => {
     dispatch(requestPage(page));
-    return fetch(makePostsUrl(page), {mode: 'cors'})
-      .then(checkStatus)
-      .then(parseJSON)
+    return fetchJSON(makePostsUrl(page))
       .then((posts: Array<any>) => dispatch(fetchPageSuccess(posts)))
-      .catch((error: Error) => dispatch(fetchPageFailed(error)));
+      .catch((error: ResponseError) => dispatch(fetchPageFailed(error)));
   }
 }
 
@@ -134,7 +120,7 @@ const initialState = {
   didInvalidate: false,
   lastUpdated: <Date>null,
   nextPage: 1,
-  posts: <Array<any>>[]
+  posts: <Array<Post>>[]
 }
 
 export default function reducer(state: any = initialState, action: any = {}) {

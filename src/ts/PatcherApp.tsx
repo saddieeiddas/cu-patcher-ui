@@ -14,6 +14,7 @@ import reducer from './redux/modules/reducer';
 import {changeRoute, Routes} from './redux/modules/locations';
 import {showChat, hideChat} from './redux/modules/chat';
 import {fetchPage} from './redux/modules/news';
+import {fetchAlerts, validateAlerts} from './redux/modules/patcherAlerts';
 
 import Sidebar from './sidebar/Sidebar';
 import Header from './Header';
@@ -25,20 +26,38 @@ import PatchNotes from './content/PatchNotes';
 import Support from './content/Support';
 import Animate from './Animate';
 
+function select(state: any): any {
+  return {
+    location: state.location.location,
+    chat: state.chat,
+    currentChannel: state.channels.currentChannel,
+    channels: state.channels.channels,
+    news: state.news,
+    alerts: state.alerts,
+  }
+}
+
 // since we're using redux all props are optional in the TypeScript interface
 // since redux fills it out at runtime rather than props being passed in from
 // a parent component
+//
+// Props will match what is returned from select() plust a dispatch function
 export interface PatcherAppProps {
   dispatch?: (action: any) => void;
   location?: Routes;
   chat?: any;
+  currentChannel?: any;
+  channels?: any;
   news?: any;
+  alerts?: any;
 }
 
 export interface PatcherState {};
 
 export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
   public name = 'cse-patcher';
+  
+  private alertsInterval: any = null;
   
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
@@ -60,6 +79,20 @@ export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
   
   fetchNewsPage = (page: number) => {
     this.props.dispatch(fetchPage(page));
+  }
+  
+  componentDidMount() {
+    // fetch initial alerts and then every minute validate & fetch alerts.
+    if (!this.props.alerts.isFetching) this.props.dispatch(fetchAlerts());
+    this.alertsInterval = setInterval(() => {
+      this.props.dispatch(validateAlerts());
+      if (!this.props.alerts.isFetching) this.props.dispatch(fetchAlerts());
+    }, 60000);
+  }
+  
+  componentDidUnMount() {
+    // unregister intervals
+    clearInterval(this.alertsInterval);
   }
 
   render() {
@@ -91,7 +124,7 @@ export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
       <div id={this.name}>
         <WindowHeader />
         <Header changeRoute={this.onRouteChanged} activeRoute={this.props.location} openChat={this.showChat} />
-        <Sidebar />
+        <Sidebar alerts={this.props.alerts.alerts} />
         <div className='main-content'>
         <Animate animationEnter='slideInRight' animationLeave='slideOutLeft'
           durationEnter={700} durationLeave={500}>
@@ -106,15 +139,5 @@ export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
     );
   }
 };
-
-function select(state: any): any {
-  return {
-    location: state.location.location,
-    chat: state.chat,
-    currentChannel: state.channels.currentChannel,
-    channels: state.channels.channels,
-    news: state.news
-  }
-}
 
 export default connect(select)(PatcherApp);

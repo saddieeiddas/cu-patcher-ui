@@ -5,17 +5,22 @@
  */
 
 import * as React from 'react';
+import {components} from 'camelot-unchained';
+let QuickSelect = components.QuickSelect;
+declare let $: any;
+
 import Login from './Login';
 import ChannelSelect, {Channel} from './ChannelSelect';
 import ServerSelect, {Server, ServerStatus} from './ServerSelect';
 import PatchButton, {ChannelState} from './PatchButton';
 import ServerCounts from './ServerCounts';
 import CharacterSelect, {Character} from './CharacterSelect';
-import {components} from 'camelot-unchained';
-let QuickSelect = components.QuickSelect;
-declare let $: any;
+import Alerts from './Alerts';
+import {PatcherAlert} from '../redux/modules/patcherAlerts';
 
-export interface SidebarProps {};
+export interface SidebarProps {
+  alerts: Array<PatcherAlert>,
+};
 
 export interface SidebarState {
   loggedIn: boolean;
@@ -27,6 +32,10 @@ export interface SidebarState {
 
 class Sidebar extends React.Component<SidebarProps, SidebarState> {
   public name = 'cse-patcher-sidebar';
+  
+  static propTypes = {
+    alerts: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  }
 
   constructor(props: SidebarProps) {
     super(props);
@@ -127,6 +136,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
 
     return (
       <div id={this.name} className=''>
+        <Alerts alerts={this.props.alerts} />
         <ChannelSelect channels={this.state.channels} onSelectedChannelChanged={this.onSelectedChannelChanged} />
         <div className='card-panel no-padding'>
           <ServerSelect servers={this.state.servers}
