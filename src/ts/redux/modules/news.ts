@@ -102,7 +102,7 @@ export function fetchPageFailed(error: ResponseError) {
 
 // async actions
 function makePostsUrl(page: number): string {
-  return `http://camelotunchained.com/v2/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}?callback=foo`;
+  return `http://camelotunchained.com/v3/wp-json/wp/v2/posts?per_page=${postsPerPage}&page=${page}?callback=foo`;
 }
 
 export function fetchPage(page: number) {
@@ -144,7 +144,8 @@ export default function reducer(state: any = initialState, action: any = {}) {
       });
     case FETCH_PAGE_FAILED:
       return Object.assign({}, state, {
-        
+        isFetching: false,
+        error: action.error
       });
     default: return state;
   }
