@@ -11,19 +11,19 @@
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 20
+  z-index: 20;
 }
 
 .login-modal {
-  width: 250px;
-  height: 50px;
+  width: 290px;
+  height: 270px;
   margin: 0 auto;
   position: absolute;
-  background: $card-bg;
+  background: $gradient;
   left: 50%;
   top: 50%;
-  margin-left: -125px;
-  margin-top: -25px;
+  margin-left: -145px;
+  margin-top: -135px;
   z-index: 21;
   line-height: initial;
   color: $color1;
@@ -54,6 +54,6 @@
   }
   
   .success {
-    color: $color5;
+    color: $colorg4;
   }
 }

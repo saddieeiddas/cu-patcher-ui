@@ -38,11 +38,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       <div id={this.name} className='navbar-fixed'>
         <nav>
         <div className='nav-wrapper'>
-          <a className='brand-logo cu-logo' onClick={this.internalLink.bind(this, Routes.HERO)}><img src='images/cu-logo-white.png' /></a>
+          <a className='brand-logo cu-logo' onClick={this.internalLink.bind(this, Routes.HERO)}><img src='images/cu_logo.png' /></a>
           <ul id='nav-mobile' className='right'>
             <li className={this.props.activeRoute == Routes.NEWS ? 'active' : ''}><a onClick={this.internalLink.bind(this, Routes.NEWS)}>News</a></li>
-            <li><a onClick={this.externalLink.bind(this, 'http://camelotunchained.com/v2/')} className='external-link'>Getting Started</a></li>
-            <li><a onClick={this.externalLink.bind(this, 'http://camelotunchained.com/v2/')}>CSE Store</a></li>
+            <li><a onClick={this.externalLink.bind(this, 'http://camelotunchained.com/v2/')} className='external-link'>Getting Started <i className="tiny material-icons">launch</i></a></li>
+            <li><a onClick={this.externalLink.bind(this, 'http://camelotunchained.com/v2/')}>CSE Store <i className="tiny material-icons">launch</i></a></li>
             <li><a onClick={this.props.openChat}>Chat</a></li>
           </ul>
         </div>

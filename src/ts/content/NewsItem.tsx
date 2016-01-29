@@ -51,9 +51,11 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
       fullArticle = (
         <div key='0' className='full-page'>
           <div className='article-content card-panel'>
-            <span className='card-title grey-text' onClick={this.hideFullArticle}
-              dangerouslySetInnerHTML={{__html: `${title}<i class="material-icons right">close</i><p>${dateString}</p>`}} />
-            <div className='words' dangerouslySetInnerHTML={{__html: post.content.rendered}} />
+            <div className='content-container'>
+                <span className='card-title grey-text' onClick={this.hideFullArticle}
+                dangerouslySetInnerHTML={{__html: `${title}<i class="material-icons right">close</i><p>${dateString}</p>`}} />
+                <div className='words' dangerouslySetInnerHTML={{__html: post.content.rendered}} />
+            </div>
           </div>
         </div>
       );
@@ -77,7 +79,7 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
     return (
       <div>
         <div className='card'>
-          <div className='card-image waves-effect waves-block waves-light'>
+          <div className='card-image waves-effect waves-block waves-light'> 
             <img className={`activator ${imgClass}`} src={imgSrc} style={{marginLeft: `-${imgWidth/2}px`}} />
           </div>
           <div className='card-content'>
@@ -90,6 +92,7 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
             <span className='card-title activator grey-text'
                 dangerouslySetInnerHTML={{__html: `${title}<i class="material-icons right">close</i>`}} />
             <p dangerouslySetInnerHTML={{__html: post.excerpt.rendered}} />
+            <p><a href='#' className='read-full' onClick={this.showFullArticle}>Read full post</a></p>
           </div>
         </div>
         <Animate animationEnter='bounceInUp' animationLeave='bounceOutDown'

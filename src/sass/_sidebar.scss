@@ -11,14 +11,29 @@
   width: 300px;
   z-index: 10;
   .card-panel {
-    background-color: $sidebar-bg;
+    background: $sidebar-bg;
+    border-width: 1px;
+    border-image: $gradient-border;
+    border-image-slice: 1;
   }
 }
 
 .sign-in {
-  position: relative;
-  right: -35px;
-  top: 9px;
+    background: $gradient4;
+    border: solid $colorg4 1px;
+    color: $color1;
+    position: relative;
+    right: -22px;
+    top: 9px;
+    width: 270px;
+    margin: 5px;
+    height: 60px;
+    line-height: 60px;
+    font-weight: 700;
+    &:hover {
+      filter: brightness(1.2);
+      -webkit-filter: brightness(1.2);
+  }
 }
 
 #cse-patcher-sidebar .content {
@@ -27,7 +42,7 @@
 }
 
 .btn-flat {
-  color: $color5;
+  color: $colorg4;
 }
 
 .btn {
@@ -59,6 +74,7 @@
 #cse-patcher-server-counts {
   position: relative;
   left: 5px;
+  margin-top: 10px;
 }
 
 @mixin server-count($url) {
