@@ -38,9 +38,16 @@
   .card-reveal {
     overflow: hidden;
   }
+  ul li {
+    list-style-type: inherit;
+    margin-bottom: 15px;
+  }
   
   .card-image {
     height: 250px;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    background-position: top center!important;
     
     img {
       position: relative;
@@ -115,12 +122,18 @@
       overflow-y: auto;
       overflow-x: hidden;
       margin: 75px 0px 0px 330px;
-      height: calc(100% - 80px);
+      height: calc(100% - 70px);
+      color: $color6;
       
       .content-container {
         min-width: 40%;
         max-width: 600px;
         margin: auto;
+        
+        img {
+            height: auto;
+            max-width:100%;
+        }
       }
     }
     
