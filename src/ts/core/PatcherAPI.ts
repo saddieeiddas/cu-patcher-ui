@@ -159,15 +159,15 @@ export class PatcherAPI {
    * Window Controls
    */
   closeWindow() {
-    this._api.closeWindow();
+    this._api.CloseWindow();
   }
   
   minimizeWindow() {
-    this._api.minimizeWindow();
+    this._api.MinimizeWindow();
   }
   
   maximizeWindow() {
-    this._api.maxmizeWindow();
+    this._api.MaxmizeWindow();
   }
   
   
