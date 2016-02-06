@@ -118,7 +118,13 @@ export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
     }
     
     let chat: any = null;
-    if (this.props.chat.showChat) chat = <div id="chat-window" key='0'><Chat hideChat={this.hideChat} /></div>
+    if (this.props.chat.visibility.showChat) {
+      chat = (
+        <div id="chat-window" key='0'>
+          <Chat hideChat={this.hideChat} />
+        </div>
+      );
+    }
     
     return (
       <div id={this.name}>

@@ -10,8 +10,7 @@ import { ChatMessage, chatType } from './ChatMessage';
 import { UserInfo } from './User';
 import ChatRoomInfo from './ChatRoomInfo';
 import RoomId from './RoomId';
-import ChatActions from '../../chat/ChatActions';
-import ChatStore from '../../chat/ChatStore';
+import ChatClient from '../../chat/ChatClient';
 import messageType from '../../chat/messageType';
 
 class ChatSession {
@@ -20,40 +19,49 @@ class ChatSession {
   currentRoom: RoomId = undefined;
   reconnecting: boolean = false;
   connected: boolean = false;
+  client: ChatClient = null;
   me: string = "me";
   latency: number;
 
   constructor() {
-    ChatActions.connect.completed.listen(this.onconnect,this);
-    ChatActions.connect.failed.listen(this.onconnectFail,this);
-    ChatActions.connect.disconnected.listen(this.ondisconnected,this);
-    ChatActions.ping.listen(this.onPing, this);
-    ChatStore.listen(this.onchat.bind(this))
+      this.onconnect = this.onconnect.bind(this);
+      this.onconnectfail = this.onconnectfail.bind(this);
+      this.onping = this.onping.bind(this);
+      this.onchat = this.onchat.bind(this);
+      this.ondisconnect = this.ondisconnect.bind(this);
   }
 
-  onPing(ping:any) {
+  connect() {
+    if (!this.client) {
+      this.client = new ChatClient();
+      this.client.on('connect', this.onconnect);
+      this.client.on('connectfail', this.onconnectfail);
+      this.client.on('ping', this.onping);
+      this.client.on('presence', this.onchat);
+      this.client.on('message', this.onchat);
+      this.client.on('groupmessage', this.onchat);
+      this.client.on('disconnect', this.ondisconnect);
+      this.client.connect(
+        () => { return window.prompt('Username?'); },
+        () => { return window.prompt('Password?'); }
+      );
+    }
+  }
+
+  onping(ping: any) {
     this.latency = (Date.now() - ping.now);
     events.fire('chat-session-update', this);
   }
 
-  connect() {
-    if (!this.connected) {
-      ChatActions.connect(
-        () => { return window.prompt('Username?'); },
-        () => { return window.prompt('Password?'); }
-      );      
-    }
-  }
-
-  onconnect(chat: CSEChat) : void {
+  onconnect() : void {
     // TODO: if no rooms yet, this won't work.
-    this.me = chat.config.getNick();
+    this.me = this.client.getNick();
     this.broadcast(new ChatMessage(chatType.SYSTEM, '', '', 'Connected to chat server.'));
     this.connected = true;
     this.reconnecting = false;
   }
 
-  onconnectFail() {
+  onconnectfail() {
     // if failed to connect and we are trying to re-connect, we should 
     // retry
     if (this.reconnecting) {
@@ -62,34 +70,14 @@ class ChatSession {
     }
   }
 
-  ondisconnected() {
+  ondisconnect() {
     this.broadcast(new ChatMessage(chatType.SYSTEM, '', '', 'Disconnected from chat server.'));
     this.reconnect();
   }
 
-  reconnect() {
-    this.reconnecting = true;
-
-    // Build list of rooms to re-connect to
-    const rooms : string[] = [];
-    for (let i = 0; i < this.rooms.length; i++) {
-      if (this.rooms[i].roomId.type === chatType.GROUP) {
-        rooms.push(this.rooms[i].roomId.name);
-        this.rooms[i].players = 0;
-      }
-    }
-    // Reconnect in 1s
-    setTimeout(() => { ChatActions.connect.reconnect(rooms); }, 10000);
-  }
-
-  simulateDisconnect() {
-    ChatActions.connect.disconnect();
-    ChatActions.connect.disconnected();
-  }
-
-  onchat(args: any) : void {
+  onchat(args: any): void {
     console.log(JSON.stringify(args));
-    switch(args.type) {
+    switch (args.type) {
       case messageType.AVAILIBLE:
       case messageType.UNAVAILIBLE:
         this.presence(args.type, new UserInfo(args.roomName, args.sender.sender));
@@ -110,6 +98,25 @@ class ChatSession {
         this.recv(new ChatMessage(chatType.SYSTEM, '', '', 'Unrecognised message type ' + args.type));
         break;
     }
+  }
+
+  reconnect() {
+    this.reconnecting = true;
+
+    // Build list of rooms to re-connect to
+    const rooms : string[] = [];
+    for (let i = 0; i < this.rooms.length; i++) {
+      if (this.rooms[i].roomId.type === chatType.GROUP) {
+        rooms.push(this.rooms[i].roomId.name);
+        this.rooms[i].players = 0;
+      }
+    }
+    // Reconnect in 1s
+    setTimeout(() => { this.client.reconnect(rooms); }, 10000);
+  }
+
+  simulateDisconnect() {
+    this.client.disconnect();
   }
 
   // Broadcast a message to all rooms
@@ -198,11 +205,11 @@ class ChatSession {
   }
 
   send(text: string, roomName: string) : void {
-    ChatActions.sendMessageToRoom(text, roomName);
+    this.client.sendMessageToRoom(text, roomName);
   }
 
   sendMessage(text: string, user: string) : void {
-    ChatActions.sendMessageToUser(text, user);
+    this.client.sendMessageToUser(text, user);
     const roomId = new RoomId(user, chatType.PRIVATE);
     const message = new ChatMessage(chatType.PRIVATE, user, this.me, text);
     this.getRoom(roomId).add(message);
@@ -211,7 +218,7 @@ class ChatSession {
 
   joinRoom(roomId: RoomId) : void {
     if (!this.findRoom(roomId)) {
-      ChatActions.joinRoom(roomId.name);
+      this.client.joinRoom(roomId.name);
     }
     this.getRoom(roomId).seen();
     this.setCurrentRoom(roomId);
@@ -222,7 +229,7 @@ class ChatSession {
     if (room) {
       switch(roomId.type) {
         case chatType.GROUP:
-          ChatActions.leaveRoom(roomId.name);
+          this.client.leaveRoom(roomId.name);
           break;
         case chatType.PRIVATE:
           // no-op
