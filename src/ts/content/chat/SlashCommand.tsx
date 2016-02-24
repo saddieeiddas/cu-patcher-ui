@@ -6,7 +6,6 @@
 
 import * as events from '../../core/events';
 import ChatSession from './ChatSession';
-import ChatActions from '../../chat/ChatActions';
 import RoomId from './RoomId';
 import { ChatMessage, chatType } from './ChatMessage';
 
