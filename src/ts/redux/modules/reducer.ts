@@ -29,7 +29,6 @@ export default combineReducers({
   alerts,
 });
 
-
 /**
  * Global State
  * {

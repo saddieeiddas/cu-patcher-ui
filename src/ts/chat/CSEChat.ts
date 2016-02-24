@@ -3,9 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
  
-/// <reference path="../../tsd/node-xmpp-client/node-xmpp-client.d.ts" />
-
-import {Client,Element} from 'node-xmpp-client';
+import {Client, Element} from 'node-xmpp-client';
 import Config from './Config';
 import EventEmitter from '../core/EventEmitter';
 import Message from './Message'

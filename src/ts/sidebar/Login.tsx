@@ -44,20 +44,20 @@ class Login extends React.Component<LoginProps, LoginState> {
     });
   }
   
+  onPasswordChanged = (evt: any) => {
+    this.setState({
+      email: this.state.email,
+      password: evt.target.value,
+      rememberMe: this.state.rememberMe,
+      showModal: false
+    });
+  }
+  
   onRememberMe = (evt: any) => {
     this.setState({
       email: this.state.email,
       password: this.state.password,
       rememberMe: !this.state.rememberMe,
-      showModal: false
-    });
-  }
-  
-  onPasswordChanged = (evt: any) => {
-    this.setState({
-      email: this.state.email,
-      password: this.state.password,
-      rememberMe: this.state.rememberMe,
       showModal: false
     });
   }
@@ -100,7 +100,7 @@ class Login extends React.Component<LoginProps, LoginState> {
           <label htmlFor='email'>Email Address</label>
         </div>
         <div className='input-field col s12'>
-          <input id='password' type='password' className='validate' value={this.state.email || ''} onChange={this.onPasswordChanged}/>
+          <input id='password' type='password' className='validate' value={this.state.password || ''} onChange={this.onPasswordChanged}/>
           <label htmlFor='password'>Password</label>
         </div>
         <div className='col s12 no-padding'>

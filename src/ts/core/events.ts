@@ -4,8 +4,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-/// <reference path="../../tsd/tsd.d.ts" />
-
 import EventEmitter from './EventEmitter';
 
 // Global event emitter
