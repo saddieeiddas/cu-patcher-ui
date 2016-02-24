@@ -278,15 +278,12 @@
       }
 
       .chat-input {
-        flex-grow: 0;
         height: 38px;
-        display: flex;
         margin: 0;
 
         input { 
           margin: 0 5px;
           height: 38px;
-          flex-grow: 1;
           background-color: rgba(128,128,128,0.2);
           border: 0;
           padding: 0 10px;
