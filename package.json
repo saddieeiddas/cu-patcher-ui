@@ -46,7 +46,7 @@
     "es6-promise": "^3.0.2",
     "eventemitter3": "^1.1.1",
     "isomorphic-fetch": "^2.2.1",
-    "node-xmpp-client": "github:codecorsair/node-xmpp-client",
+    "node-xmpp-client": "^2.1.0",
     "normalizr": "^2.0.0",
     "react": "^0.14.6",
     "react-addons-css-transition-group": "^0.14.6",
@@ -55,8 +55,7 @@
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.3",
-    "reflux": "^0.3.0",
-    "reflux-tsd": "github:saddieeiddas/reflux-tsd"
+    "reflux": "^0.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
