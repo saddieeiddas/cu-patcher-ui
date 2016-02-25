@@ -5,9 +5,25 @@
  */
 
 .alert {
-  background-color: $color5 !important;
-  color: $color4 !important;
+  background: $gradient-alert1 !important;
+  color: $color1 !important;
   text-align: center;
   padding: 2px;
   list-style: none;
+  border-width: 2px 0px!important;
+  border-image: $gradient-alert1-lt!important;
+  border-image-slice: 1!important;
+  box-shadow: none;
+}
+
+.alert2 {
+  background: $gradient-alert2 !important;
+  color: $color1 !important;
+  text-align: center;
+  padding: 2px;
+  list-style: none;
+  border-width: 2px 0px!important;
+  border-image: $gradient-alert2-lt!important;
+  border-image-slice: 1!important;
+  box-shadow: none;
 }

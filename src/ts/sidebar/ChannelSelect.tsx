@@ -20,7 +20,7 @@ class ActiveChannelView extends React.Component<ActiveChannelViewProps, ActiveCh
   render() {
     return (
       <div className='channel-select quickselect-active'>
-        <h5 className='label'>CHANNEL</h5>
+        <h5 className='label'>CHANNEL</h5> 
         <h5 className='channel'>{this.props.item.name}</h5>
       </div>
     );

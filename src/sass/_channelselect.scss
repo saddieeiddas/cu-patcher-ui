@@ -6,20 +6,25 @@
  
 .channel-select.quickselect-active {
   cursor: pointer !important;
+  padding: 0 10px;
   &:hover {
     background-color: lighten($card-bg, 5%);
+    -webkit-filter: brightness(1.2);
+    filter: brightness(1.2);
   }
   h5 {
     display: inline-block;
-    margin: 0.41rem 0 0.328rem 0;
   }
   h5.channel {
     color: $color1;
+    font-size: 18px;
   }
   h5.label {
     color: lighten($color4, 30%);
-    padding: 2.5px;
-  }
+    padding: 2.5px 0px;
+    font-size: 18px;
+    margin-right: 3px;
+  } 
 }
 
 .quickselect-active {
@@ -42,5 +47,7 @@
   color: $color1;
   &:hover {
     background-color: lighten($card-bg, 5%);
+    -webkit-filter: brightness(1.2);
+    filter: brightness(1.2);
   }
 }

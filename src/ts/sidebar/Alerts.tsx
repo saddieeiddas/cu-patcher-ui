@@ -25,7 +25,7 @@ export class Alerts extends React.Component<AlertsProps, AlertsState> {
   render() {
     let display: any = null;
     if (this.props.alerts.length > 0) {
-      display = this.props.alerts.map((alert: PatcherAlert) => <li className='card-panel alert' key={alert.id}>{alert.message}</li>);
+      display = this.props.alerts.map((alert: PatcherAlert) => <li className='card-panel alert' key={alert.id}>{alert.message}</li> );
     }
     return (
       <div className={this.name}>

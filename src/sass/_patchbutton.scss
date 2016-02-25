@@ -8,8 +8,9 @@
 #cse-patcher-patch-button {
   position: relative;
   height: 60px;
-  width: 300px;
-  margin: 0px 0px 20px 0px;
+  width: 290px;
+  margin: 0px 0px 10px 0px;
+  font-size: 21px;
   
   .layer {
     position: absolute;
@@ -31,8 +32,8 @@
   }
   
   .fill {
-    background-color: rgba(0, 0, 0, 0.25);
-    height: 50px;
+    background: $gradient-bar1;
+    height: 10px;
     margin: 5px;
   }
   
@@ -40,7 +41,7 @@
     -webkit-user-select: none;
     cursor: default !important;
     position: relative;
-    height: 50px;
+    height: 60px;
     margin: 5px 10px;
   }
   
@@ -62,26 +63,28 @@
   .install-download-btn {
     width: 290px;
     margin: 5px;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     font-weight: 700;
   }
   
   .uninstalled {
-    background-color: $color3;
+    background: $gradient2;
+    border: solid $colorg2 1px;
     color: $color1;
     &:hover {
-      background-color: lighten($color3, 5%);
+      filter: brightness(1.2);
+      -webkit-filter: brightness(1.2);
     }
   }
   
   .installing {
-    background-color: lighten($color4, 20%);
-    color: lighten($color4, 50%);
+    background-color: $color4;
+    color: lighten($color4, 30%);
   }
   
   .downloading {
-    background-color: $color4;
+    background: $color4;
     color: $color1;
     &:hover {
       background-color: lighten($color4, 5%);
@@ -89,10 +92,12 @@
   }
   
   .ready {
-    background-color: $color5;
-    color: $color4;
+    background: $gradient3;
+    border: solid $colorg3 1px;
+    color: $color1;
     &:hover {
-      background-color: lighten($color5, 5%);
+      filter: brightness(1.2);
+      -webkit-filter: brightness(1.2);
     }
   }
   
