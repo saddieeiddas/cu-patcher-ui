@@ -13,7 +13,7 @@
     "reflux-core": "github:cumodsquad/Typings/reflux/reflux-core.d.ts"
   },
   "dependencies": {
-    "camelot-unchained": "github:codecorsair/camelot-unchained-client-library#typings",
+    "camelot-unchained": "github:csegames/camelot-unchained-client-library",
     "es6-promise": "github:typed-typings/npm-es6-promise#fb04188767acfec1defd054fc8024fafa5cd4de7",
     "react-redux": "github:andrew-w-ross/typings-react-redux#6be88a57427f8ec220cad13d68565fd5f5711146",
     "redux": "github:andrew-w-ross/typings-redux#2e0b57e18c6240d17fde045573d74e649762437b",

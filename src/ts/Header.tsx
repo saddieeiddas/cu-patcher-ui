@@ -52,7 +52,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   }
 };
 
-// PATCH NOTES DISABLED -- paste into unordered list to re-enable
+// DISABLED -- paste into unordered list to re-enable
 // <li className={this.props.activeRoute == Routes.PATCHNOTES ? 'active' : ''}><a onClick={this.internalLink.bind(this, Routes.PATCHNOTES)}>Patch Notes</a></li>
 // <li className={this.props.activeRoute == Routes.SUPPORT ? 'active' : ''}><a onClick={this.internalLink.bind(this, Routes.SUPPORT)}>Support</a></li>
 

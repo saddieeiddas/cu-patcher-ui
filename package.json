@@ -7,6 +7,7 @@
   "author": "City State Entertainment <support@citystateentertainment.com>",
   "contributors": [
     "JB (codecorsair) <jb@codecorsair.com>",
+    "Mehuge <mehuge@sorcerer.co.uk>",
     "Stacey Schlenker (Sschlenker) <cloudsift@gmail.com>"
   ],
   "private": true,
@@ -25,7 +26,7 @@
     "name": "cu-patcher-ui"
   },
   "scripts": {
-    "typings": "cd src && typings install && cd ..",
+    "typings": "typings install",
     "clean:tmp": "(rmdir /s /q tmp) ^& exit 0",
     "clean:tmpp": "(rmdir /s /q tmpp) ^& exit 0",
     "clean:publish": "(rmdir /s /q %npm_package_config_publishDirectory%) ^& exit 0",
@@ -39,10 +40,10 @@
     "build": "tsc && npm run build:sass && npm run copy -s && npm run babel && npm run browserify && npm run clean:tmp -s && npm run clean:tmpp -s",
     "prebuild": "npm run clean -s && npm run typings",
     "publish": "npm run build",
-    "serve": "http-server -p 9000 publish/"
+    "serve": "http-server -p 9000 %npm_package_config_publishDirectory%/"
   },
   "dependencies": {
-    "camelot-unchained": "^0.1.12",
+    "camelot-unchained": "latest",
     "es6-promise": "^3.0.2",
     "eventemitter3": "^1.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -63,6 +64,7 @@
     "babel-preset-es2015": "^6.5.0",
     "browserify": "^13.0.0",
     "http-server": "^0.9.0",
+    "node-sass": "^3.4.2",
     "typescript": "^1.8.0",
     "typings": "^0.6.8"
   }
