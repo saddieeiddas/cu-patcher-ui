@@ -22,28 +22,29 @@
     "url": "https://github.com/csegames/cu-patcher-ui.git"
   },
   "config": {
-    "publishDirectory": "publish",
     "name": "cu-patcher-ui"
   },
   "scripts": {
     "typings": "typings install",
+    "clean:typings": "(rmdir /s /q typings) ^& exit 0",
     "clean:tmp": "(rmdir /s /q tmp) ^& exit 0",
     "clean:tmpp": "(rmdir /s /q tmpp) ^& exit 0",
-    "clean:publish": "(rmdir /s /q %npm_package_config_publishDirectory%) ^& exit 0",
-    "clean": "npm run clean:tmp && npm run clean:tmpp && npm run clean:publish",
-    "copy:misc": "(robocopy src\\ %npm_package_config_publishDirectory%\\ /s /xf *.js /xf *.ts /xf *.tsx /xf *.scss) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
-    "copy:third-party": "(robocopy src\\third-party %npm_package_config_publishDirectory%\\third-party /s) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
+    "clean:publish": "(rmdir /s /q dist) ^& exit 0",
+    "clean": "npm run clean:typings && npm run clean:tmp && npm run clean:tmpp && npm run clean:publish",
+    "copy:misc": "(robocopy src\\ dist\\ /s /xf *.js /xf *.ts /xf *.tsx /xf *.scss) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
+    "copy:third-party": "(robocopy src\\third-party dist\\third-party /s) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
     "copy": "npm run copy:third-party && npm run copy:misc",
     "babel": "babel tmp -d tmpp",
-    "browserify": "browserify tmpp/main.js -o %npm_package_config_publishDirectory%/%npm_package_config_name%.js",
-    "build:sass": "node-sass src/sass -o %npm_package_config_publishDirectory%/css",
-    "build": "tsc && npm run build:sass && npm run copy -s && npm run babel && npm run browserify && npm run clean:tmp -s && npm run clean:tmpp -s",
+    "browserify": "browserify tmpp/main.js -o dist/js/%npm_package_config_name%.js",
+    "prebrowserify": "mkdirp dist/js",
+    "build:sass": "node-sass src/sass -o dist/css --importer node_modules/camelot-unchained/lib/third-party/sass-importer/sass-npm-importer.js",
+    "build": "npm run build:sass && npm run copy -s && tsc && npm run babel && npm run browserify && npm run clean:tmp -s && npm run clean:tmpp -s",
     "prebuild": "npm run clean -s && npm run typings",
     "publish": "npm run build",
-    "serve": "http-server -p 9000 %npm_package_config_publishDirectory%/"
+    "serve": "http-server -p 9000 dist/"
   },
   "dependencies": {
-    "camelot-unchained": "latest",
+    "camelot-unchained": "^0.2.6",
     "es6-promise": "^3.0.2",
     "eventemitter3": "^1.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -64,6 +65,7 @@
     "babel-preset-es2015": "^6.5.0",
     "browserify": "^13.0.0",
     "http-server": "^0.9.0",
+    "mkdirp": "^0.5.1",
     "node-sass": "^3.4.2",
     "typescript": "^1.8.0",
     "typings": "^0.6.8"

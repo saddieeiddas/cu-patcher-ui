@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "removeComments": false,
         "outDir": "./tmp",
         "sourceMap": false,
@@ -25,8 +25,8 @@
     "compileOnSave": false,
     "buildOnSave": false,
     "filesGlob": [
-        "./src/ts/**/*.ts",
-        "./src/ts/**/*.tsx"
+        "./src/**/*.ts",
+        "./src/**/*.tsx"
     ],
     "exclude": [
       "typings/browser.d.ts",
