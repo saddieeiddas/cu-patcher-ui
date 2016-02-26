@@ -7,7 +7,7 @@
 import * as React from 'react';
 import { chatType, ChatMessage } from './ChatMessage';
 import * as events from '../../core/events';
-import URLRegExp from './URLRegExp';
+import ChatLineParser from './ChatLineParser';
 
 export interface ChatLineState {
 }
@@ -21,30 +21,6 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
   constructor(props: ChatLineProps) {
     super(props);
   }
-  fixupLink(url: string) : string {
-    if (url.indexOf('www.') == 0) {
-      url = 'http://' + url;
-    }
-    return url;
-  }
-  makeLinks(text: string) : JSX.Element[] {
-    const re: RegExp = URLRegExp.create();
-    const html: JSX.Element[] = [];
-    let next: number = 0;
-    let match: RegExpExecArray;
-    let key: number = 0;
-    for (match = re.exec(text); match; match = re.exec(text)) {
-      if (match.index > next) {
-        html.push(<span key={key++} className="chat-line-message">{text.substr(next, match.index - next)}</span>);
-      }
-      html.push(<a key={key++} className="chat-line-message" target="_blank" href={this.fixupLink(match[0])}>{match[0]}</a>);
-      next = match.index + match[0].length;
-    }
-    if (next < text.length) {
-      html.push(<span key={key++} className="chat-line-message">{text.substr(next)}</span>);
-    }
-    return html;
-  }
   timestamp(message: ChatMessage): string {
     let s: string = "";
     const d: Date = message.when;
@@ -53,6 +29,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
     return s;
   }
   render(): JSX.Element {
+    const parser = new ChatLineParser();
     let element: JSX.Element;
     let timestamp : JSX.Element = <span className="chat-timestamp">{ this.timestamp(this.props.message) }</span>;
     switch(this.props.message.type) {
@@ -75,7 +52,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
           <div className="chat-line">
             {timestamp}
             <span className="chat-line-nick" onClick={this.PM.bind(this)}>{this.props.message.nick}:</span>
-            {this.makeLinks(this.props.message.text)}
+            {parser.parse(this.props.message.text)}
           </div>
         );
         break;
@@ -84,7 +61,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
           <div className="chat-line chat-private">
             {timestamp}
             <span className="chat-line-nick">{this.props.message.nick}:</span>
-            {this.makeLinks(this.props.message.text)}
+            {parser.parse(this.props.message.text)}
           </div>
         );
         break;
