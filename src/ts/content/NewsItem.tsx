@@ -68,31 +68,29 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
     let imgSrc: any = 'images/other-bg.png';
     let imgClass: any = 'wide';
     let imgWidth: any = 500;
-    if (images.length > 0) {
-      let img = images[images.length-1];
-      imgSrc = img.src;
-      imgWidth = img.width;
-      if(img.width / img.height <= 1) imgClass = 'tall'
+    if(images.length > 0) {
+      let index = images.length - 1;
+      do {
+        let img = images[index];
+        if (img.width > imgWidth) {
+          imgSrc = img.src;
+          imgWidth = img.width;
+          if(img.width / img.height <= 1) imgClass = 'tall'
+          break;
+        }
+        --index;
+      } while(index >= 0)
+      
     }
-    console.log(imgSrc);
     
     return (
       <div>
-        <div className='card'>
-          <div className='card-image waves-effect waves-block waves-light'> 
-            <img className={`activator ${imgClass}`} src={imgSrc} style={{marginLeft: `-${imgWidth/2}px`}} />
-          </div>
+        <div className='card news-card' onClick={this.showFullArticle}>
+            <img className={imgClass} src={imgSrc} style={{marginLeft: `-${imgWidth/2}px`}} />
           <div className='card-content'>
-            <span className='card-title activator grey-text front-title'
-              dangerouslySetInnerHTML={{__html: `${title}<i class="material-icons right">more_vert</i>`}} />
-            <p className='date grey-text activator'>{dateString}</p>
-            <p><a href='#' className='read-full' onClick={this.showFullArticle}>Read full post</a></p>
-          </div>
-          <div className='card-reveal'>
-            <span className='card-title activator grey-text'
-                dangerouslySetInnerHTML={{__html: `${title}<i class="material-icons right">close</i>`}} />
+            <span className='card-title' dangerouslySetInnerHTML={{__html: title}} />
+            <h6 className='date'>{dateString}</h6>
             <p dangerouslySetInnerHTML={{__html: post.excerpt.rendered}} />
-            <p><a href='#' className='read-full' onClick={this.showFullArticle}>Read full post</a></p>
           </div>
         </div>
         <Animate animationEnter='bounceInUp' animationLeave='bounceOutDown'
