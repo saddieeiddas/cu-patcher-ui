@@ -274,15 +274,80 @@
             font-size: 80%;
           }
 
+          .chat-emoticon {
+            display: inline-block;
+            margin: 0 0.1em;
+            width: 1.2em;
+            height: 1.2em;
+            position: relative;
+            top: 0.2em;
+            background-repeat: no-repeat;
+            background-size: contain;
+            fill: $chat-line-emoji-color;
+            &.emote-angry {
+              background-image:url("../images/chat/emoji/angry2.png"), url("../images/chat/emoji/angry2.svg");
+            }
+            &.emote-baffled {
+              background-image:url("../images/chat/emoji/baffled2.svg"), url("../images/chat/emoji/baffled2.png");
+            }
+            &.emote-confused {
+              background-image:url("../images/chat/emoji/confused2.svg"), url("../images/chat/emoji/confused2.png");
+            }
+            &.emote-cool {
+              background-image:url("../images/chat/emoji/cool2.svg"), url("../images/chat/emoji/cool2.png");
+            }
+            &.emote-crying {
+              background-image:url("../images/chat/emoji/crying2.svg"), url("../images/chat/emoji/crying2.png");
+            }
+            &.emote-evil {
+              background-image:url("../images/chat/emoji/evil2.svg"), url("../images/chat/emoji/evil2.png");
+            }
+            &.emote-frustrated {
+              background-image:url("../images/chat/emoji/frustrated2.svg"), url("../images/chat/emoji/frustrated2.png");
+            }
+            &.emote-grin {
+              background-image:url("../images/chat/emoji/grin2.svg"), url("../images/chat/emoji/grin2.png");
+            }
+            &.emote-happy {
+              background-image:url("../images/chat/emoji/happy2.svg"), url("../images/chat/emoji/happy2.png");
+            }
+            &.emote-hipster {
+              background-image:url("../images/chat/emoji/hipster2.svg"), url("../images/chat/emoji/hipster2.png");
+            }
+            &.emote-neutral {
+              background-image:url("../images/chat/emoji/neutral2.svg"), url("../images/chat/emoji/neutral2.png");
+            }
+            &.emote-sad {
+              background-image:url("../images/chat/emoji/sad2.svg"), url("../images/chat/emoji/sad2.png");
+            }
+            &.emote-shocked {
+              background-image:url("../images/chat/emoji/shocked2.svg"), url("../images/chat/emoji/shocked2.png");
+            }
+            &.emote-sleepy {
+              background-image:url("../images/chat/emoji/sleepy2.svg"), url("../images/chat/emoji/sleepy2.png");
+            }
+            &.emote-smile {
+              background-image:url("../images/chat/emoji/smile2.svg"), url("../images/chat/emoji/smile2.png");
+            }
+            &.emote-tongue {
+              background-image:url("../images/chat/emoji/tongue2.svg"), url("../images/chat/emoji/tongue2.png");
+            }
+            &.emote-wink {
+              background-image:url("../images/chat/emoji/wink2.svg"), url("../images/chat/emoji/wink2.png");
+            }
+            &.emote-wondering {
+              background-image:url("../images/chat/emoji/wondering2.svg"), url("../images/chat/emoji/wondering2.png");
+            }
+          }
         }
       }
 
       .chat-input {
         height: 38px;
-        margin: 0;
+        margin: 0 5px;
 
         input { 
-          margin: 0 5px;
+          box-sizing: border-box;
           height: 38px;
           background-color: rgba(128,128,128,0.2);
           border: 0;
