@@ -8,7 +8,18 @@
  	/twimg.com$/,
  	/fbcdn.net$/,
  	/imgur.com$/,
- 	/trillian.im$/
+ 	/trillian.im$/,
+ 	/imageshack.com$/,
+ 	/postimage.org$/,
+ 	/staticflickr.com$/,
+ 	/tinypic.com$/,
+ 	/photobucket.com$/,
+ 	/cdninstagram.com$/,
+ 	/deviantart.net$/,
+ 	/imagebam.com$/,
+ 	/dropboxusercontent.com$/,
+ 	/whicdn.com$/,
+ 	/smugmug.com$/,
 ];
 
 function ok(text:string) {
