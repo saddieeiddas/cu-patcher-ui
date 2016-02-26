@@ -26,10 +26,10 @@
   },
   "scripts": {
     "typings": "typings install",
-    "clean:typings": "(rmdir /s /q typings) ^& exit 0",
-    "clean:tmp": "(rmdir /s /q tmp) ^& exit 0",
-    "clean:tmpp": "(rmdir /s /q tmpp) ^& exit 0",
-    "clean:publish": "(rmdir /s /q dist) ^& exit 0",
+    "clean:typings": "rimraf typings",
+    "clean:tmp": "rimraf tmp",
+    "clean:tmpp": "rimraf tmpp",
+    "clean:publish": "rimraf dist",
     "clean": "npm run clean:typings && npm run clean:tmp && npm run clean:tmpp && npm run clean:publish",
     "copy:misc": "(robocopy src\\ dist\\ /s /xf *.js /xf *.ts /xf *.tsx /xf *.scss) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
     "copy:third-party": "(robocopy src\\third-party dist\\third-party /s) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
@@ -67,6 +67,7 @@
     "http-server": "^0.9.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^3.4.2",
+    "rimraf": "^2.5.2",
     "typescript": "^1.8.0",
     "typings": "^0.6.8"
   }
