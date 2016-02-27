@@ -12,6 +12,7 @@ import JoinRoomButton from './JoinRoomButton';
 import ChatSession from './ChatSession';
 import Users from './Users';
 import RoomId from './RoomId';
+import Settings from './settings/Settings';
 
 export class InfoState {
   currentTab: string = "rooms";
@@ -33,6 +34,7 @@ class Info extends React.Component<InfoProps, InfoState> {
     let content : JSX.Element[] = [];
     switch(this.state.currentTab) {
       case 'settings':
+        content.push(<Settings key='setings' />)
         break;
       case 'users':
         content.push(<Users key="users" room={this.props.chat.getRoom(this.props.currentRoom)}/>);

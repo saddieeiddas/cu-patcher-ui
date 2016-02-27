@@ -94,7 +94,6 @@ export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
   }
 
   render() {
-    console.log(this.props);
     let content: any = null;
     switch(this.props.location) {
       case Routes.HERO: content = <div key='0'><Hero /></div>; break;

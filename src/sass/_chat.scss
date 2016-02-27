@@ -28,7 +28,6 @@
   height: 100%;
   box-sizing: border-box;
   padding-top: 40px;
-  padding-left: 30px;
   background-color: rgba(0,0,0,0.75);
   line-height: 1em;
   text-align: left;     /* override #Content style */
@@ -45,7 +44,7 @@
 
       min-width: 200px;
       width: 200px;
-      background-color: rgba(255,255,255,0.15);
+      background-color: rgba(#222222,1);
       flex-grow: 0;
       display: flex;
       flex-flow: column nowrap;
@@ -87,6 +86,55 @@
         }
         .chat-tab.chat-settings {
           background-image: url('../images/chat/settings.png');
+        }
+      }
+      
+      .fly-out {
+        position: absolute;
+        top: 0px;
+        left: 200px;
+        background-color: #222222;
+        color: white;
+        height: 100%;
+        min-width: 300px;
+        z-index: 7;
+        padding: 5px;
+        
+        .row {
+          border-bottom: 0.5px #333 solid;
+          padding: 10px 5px;
+          margin: 0;
+        }
+      }
+      
+      .chat-settings-menu {
+        position: relative;
+        flex-grow: 1;
+        
+        i {
+          font-size: 12px;
+          color: darken(white, 20%);
+        }
+      }
+      
+      .chat-settings-list {
+        position: absolute;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: 8;
+        margin: 0;
+        background-color: rgba(#222222,1);
+        
+        li {
+          font-size: 18px;
+          padding: 10px;
+          color: white;
+          cursor: pointer !important;
+          border-bottom: 0.5px #333 solid;
+          &:hover {
+            background-color: lighten(#222222, 10%);
+          }
         }
       }
 

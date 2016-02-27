@@ -76,7 +76,6 @@ class ChatSession {
   }
 
   onchat(args: any): void {
-    console.log(JSON.stringify(args));
     switch (args.type) {
       case messageType.AVAILIBLE:
       case messageType.UNAVAILIBLE:
@@ -131,7 +130,6 @@ class ChatSession {
       events.fire('chat-session-update', this);
     } else {
       // TODO: What to do here?
-      console.log(JSON.stringify(message));
     }
   }
 

@@ -9,6 +9,8 @@ import Emoji from './Emoji';
 import URLRegExp from './URLRegExp';
 import Whitelist from './URLWhitelist';
 
+import {prefixes, display} from './settings/chat-defaults';
+
 class ChatLineParser {
   key: number = 0;
 
@@ -52,13 +54,16 @@ class ChatLineParser {
     let html: JSX.Element[] = [];
     let next: number = 0;
     let match: RegExpExecArray;
+    let embedImages = JSON.parse(localStorage.getItem(`${prefixes.display}${display.embedImages.key}`));
+    let embedVideos = JSON.parse(localStorage.getItem(`${prefixes.display}${display.embedVideos.key}`));
+    let showEmoticons = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showEmoticons.key}`));
     for (match = re.exec(text); match; match = re.exec(text)) {
       if (match.index > next) {
-        html = html.concat(this._makeTextWithEmoji(text.substr(next, match.index - next)));
+        html = html.concat(showEmoticons ? this._makeTextWithEmoji(text.substr(next, match.index - next)) : [<span key={this.key++} className="chat-line-message">{text.substr(next, match.index - next)}</span>]);
       }
-      let videoMatch: string = Whitelist.isVideo(match[0]);
-      let vineMatch: string = Whitelist.isVine(match[0]);
-      if (Whitelist.isImage(match[0]) && Whitelist.ok(match[0])) {
+      let videoMatch: string = embedVideos ? Whitelist.isVideo(match[0]) : null;
+      let vineMatch: string = embedVideos ? Whitelist.isVine(match[0]) : null;
+      if (embedImages && Whitelist.isImage(match[0]) && Whitelist.ok(match[0])) {
         html.push(
           <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
             <img className='chat-line-image' src={match[0]} title={match[0]}/>
@@ -82,7 +87,7 @@ class ChatLineParser {
       next = match.index + match[0].length;
     }
     if (next < text.length) {
-      html = html.concat(this._makeTextWithEmoji(text.substr(next)));
+      html = html.concat(showEmoticons ? this._makeTextWithEmoji(text.substr(next)) : [<span key={this.key++} className="chat-line-message">{text.substr(next)}</span>]);
     }
     return html;
   }

@@ -74,6 +74,11 @@ class WindowHeader extends React.Component<WindowHeaderProps, WindowHeaderState>
   }
 };
 
+// DISABLED WINDOW CONTROLS FOR NOW
+// <li><a href='#' onClick={patcher.closeWindow}><img src='images/close.png' /></a></li>
+// <li><a href='#' onClick={patcher.maximizeWindow}><img src='images/max.png' /></a></li>
+// <li><a href='#' onClick={patcher.minimizeWindow}><img src='images/min.png' /></a></li>
+
 export default WindowHeader;
 
 /**

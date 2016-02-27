@@ -14,6 +14,7 @@ import RoomId from './RoomId';
 
 import Info from './Info';
 import Content from './Content';
+import {initLocalStorage} from './settings/chat-defaults';
 
 export interface ChatState {
   chat: ChatSession;
@@ -33,6 +34,9 @@ class Chat extends React.Component<ChatProps, ChatState> {
 
     // handle updates to chat session
     this._eventHandlers.push(events.on('chat-session-update', this.update));
+    
+    // Initialize chat settings in localStorage
+    initLocalStorage();
   }
   
   initialState(): ChatState {

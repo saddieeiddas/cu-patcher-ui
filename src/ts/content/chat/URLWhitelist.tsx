@@ -29,7 +29,6 @@ function ok(text: string) {
 	if (match) {
 		for (i = 0; i < whitelist.length; i++) {
 			if (whitelist[i].exec(match[1])) {
-				console.log(text + ' is whitelisted');
 				return true;
 			}
 		}
