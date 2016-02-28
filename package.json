@@ -43,6 +43,7 @@
     "build:sass": "node-sass src/sass -o dist/css --importer node_modules/camelot-unchained/lib/third-party/sass-importer/sass-npm-importer.js",
     "build": "npm run build:sass && npm run copy -s && tsc && npm run babel && npm run browserify && npm run clean:tmp -s && npm run clean:tmpp -s",
     "build:nix": "npm run build:sass && npm run copy:nix -s && tsc && npm run babel && npm run browserify && npm run clean:tmp -s && npm run clean:tmpp -s", 
+    "prebuild:nix": "npm run clean -s && npm run typings",
     "prebuild": "npm run clean -s && npm run typings",
     "publish": "npm run build",
     "serve": "http-server -p 9000 dist/"
