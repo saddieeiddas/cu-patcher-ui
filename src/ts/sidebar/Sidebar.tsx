@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react';
-import {components} from 'camelot-unchained';
+import {components, race} from 'camelot-unchained';
 let QuickSelect = components.QuickSelect;
 declare let $: any;
 
@@ -73,11 +73,14 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
   
   getCharacters = () => {
     return [{
-      name: 'Create new character'
+      name: 'Create new character',
+      race: race.NONE
     },{
-      name: 'CSE JB [STRM]'
+      name: 'CSE JB [STRM]',
+      race: race.STRM
     },{
-      name: 'CSE JB [DRYAD]'
+      name: 'CSE JB [DRYAD]',
+      race: race.HAMADRYAD
     }];
   }
   

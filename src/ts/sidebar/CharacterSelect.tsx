@@ -5,11 +5,12 @@
  */
 
 import * as React from 'react';
-import {components} from 'camelot-unchained';
+import {components, race} from 'camelot-unchained';
 let QuickSelect = components.QuickSelect;
 
 export class Character {
   name: string;
+  race: race;
 }
 
 export interface ActiveCharacterViewProps {
@@ -25,7 +26,7 @@ class ActiveCharacterView extends React.Component<ActiveCharacterViewProps, Acti
           <div className='character-status'><div className={'indicator tooltipped ' + status} data-position='right'
             data-delay='150' data-tooltip={status} /></div>
           <div className='character-details'>
-            <h6 className='character'>{this.props.item.name}</h6>
+            <h6 className={`character char-${race[this.props.item.race]}`}>{this.props.item.name}</h6>
           </div>
         </div>
       </div>
@@ -45,7 +46,7 @@ class CharacterListView extends React.Component<CharacterListViewProps, Characte
           <div className='character-status'><div className={'indicator tooltipped ' + status} data-position='right'
             data-delay='150' data-tooltip={status} /></div>
           <div className='character-details'>
-            <h6 className='character'>{this.props.item.name}</h6>
+            <h6 className={`character char-${race[this.props.item.race]}`}>{this.props.item.name}</h6>
           </div>
         </div>
       </div>
