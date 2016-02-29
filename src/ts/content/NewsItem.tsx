@@ -39,8 +39,17 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
     });
   }
   
-  
-    
+  componentDidUpdate(prevProps: NewsItemProps, prevState: NewsItemState) {
+    const root: HTMLDivElement = (this.refs as any).newsContent;
+    if (root) {
+      const as: NodeListOf<HTMLAnchorElement> = root.getElementsByTagName("a");
+      for (let i = 0; i < as.length; i++) {
+        const a: HTMLAnchorElement = as[i];
+        a.target = "_blank";
+      }
+    }
+  }
+
   render() {
     const {post} = this.props;
     const title = post.title.rendered.split('&#8211;')[0].split('–')[0];
@@ -54,7 +63,7 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
             <div className='content-container'>
                 <span className='card-title grey-text' onClick={this.hideFullArticle}
                 dangerouslySetInnerHTML={{__html: `${title}<i class="material-icons right">close</i><p>${dateString}</p>`}} />
-                <div className='words' dangerouslySetInnerHTML={{__html: post.content.rendered}} />
+                <div ref="newsContent" className='words' dangerouslySetInnerHTML={{__html: post.content.rendered}} />
             </div>
           </div>
         </div>
