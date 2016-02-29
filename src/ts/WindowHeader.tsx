@@ -54,22 +54,19 @@ class WindowHeader extends React.Component<WindowHeaderProps, WindowHeaderState>
     return (
       <div id={this.name}>
         <ul>
-          <li><a href='#' onClick={patcher.closeWindow}><img src='images/close.png' /></a></li>
-          <li><a href='#' onClick={patcher.maximizeWindow}><img src='images/max.png' /></a></li>
-          <li><a href='#' onClick={patcher.minimizeWindow}><img src='images/min.png' /></a></li>
           <li>
-            <a href='#' onClick={this.openSettings} className='hint--right hint--bounce' data-hint='settings'>
+            <a href='#' onClick={this.openSettings} className='hint--left hint--slide' data-hint='settings'>
               <img src='images/settings.png' />
             </a>
           </li>
           <li>
-            <a href='#' onClick={this.mute} className='hint--right hint--bounce' data-hint={muteTooltip}>
+            <a href='#' onClick={this.mute} className='hint--left hint--slide' data-hint={muteTooltip}>
               {muteIcon}
             </a>
           </li>
         </ul>
-        <Animate animationEnter='bounceInUp' animationLeave='bounceOutDown'
-          durationEnter={700} durationLeave={500}>
+        <Animate animationEnter='slideInUp' animationLeave='slideOutDown'
+          durationEnter={400} durationLeave={500}>
           {settings}
         </Animate>
       </div>
@@ -78,3 +75,10 @@ class WindowHeader extends React.Component<WindowHeaderProps, WindowHeaderState>
 };
 
 export default WindowHeader;
+
+/**
+ * took out from line 57. no window controls in patcher
+ * <li><a href='#' onClick={patcher.closeWindow}><img src='images/close.png' /></a></li>
+ * <li><a href='#' onClick={patcher.maximizeWindow}><img src='images/max.png' /></a></li>
+ * <li><a href='#' onClick={patcher.minimizeWindow}><img src='images/min.png' /></a></li>
+*/

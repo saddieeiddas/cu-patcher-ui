@@ -113,7 +113,7 @@ class Login extends React.Component<LoginProps, LoginState> {
           </div>
         </div>
         <div className='col s12'>
-          <a className='waves-effect btn-flat right sign-in' onClick={this.logIn}><i className='material-icons right'>label</i>Sign In</a>
+          <a className='waves-effect btn-flat right sign-in' onClick={this.logIn}>Sign In</a>
         </div>
         </div>
         

@@ -131,12 +131,12 @@ export class PatcherApp extends React.Component<PatcherAppProps, PatcherState> {
         <Sidebar alerts={this.props.alerts.alerts} />
         <div className='main-content'>
         <Animate animationEnter='slideInRight' animationLeave='slideOutLeft'
-          durationEnter={700} durationLeave={500}>
+          durationEnter={400} durationLeave={500}>
           {content}
         </Animate>
         </div>
-        <Animate animationEnter='bounceInRight' animationLeave='bounceOutRight'
-          durationEnter={700} durationLeave={500}>
+        <Animate animationEnter='slideInRight' animationLeave='slideOutRight'
+          durationEnter={400} durationLeave={500}>
           {chat}
         </Animate>
       </div>

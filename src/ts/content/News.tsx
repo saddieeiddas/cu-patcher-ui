@@ -48,7 +48,7 @@ class News extends React.Component<NewsProps, NewsState> {
     if (this.props.isFetching) {
       spinner = (
         <div className="preloader-wrapper small active">
-          <div className="spinner-layer spinner-green-only">
+          <div className="spinner-layer spinner-yellow-only">
             <div className="circle-clipper left">
               <div className="circle"></div>
             </div><div className="gap-patch">
@@ -69,7 +69,7 @@ class News extends React.Component<NewsProps, NewsState> {
             {newsItems}
           </ul>
           {spinner}
-          <p><a href='#' onClick={this.fetchNextPage}>Load More</a></p>
+          <p className='loadmore'><a href='#' onClick={this.fetchNextPage}>Load More</a></p>
           <p />
           <p />
           <p />
