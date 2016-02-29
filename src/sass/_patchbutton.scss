@@ -32,8 +32,8 @@
   }
   
   .fill {
-    background: $gradient-bar1;
-    height: 10px;
+    background: $colorg4;
+    height: 5px;
     margin: 5px;
   }
   
@@ -56,7 +56,7 @@
   }
   
   .body {
-    color: $color5;
+    color: $colorg4;
     font-size: 10px;
   }
   
@@ -92,9 +92,9 @@
   }
   
   .ready {
-    background: $gradient3;
-    border: solid $colorg3 1px;
-    color: $color1;
+    background: $gradient4;
+    border: solid $colorg4 1px;
+    color: $colorg4;
     &:hover {
       filter: brightness(1.2);
       -webkit-filter: brightness(1.2);

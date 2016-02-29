@@ -361,7 +361,7 @@
         }
 
         label {
-          color: #909090;
+          color: #303030;
         }
 
         label.active {
@@ -389,14 +389,14 @@
   .chat-disconnect {
     position: absolute;
     bottom: 0;
-    width: 30px;
+    width: 70px;
     height: 16px;
     opacity: 0.2;
     cursor: pointer;
     left: 0;
     text-align: center;
     color: white;
-    font-size: 8px;
+    font-size: 10px;
   }
 
 }
