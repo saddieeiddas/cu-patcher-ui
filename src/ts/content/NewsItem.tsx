@@ -93,8 +93,8 @@ class NewsItem extends React.Component<NewsItemProps, NewsItemState> {
             <p dangerouslySetInnerHTML={{__html: post.excerpt.rendered}} />
           </div>
         </div>
-        <Animate animationEnter='bounceInUp' animationLeave='bounceOutDown'
-          durationEnter={700} durationLeave={500}>
+        <Animate animationEnter='slideInUp' animationLeave='slideOutDown'
+          durationEnter={400} durationLeave={500}>
           {fullArticle}
         </Animate>
       </div>
