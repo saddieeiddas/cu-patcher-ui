@@ -30,7 +30,11 @@ nav {
         .tiny {
             font-size: 1rem!important;
             float:right;
-            margin-left:3px;
+            display: block;
+            width: 20px;
+            overflow: hidden;
+            background: url("../images/linkout.jpg") no-repeat center center;
+            color: transparent;
         }
       }
       .active {
@@ -41,6 +45,7 @@ nav {
     }
   }
 }
+
 
 #cse-patcher-windowheader {
   position: fixed;
