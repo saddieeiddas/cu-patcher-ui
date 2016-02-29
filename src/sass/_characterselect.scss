@@ -54,7 +54,7 @@
 
 .character-status {
   position: relative;
-  width: 20px;
+  width: 30px;
   height: 10px;
   .indicator {
     @include circle(10px);
@@ -75,84 +75,69 @@
     background-size: contain;
     content: '';
     position: absolute;
-    left: 5px;
-    margin-top: -2px;
-    width: 20px;
-    height: 17px;
+    left: 7px;
+    margin-top: -7px;
+    width: 30px;
+    height: 26px;
     z-index: 1;
 }
 .char-STRM:before {
-    content: '';
     background-image: url("../images/character/a-strm.jpg");
     border: 1px $colorA solid;
 }
 .char-HAMADRYAD:before {
-    content: '';
     background-image: url("../images/character/t-hamadryads.jpg");
     border: 1px $colorT solid;
 }
 .char-LUCHORPAN:before {
-    content: '';
     background-image: url("../images/character/t-luchorpan.jpg");
     border: 1px $colorT solid;
 }
 .char-FIRBOG:before {
-    content: '';
     background-image: url("../images/character/t-bog.jpg");
     border: 1px $colorT solid;
 }
 .char-VALKYRIE:before {
-    content: '';
     background-image: url("../images/character/v-valkyrie.jpg");
     border: 1px $colorV solid;
 }
 .char-HELBOUND:before {
-    content: '';
     background-image: url("../images/character/v-helbound.jpg");
     border: 1px $colorV solid;
 }
 .char-FROSTGIANT:before {
-    content: '';
     background-image: url("../images/character/v-jotnar.jpg");
     border: 1px $colorV solid;
 }
 .char-CAITSITH:before {
-    content: '';
     background-image: url("../images/character/a-cait.jpg");
     border: 1px $colorA solid;
 }
 .char-GOLEM:before {
-    content: '';
     background-image: url("../images/character/a-golem.jpg");
     border: 1px $colorA solid;
 }
 .char-STORMRIDERT:before {
-    content: '';
     background-image: url("../images/character/a-stormrider.jpg");
     border: 1px $colorT solid;
 }
 .char-STORMRIDERA:before {
-    content: '';
     background-image: url("../images/character/a-stormrider.jpg");
     border: 1px $colorA solid;
 }
 .char-STORMRIDERV:before {
-    content: '';
     background-image: url("../images/character/a-stormrider.jpg");
     border: 1px $colorV solid;
 }
 .char-HUMANMALEV:before {
-    content: '';
     background-image: url("../images/character/v-humans.jpg");
     border: 1px $colorV solid;
 }
 .char-HUMANMALEA:before {
-    content: '';
     background-image: url("../images/character/a-humans.jpg");
     border: 1px $colorA solid;
 }
 .char-HUMANMALET:before {
-    content: '';
     background-image: url("../images/character/t-humans.jpg");
     border: 1px $colorT solid;
 }
