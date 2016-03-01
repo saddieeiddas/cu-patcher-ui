@@ -56,26 +56,24 @@ class ChatLineParser {
       if (match.index > next) {
         html = html.concat(this._makeTextWithEmoji(text.substr(next, match.index - next)));
       }
-      let videoMatch: RegExpMatchArray = Whitelist.isVideo(match[0]);
-      let vineMatch: RegExpMatchArray = Whitelist.isVine(match[0]);
+      let videoMatch: string = Whitelist.isVideo(match[0]);
+      let vineMatch: string = Whitelist.isVine(match[0]);
       if (Whitelist.isImage(match[0]) && Whitelist.ok(match[0])) {
         html.push(
           <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
-            <img className='chat-line-image' height="100" src={match[0]} title={match[0]}/>
+            <img className='chat-line-image' src={match[0]} title={match[0]}/>
           </a>
         );
-      } else if (videoMatch && Whitelist.ok(match[0])) {
-        let videoSrc: string = "https://www.youtube.com/embed/" + videoMatch[1];
+      } else if (videoMatch) {
         html.push(
           <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
-            <iframe width="480" height="385" src={videoSrc}></iframe>
+            <iframe className='chat-line-video' src={videoMatch} allowFullScreen></iframe>
           </a>
         );
-      } else if (vineMatch && Whitelist.ok(match[0])) {
-        let vineSrc: string = "https://vine.co/v/" + vineMatch[1] + "/embed/simple";
+      } else if (vineMatch) {
         html.push(
           <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
-            <iframe src={vineSrc} width="400" height="400"></iframe><script src="https://platform.vine.co/static/scripts/embed.js"></script>
+            <iframe className='chat-line-vine' src={vineMatch}></iframe><script src="https://platform.vine.co/static/scripts/embed.js"></script>
           </a>
         );
       } else {
