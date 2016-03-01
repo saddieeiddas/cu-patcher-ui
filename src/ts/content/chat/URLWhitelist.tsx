@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
- const whitelist = [
+const whitelist = [
  	/twimg.com$/,
  	/fbcdn.net$/,
  	/imgur.com$/,
@@ -22,9 +22,9 @@
  	/smugmug.com$/,
 ];
 
-function ok(text:string) {
-	const re : RegExp = /http[s]*:\/\/([^/]*)/;
-	let i : number;
+function ok(text: string) {
+	const re: RegExp = /http[s]*:\/\/([^/]*)/;
+	let i: number;
 	let match: RegExpExecArray = re.exec(text);
 	if (match) {
 		for (i = 0; i < whitelist.length; i++) {
@@ -36,11 +36,49 @@ function ok(text:string) {
 	}
 }
 
-function isImage(text:string) {
+function isImage(text: string) {
 	return text.split('?')[0].match(/\.jpg$|\.jpeg$|\.png$|\.gif$/);
+}
+
+function isVideo(text: string) {
+	let youtubeURL: RegExpMatchArray = text.match(/^http[s]?:\/\/(?:www\.)?youtu(?:be\.com|\.be)\//);
+	let vimeoURL: RegExpMatchArray = text.match(/^http[s]?:\/\/(?:www\.|player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/videos\/|album\/(?:\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/);
+	let twitchURL: RegExpMatchArray = text.match(/^http[s]?:\/\/(?:www\.)?twitch\.tv\//);
+	if (youtubeURL) {
+		let youtubeMatch: RegExpMatchArray = text.match(/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/);
+		if (youtubeMatch) {
+			return "https://www.youtube.com/embed/" + youtubeMatch[1];
+		} else {
+			return null;
+		}
+	} else if (vimeoURL) {
+		return "https://player.vimeo.com/video/" + vimeoURL[1];
+	} else if (twitchURL) {
+		let twitchMatch: RegExpMatchArray = text.match(/^.*twitch\.tv\/(\w+)\/?(?:v\/([0-9]+))?$/);
+		if (twitchMatch && twitchMatch[2]) {
+			return "http://player.twitch.tv/?video=v" + twitchMatch[2] + "&!autoplay";
+		} else if (twitchMatch) {
+			return "http://player.twitch.tv/?channel=" + twitchMatch[1] + "&!autoplay";
+		} else {
+			return null;
+		}
+	} else {
+		return null;
+	}
+}
+
+function isVine(text: string) {
+	let vineURL: RegExpMatchArray = text.match(/^http[s]?:\/\/(?:www\.)?vine\.co\/v\/([A-Za-z0-9]+)$/);
+	if (vineURL) {
+		return "https://vine.co/v/" + vineURL[1] + "/embed/simple";
+	} else {
+		return null;
+	}
 }
 
 export default {
 	ok,
-	isImage
+	isImage,
+	isVideo,
+	isVine
 }
