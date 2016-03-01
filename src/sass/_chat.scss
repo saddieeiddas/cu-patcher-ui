@@ -283,6 +283,10 @@
             border-width: 1px;
             border-color: #039be5;
           }
+          .chat-line-action {
+            font-style: italic;
+            color: $chat-line-action-color;
+          }
           .chat-timestamp {
             color: $chat-line-timestamp-color;
             margin-right: 0.5em;

@@ -18,7 +18,7 @@ class SlashCommand {
     this.args = command.substr(this.name.length+1);
     this.argv = this.args.length ? this.args.split(' ') : [];
   }
-  exec(session : ChatSession) : void {
+  exec(session : ChatSession) : boolean {
     switch(this.name) {
       case 'w': case 't': case 'tell': case 'pm': case 'msg':  // which?
         if (this.argv.length > 1) {
@@ -26,12 +26,12 @@ class SlashCommand {
           const message = this.args.substr(user.length+1).trim();
           session.sendMessage(message, user);
         }
-        break;
+        return true;
       case 'join':
         if (this.argv.length === 1) {
           session.joinRoom(new RoomId(this.argv[0], chatType.GROUP));
         }
-        break;
+        return true;
       case 'leave':
         if (this.argv.length === 1) {
           session.leaveRoom(new RoomId(this.argv[0], chatType.GROUP));
@@ -39,8 +39,9 @@ class SlashCommand {
         } else {
           session.leaveRoom(session.currentRoom);
         }
-        break;
+        return true;
     }
+    return false;  // command was not recognised
   }
 }
 
