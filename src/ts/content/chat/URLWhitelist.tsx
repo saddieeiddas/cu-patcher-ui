@@ -48,8 +48,6 @@ function isVideo(text: string) {
 		let youtubeMatch: RegExpMatchArray = text.match(/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/);
 		if (youtubeMatch) {
 			return "https://www.youtube.com/embed/" + youtubeMatch[1];
-		} else {
-			return null;
 		}
 	} else if (vimeoURL) {
 		return "https://player.vimeo.com/video/" + vimeoURL[1];
@@ -59,11 +57,7 @@ function isVideo(text: string) {
 			return "http://player.twitch.tv/?video=v" + twitchMatch[2] + "&!autoplay";
 		} else if (twitchMatch) {
 			return "http://player.twitch.tv/?channel=" + twitchMatch[1] + "&!autoplay";
-		} else {
-			return null;
 		}
-	} else {
-		return null;
 	}
 }
 
@@ -71,8 +65,6 @@ function isVine(text: string) {
 	let vineURL: RegExpMatchArray = text.match(/^http[s]?:\/\/(?:www\.)?vine\.co\/v\/([A-Za-z0-9]+)$/);
 	if (vineURL) {
 		return "https://vine.co/v/" + vineURL[1] + "/embed/simple";
-	} else {
-		return null;
 	}
 }
 
