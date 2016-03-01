@@ -286,6 +286,9 @@
           .chat-line-action {
             font-style: italic;
             color: $chat-line-action-color;
+            .chat-line-message {
+              color: $chat-line-action-color;
+            }
           }
           .chat-timestamp {
             color: $chat-line-timestamp-color;
