@@ -87,6 +87,17 @@ class ChatLineParser {
     return html;
   }
 
+  parseAction(text: string): JSX.Element[] {
+    const html: JSX.Element[] = [];
+    const content : JSX.Element[] = this._makeLinks(text.substr(4).trim());
+    html.push(<span className="chat-line-action">&lt;{content}&gt;</span>);
+    return html;
+  }
+
+  isAction(text: string) : boolean {
+     return text.toLowerCase().substr(0, 4) === '/me ';
+  }
+
   // parse chat text, and return a bunch of JSX elements.  The parser first looks for links, then makes them either
   // clickable or image thumbnails. For the remaining text that isn't links, it searches for emoji sequences and
   // replaces ones it recongnises with the emoji icon.

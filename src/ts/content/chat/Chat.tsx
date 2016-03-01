@@ -71,9 +71,9 @@ class Chat extends React.Component<ChatProps, ChatState> {
     this.state.chat.leaveRoom(roomId);
   }
 
-  slashCommand = (command: string) : void => {
+  slashCommand = (command: string) : boolean => {
     const cmd = new SlashCommand(command);
-    cmd.exec(this.state.chat);
+    return cmd.exec(this.state.chat);
   }
 
   close = () : void => {

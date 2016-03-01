@@ -49,9 +49,8 @@ class ChatInput extends React.Component<ChatInputProps, ChatInputState> {
   send() : void {
     const input : any = this.getInputNode();
     const value: string = input.value.trim();
-    if (value[0] === '/') {
-      this.props.slashCommand(value.substr(1));
-    } else {
+    if (value[0] !== '/' || !this.props.slashCommand(value.substr(1))) {
+      // not a recognised / command, send it
       this.props.send(value);
     }
     input.value = '';

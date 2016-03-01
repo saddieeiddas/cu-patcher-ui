@@ -28,8 +28,26 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
     s += d.toLocaleTimeString();
     return s;
   }
-  render(): JSX.Element {
+  buildMessage(timestamp: JSX.Element, text: string, classes: string = null): JSX.Element {
     const parser = new ChatLineParser();
+    const isAction: boolean = parser.isAction(text);
+    let nick: string = this.props.message.nick;
+    let elements: JSX.Element[];
+    if (isAction) {
+      elements = parser.parseAction(text);
+    } else {
+      nick += ':';
+      elements = parser.parse(text);
+    }
+    return (
+      <div className={'chat-line' + (classes ? ' ' + classes : '') }>
+            {timestamp}
+            <span className="chat-line-nick" onClick={this.PM.bind(this) }>{nick}</span>
+            {elements}
+      </div>
+    );
+  }
+  render(): JSX.Element {
     let element: JSX.Element;
     let timestamp : JSX.Element = <span className="chat-timestamp">{ this.timestamp(this.props.message) }</span>;
     switch(this.props.message.type) {
@@ -48,22 +66,10 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
         );
         break;
       case chatType.GROUP:
-        element = (
-          <div className="chat-line">
-            {timestamp}
-            <span className="chat-line-nick" onClick={this.PM.bind(this)}>{this.props.message.nick}:</span>
-            {parser.parse(this.props.message.text)}
-          </div>
-        );
+        element = this.buildMessage(timestamp, this.props.message.text);
         break;
       case chatType.PRIVATE:
-        element = (
-          <div className="chat-line chat-private">
-            {timestamp}
-            <span className="chat-line-nick">{this.props.message.nick}:</span>
-            {parser.parse(this.props.message.text)}
-          </div>
-        );
+        element = this.buildMessage(timestamp, this.props.message.text, 'chat-private');
         break;
       case chatType.SYSTEM:
       case chatType.BROADCAST:
