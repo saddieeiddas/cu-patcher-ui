@@ -5,50 +5,54 @@
  */
 
 @font-face {
-  font-family: 'Roboto';
-  src: url(../font/Roboto/Roboto-Regular.ttf) format('truetype');
+  font-family: 'TitilliumWeb';
+  src: url(../font/TitilliumWeb/TitilliumWeb-Regular.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'RobotoItalic';
-  src: url(../font/Roboto/Roboto-Italic.ttf) format('truetype');
+  font-family: 'TitilliumWebItalic';
+  src: url(../font/TitilliumWeb/TitilliumWeb-Italic.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'RobotoBold';
-  src: url(../font/Roboto/Roboto-Bold.ttf) format('truetype');
+  font-family: 'TitilliumWebBold';
+  src: url(../font/TitilliumWeb/TitilliumWeb-Bold.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'RobotoBoldItalic';
-  src: url(../font/Roboto/Roboto-BoldItalic.ttf) format('truetype');
+  font-family: 'TitilliumWebBoldItalic';
+  src: url(../font/TitilliumWeb/TitilliumWeb-BoldItalic.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+html {
+  font-family: 'TitilliumWeb', sans-serif;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'TitilliumWeb', sans-serif;
 }
 
 h1 {
-  font-family: 'RobotoBold';
+  font-family: 'TitilliumWebBold';
   font-weight: normal;
 }
 
 em {
-  font-family: 'RobotoItalic';
+  font-family: 'TitilliumWebItalic';
   font-weight: normal;
   font-style: normal;
 }
 
 strong em {
-  font-family: 'RobotoBoldItalic';
+  font-family: 'TitilliumWebBoldItalic';
   font-weight: normal;
   font-style: normal;
 }
