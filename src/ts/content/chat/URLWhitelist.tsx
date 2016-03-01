@@ -56,9 +56,9 @@ function isVideo(text: string) {
 	} else if (twitchURL) {
 		let twitchMatch: RegExpMatchArray = text.match(/^.*twitch\.tv\/(\w+)\/?(?:v\/([0-9]+))?$/);
 		if (twitchMatch && twitchMatch[2]) {
-			return "http://player.twitch.tv/?video=v" + twitchMatch[2];
+			return "http://player.twitch.tv/?video=v" + twitchMatch[2] + "&!autoplay";
 		} else if (twitchMatch) {
-			return "http://player.twitch.tv/?channel=" + twitchMatch[1];
+			return "http://player.twitch.tv/?channel=" + twitchMatch[1] + "&!autoplay";
 		} else {
 			return null;
 		}
