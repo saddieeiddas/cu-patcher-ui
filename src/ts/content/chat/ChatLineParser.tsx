@@ -5,6 +5,7 @@
  */
 
 import * as React from 'react';
+import { ChatTextParser, ChatTextParserToken } from './ChatTextParser';
 import Emoji from './Emoji';
 import URLRegExp from './URLRegExp';
 import Whitelist from './URLWhitelist';
@@ -12,7 +13,15 @@ import Whitelist from './URLWhitelist';
 import {prefixes, display} from './settings/chat-defaults';
 
 class ChatLineParser {
-  key: number = 0;
+  _key: number = 0;
+
+  static LINK: number = ChatTextParser.TEXT + 1;
+  static EMOJI: number = ChatTextParser.TEXT + 2;
+  
+  // Settings from Patcher Options
+  _embedImages: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.embedImages.key}`));
+  _embedVideos: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.embedVideos.key}`));
+  _showEmoticons: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showEmoticons.key}`));
 
   _fixupLink(url: string) : string {
     if (url.indexOf('www.') == 0) {
@@ -21,81 +30,58 @@ class ChatLineParser {
     return url;
   }
 
-  // parse text, replace emoticon's with their emoji counterparts
-  _makeTextWithEmoji(text: string): JSX.Element[] {
-    const html: JSX.Element[] = [];
-    const re: RegExp = Emoji.regexp;
-    let next: number = 0;
-    let match: RegExpExecArray;
-    let emoji: string;
-    for (match = re.exec(text); match; match = re.exec(text)) {
-      if (match.index > next) {
-        html.push(<span key={this.key++} className="chat-line-message">{text.substr(next, match.index - next)}</span>);
-      }
-      emoji = Emoji.fromText(match[0]);
-      if (emoji) {
-        html.push(
-          <span key={this.key++} className={'chat-emoticon emote-' + emoji}></span>
-        );
-      } else {
-        html.push(<span key={this.key++} className="chat-line-message">{match[0]}</span>);
-      }
-      next = match.index + match[0].length;
+  _parseLink(text: string) : JSX.Element[] {
+    const videoMatch: string = this._embedVideos ? Whitelist.isVideo(text) : null;
+    const vineMatch: string = this._embedVideos ? Whitelist.isVine(text) : null;
+    const href : string = this._fixupLink(text);
+
+    // Video link (youtube)
+    if (videoMatch) {
+      return [
+        <a key={this._key++} className="chat-line-message" target="_blank" href={href}>
+          <iframe className='chat-line-video' src={videoMatch} allowFullScreen></iframe>
+        </a>
+      ];
+    } 
+    
+    // Vine link (vine)
+    else if (vineMatch) {
+      return [
+        <a key={this._key++} className="chat-line-message" target="_blank" href={href}>
+          <iframe className='chat-line-vine' src={vineMatch}></iframe>
+          <script src="https://platform.vine.co/static/scripts/embed.js"></script>
+        </a>
+      ];
+    } 
+
+    // Image link (whitelisted)
+    else if (this._embedImages && Whitelist.isImage(text) && Whitelist.ok(text)) {
+      return [
+        <a key={this._key++} className="chat-line-message" target="_blank" href={href}>
+          <img className='chat-line-image' src={text} title={text}/>
+        </a>
+      ];
+    } 
+
+    // all other links
+    return [ <a key={this._key++} className="chat-line-message" target="_blank" href={href}>{text}</a> ];
+  }
+  
+  _parseEmoji(text: string) : JSX.Element[] {
+    const emoji : string = Emoji.fromText(text);
+    if (emoji) {
+      return [<span key={this._key++} className={'chat-emoticon emote-' + emoji}></span>];
     }
-    if (next < text.length) {
-      html.push(<span key={this.key++} className="chat-line-message">{text.substr(next)}</span>);
-    }
-    return html;
   }
 
-  // parse text, replacing urls with either clickable links, or clickable image thumbnails.
-  _makeLinks(text: string): JSX.Element[] {
-    const re: RegExp = URLRegExp.create();
-    let html: JSX.Element[] = [];
-    let next: number = 0;
-    let match: RegExpExecArray;
-    let embedImages = JSON.parse(localStorage.getItem(`${prefixes.display}${display.embedImages.key}`));
-    let embedVideos = JSON.parse(localStorage.getItem(`${prefixes.display}${display.embedVideos.key}`));
-    let showEmoticons = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showEmoticons.key}`));
-    for (match = re.exec(text); match; match = re.exec(text)) {
-      if (match.index > next) {
-        html = html.concat(showEmoticons ? this._makeTextWithEmoji(text.substr(next, match.index - next)) : [<span key={this.key++} className="chat-line-message">{text.substr(next, match.index - next)}</span>]);
-      }
-      let videoMatch: string = embedVideos ? Whitelist.isVideo(match[0]) : null;
-      let vineMatch: string = embedVideos ? Whitelist.isVine(match[0]) : null;
-      if (embedImages && Whitelist.isImage(match[0]) && Whitelist.ok(match[0])) {
-        html.push(
-          <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
-            <img className='chat-line-image' src={match[0]} title={match[0]}/>
-          </a>
-        );
-      } else if (videoMatch) {
-        html.push(
-          <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
-            <iframe className='chat-line-video' src={videoMatch} allowFullScreen></iframe>
-          </a>
-        );
-      } else if (vineMatch) {
-        html.push(
-          <a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>
-            <iframe className='chat-line-vine' src={vineMatch}></iframe><script src="https://platform.vine.co/static/scripts/embed.js"></script>
-          </a>
-        );
-      } else {
-        html.push(<a key={this.key++} className="chat-line-message" target="_blank" href={this._fixupLink(match[0])}>{match[0]}</a>);
-      }
-      next = match.index + match[0].length;
-    }
-    if (next < text.length) {
-      html = html.concat(showEmoticons ? this._makeTextWithEmoji(text.substr(next)) : [<span key={this.key++} className="chat-line-message">{text.substr(next)}</span>]);
-    }
-    return html;
+  _parseText(text: string) : JSX.Element[] { 
+    return [ <span key={this._key++} className="chat-line-message">{text}</span> ];
   }
-
+  
   parseAction(text: string): JSX.Element[] {
     const html: JSX.Element[] = [];
-    const content : JSX.Element[] = this._makeLinks(text.substr(4).trim());
-    html.push(<span className="chat-line-action">&lt;{content}&gt;</span>);
+    const content : JSX.Element[] = this.parse(text.substr(4).trim());
+    html.push(<span key={this._key++} className="chat-line-action">&lt;{content}&gt;</span>);
     return html;
   }
 
@@ -103,12 +89,24 @@ class ChatLineParser {
      return text.toLowerCase().substr(0, 4) === '/me ';
   }
 
-  // parse chat text, and return a bunch of JSX elements.  The parser first looks for links, then makes them either
-  // clickable or image thumbnails. For the remaining text that isn't links, it searches for emoji sequences and
-  // replaces ones it recongnises with the emoji icon.
-  public parse(text: string): JSX.Element[] {
-    return this._makeLinks(text);
+  parse(text: string): JSX.Element[] {
+    const tokens : ChatTextParserToken[] = [
+      { token: ChatLineParser.LINK,  expr: URLRegExp.create() },      
+    ];
+    if (this._showEmoticons) {
+      tokens.push({ token: ChatLineParser.EMOJI, expr: Emoji.regexp });
+    }
+    const parser : ChatTextParser = new ChatTextParser(tokens);
+    return parser.parse(text, (token: number, text: string) => {
+      switch(token) {
+        case ChatLineParser.LINK:  return this._parseLink(text);
+        case ChatLineParser.EMOJI: return this._parseEmoji(text);
+      }
+      // treat everything else as just text
+      return this._parseText(text);
+    });
   }
+
 }
 
 export default ChatLineParser;
