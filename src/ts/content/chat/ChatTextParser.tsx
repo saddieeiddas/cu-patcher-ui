@@ -42,7 +42,7 @@ class ChatTextParser {
         insert = callback(this.tokens[index].token, match[0]);
         if (!insert) {
           // text didn't match after all, parse again
-          insert = this.parse(section, callback, index + 1);
+          insert = this.parse(match[0], callback, index + 1);
         }
         html = html.concat(insert);                                            
 
