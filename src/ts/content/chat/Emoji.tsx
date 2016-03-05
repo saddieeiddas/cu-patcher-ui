@@ -4,7 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-function fromText(text:string) {
+function fromText(text:string): string {
   switch(text) {
     case ':angry:': case ':[': case ':-[':
       return 'angry';
