@@ -306,11 +306,12 @@
               content: "";
               background: url('../images/chat/chat-icon-cse.png') #2F2F2F;
               background-size: contain;
-              float: left;
               height: 20px;
               width: 20px;
-              display: block;
-              margin: 0px 5px 0px 0px;
+              display: inline-block;
+              margin: -6px 5px 0px -2px;
+              top: 6px;
+              position: relative;
             }
           }
           .chat-line-message {
