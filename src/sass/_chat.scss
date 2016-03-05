@@ -28,6 +28,7 @@
   height: 100%;
   box-sizing: border-box;
   padding-top: 40px;
+  padding-left: 5px;
   background-color: rgba(0,0,0,0.75);
   line-height: 1em;
   text-align: left;     /* override #Content style */
@@ -299,12 +300,17 @@
             margin-right: 0.5em;
           }
           .cse {
-            color: #fff;
-            background-color: #00C357;
-            border-radius: 5px;
-            padding: 0 4px;
+            color: #FF5E44;
+            padding: 2px;
             &:before {
-              content: 'CSE '
+              content: "";
+              background: url('../images/chat/chat-icon-cse.png') #2F2F2F;
+              background-size: contain;
+              float: left;
+              height: 20px;
+              width: 20px;
+              display: block;
+              margin: 0px 5px 0px 0px;
             }
           }
           .chat-line-message {
@@ -478,4 +484,12 @@
     font-size: 8px;
   }
 
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #FFCC3C;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #776329;    
 }
