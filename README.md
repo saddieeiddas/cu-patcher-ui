@@ -4,69 +4,41 @@ cu-patcher-ui
 > Camelot Unchained Patcher UI
 
 ---
-*Notice: This library is currently under heavy development and is not guaranteed to be in a working state as this time.  This notice will be removed when the library is stable.*
+*Notice: This project is currently under heavy development and is not guaranteed to be in a working state as this time.  This notice will be removed when the library is stable.*
 
 Installation
 ------------
-##### 1. clone this repository
+### 1. clone this repository
 ```
 git clone https://github.com/CUModSquad/cu-patcher-ui.git
 ```
-##### 2. install npm packages
+
+### 2. Install required npm global dependencies
+```sh
+npm i -g babel-cli babel-core babel-preset-es2015 node-sass browserify typescript@1.8.0 typings mkdirp http-server
 ```
+
+### 3. Install
+```sh
 npm install
 ```
 
-
-Build
------
-
-#### Gulp Tasks
-
-##### default
-*build & watch directory for changes*
-```
-gulp
-```
-##### build
-*build the ui once*
-```
-gulp build
+### 4. Build
+```sh
+npm run build
 ```
 
-##### server
-*load the `dist` folder into a local server to view in browser*
-```
-gulp server
-```
-
-##### --server
-*run server command as part of default task*
-```
-gulp --server
+### 5. Serve
+```sh
+npm run serve
 ```
 
-A full list of commands and arguments can be found **[here](https://github.com/csegames/cu-build-tools#modulelibrary---builder)**
-
-#### Changing Build & Publish Directories
-
-You can override the configuration specified in `cu-build.config.js` by creating a file called `user-cu-build.config.js`
-
-If you wanted to change the build directory from `dist` to `build` you could add the following to your user configuration:
-
-```js
-// add configuration here to override cu-build.config.js
-module.exports = {
-  bundle: {
-    dest: 'build'
-  }
-};
-
-```
+### 6. Preview
+Navigate to http://localhost:9000
 
 
 Software Requirements
 ---------------------
 - Git
-- NodeJs 4
-- NPM 3.3.x
+- NodeJs 5.x.x
+- NPM 3.5.x
