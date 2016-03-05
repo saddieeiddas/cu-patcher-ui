@@ -43,7 +43,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
     return (
       <div className={'chat-line' + (classes ? ' ' + classes : '') }>
             {timestamp}
-            <span className="chat-line-nick" onClick={this.PM.bind(this) }>{nick}</span>
+            <span className={`chat-line-nick ${this.props.message.isCSE ? 'cse' : ''}`} onClick={this.PM.bind(this) }>{nick}</span>
             {elements}
       </div>
     );

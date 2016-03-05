@@ -298,6 +298,15 @@
             cursor: pointer;
             margin-right: 0.5em;
           }
+          .cse {
+            color: #fff;
+            background-color: #00C357;
+            border-radius: 5px;
+            padding: 0 4px;
+            &:before {
+              content: 'CSE '
+            }
+          }
           .chat-line-message {
             color: $chat-line-message-color;
           }
