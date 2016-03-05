@@ -13,27 +13,27 @@ Installation
 git clone https://github.com/CUModSquad/cu-patcher-ui.git
 ```
 
-### 2. Install required npm global dependencies
-```sh
-npm i -g babel-cli babel-core babel-preset-es2015 node-sass browserify typescript@1.8.0 typings mkdirp http-server
-```
-
-### 3. Install
+### 2. Install
 ```sh
 npm install
 ```
 
-### 4. Build
+### 3. Build
+Windows:
 ```sh
 npm run build
 ```
+OSX/Linux:
+```sh
+npm run build:nix
+```
 
-### 5. Serve
+### 4. Serve
 ```sh
 npm run serve
 ```
 
-### 6. Preview
+### 5. Preview
 Navigate to http://localhost:9000
 
 
