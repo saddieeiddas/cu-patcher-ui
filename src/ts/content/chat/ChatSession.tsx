@@ -89,6 +89,7 @@ class ChatSession {
             args.roomName,
             args.sender.sender,
             args.message,
+            args.sender.isCSE,
             args.time
           )
         );
