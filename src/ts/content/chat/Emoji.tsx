@@ -26,7 +26,7 @@ function fromText(text:string) {
       return 'happy';
     case ':hipster:':
       return 'hipster';
-    case ':neutral:':
+    case ':neutral:': case ':|': case ':-|':
       return 'neutral';
     case ':sad:': case ':(': case ':-(':
       return 'sad';
