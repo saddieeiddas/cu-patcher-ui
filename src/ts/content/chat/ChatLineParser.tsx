@@ -94,7 +94,7 @@ class ChatLineParser {
       { token: ChatLineParser.LINK,  expr: URLRegExp.create() },      
     ];
     if (this._showEmoticons) {
-      tokens.push({ token: ChatLineParser.EMOJI, expr: Emoji.regexp });
+      tokens.push({ token: ChatLineParser.EMOJI, expr: Emoji.createRegExp() });
     }
     const parser : ChatTextParser = new ChatTextParser(tokens);
     return parser.parse(text, (token: number, text: string) => {
