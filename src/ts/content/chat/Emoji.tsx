@@ -4,7 +4,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-function fromText(text:string): string {
+import * as React from 'react';
+
+function emojiNameFromText(text:string): string {
   switch(text) {
     case ':angry:': case ':[': case ':-[':
       return 'angry';
@@ -47,6 +49,13 @@ function fromText(text:string): string {
       return 'wondering';
   }
   return null;
+}
+
+function fromText(text: string, keygen: () => number) : JSX.Element[] {
+  const emoji : string = emojiNameFromText(text);
+  if (emoji) {
+    return [<span key={keygen()} className={'chat-emoticon emote-' + emoji}></span>];
+  }
 }
 
 function createRegExp() : RegExp {
