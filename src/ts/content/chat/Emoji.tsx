@@ -49,9 +49,11 @@ function fromText(text:string): string {
   return null;
 }
 
-const regexp : RegExp = /[3]*[;:8][-']*[()@oO#$*pPD/|><]|\([6aAhH]\)|-_-zzZ|\(-_-\)zzZ|[oO]\.[oO]|:[a-z]*:/g;
+function createRegExp() : RegExp {
+  return /[3]*[;:8][-']*[()@oO#$*pPD/|><]|\([6aAhH]\)|-_-zzZ|\(-_-\)zzZ|[oO]\.[oO]|:[a-z]*:/g;
+}
 
 export default {
   fromText,
-  regexp
+  createRegExp
 }
