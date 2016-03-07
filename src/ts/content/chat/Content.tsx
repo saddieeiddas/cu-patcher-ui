@@ -8,27 +8,27 @@ import * as React from 'react';
 import ChatText from './ChatText';
 import ChatInput from './ChatInput';
 import ChatLine from './ChatLine';
+import ChatRoomInfo from './ChatRoomInfo';
 import { ChatMessage } from './ChatMessage';
 import RoomId from './RoomId';
 
 export interface ContentState {
 }
 export interface ContentProps {
-  messages: JSX.Element[];              // ChatLine elements to render
-  currentRoom: RoomId;                  // current room
+  room: ChatRoomInfo;                   // current room
   send: (roomId: RoomId, text: string) => void;
   slashCommand: (command: string) => void;
 }
 
 class Content extends React.Component<ContentProps, ContentState> {
   send = (text: string) : void => {
-    this.props.send(this.props.currentRoom, text);
+    this.props.send(this.props.room.roomId, text);
   }
   
   render() {
     return (
       <div className="chat-content">
-        <ChatText messages={this.props.messages} currentRoom={this.props.currentRoom}/>
+        <ChatText room={this.props.room}/>
         <ChatInput label="SEND" send={this.send} slashCommand={this.props.slashCommand}/>
       </div>
     );
