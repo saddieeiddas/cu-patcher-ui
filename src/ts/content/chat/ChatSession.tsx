@@ -22,6 +22,7 @@ class ChatSession {
   client: ChatClient = null;
   me: string = "me";
   latency: number;
+  windowActive = true;
 
   constructor() {
       this.onconnect = this.onconnect.bind(this);
@@ -29,6 +30,13 @@ class ChatSession {
       this.onping = this.onping.bind(this);
       this.onchat = this.onchat.bind(this);
       this.ondisconnect = this.ondisconnect.bind(this);
+      
+      window.onblur = () => this.windowActive = false;
+      window.onfocus = () => {
+        this.windowActive = true;
+        var room = this.getRoom(this.currentRoom);
+        if (room) room.seen();
+      }
   }
 
   connect() {
@@ -146,7 +154,7 @@ class ChatSession {
       if (!this.currentRoom) {
         this.currentRoom = roomId;
       }
-      if (this.currentRoom.same(roomId)) {
+      if (this.windowActive && this.currentRoom.same(roomId)) {
         room.seen();
       }
       events.fire('chat-session-update', this);
