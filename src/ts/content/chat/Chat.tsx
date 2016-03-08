@@ -108,6 +108,8 @@ class Chat extends React.Component<ChatProps, ChatState> {
 
   // Render chat
   render() {
+    const current : RoomId = this.state.chat.currentRoom;
+    const room : ChatRoomInfo = current ? this.state.chat.getRoom(current) : undefined;
     return (
       <div id={this.name} className="cse-chat chat-container no-select">
         <div className="chat-disconnect" onClick={this.disconnect}>{this.state.chat.latency}</div>
@@ -119,8 +121,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
             leaveRoom={this.leaveRoom}
             />
           <Content
-            currentRoom={this.state.chat.currentRoom}
-            messages={this.state.chat.currentRoom ? this.getCurrentRoom().messages : undefined}
+            room={room}
             send={this.send}
             slashCommand={this.slashCommand}
             />

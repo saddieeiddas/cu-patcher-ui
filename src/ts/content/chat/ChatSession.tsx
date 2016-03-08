@@ -14,6 +14,9 @@ import ChatClient from '../../chat/ChatClient';
 import messageType from '../../chat/messageType';
 
 class ChatSession {
+  
+  SCROLLBACK_THRESHOLD : number = 50;
+  SCROLLBACK_PAGESIZE : number = 100;
 
   rooms: ChatRoomInfo[] = [];
   currentRoom: RoomId = undefined;
@@ -170,7 +173,7 @@ class ChatSession {
       // enter or leave
       if (type === messageType.AVAILIBLE) {
         room.addUser(user);
-        room.add(new ChatMessage(chatType.AVAILABLE, '', user.name));      
+        room.add(new ChatMessage(chatType.AVAILABLE, '', user.name));
       } else {
         room.removeUser(user);
         room.add(new ChatMessage(chatType.UNAVAILABLE, '', user.name));      
@@ -195,7 +198,11 @@ class ChatSession {
   getRoom(roomId: RoomId, add: boolean = true) : ChatRoomInfo {
     let room : ChatRoomInfo = this.findRoom(roomId);
     if (!room && add) {
-      room = new ChatRoomInfo(roomId);
+      room = new ChatRoomInfo(
+        roomId,
+        this.SCROLLBACK_THRESHOLD,
+        this.SCROLLBACK_PAGESIZE
+      );
       this.rooms.push(room);
     }
     return room;
@@ -227,7 +234,9 @@ class ChatSession {
     if (!this.findRoom(roomId)) {
       this.client.joinRoom(roomId.name);
     }
-    this.getRoom(roomId).seen();
+    const room: ChatRoomInfo = this.getRoom(roomId);
+    room.seen();
+    room.startScrollback();
     this.setCurrentRoom(roomId);
   }
 
@@ -245,6 +254,7 @@ class ChatSession {
       if (roomId.same(this.currentRoom)) {
         if (this.rooms.length) {
           this.currentRoom = this.rooms[0].roomId;
+          this.rooms[0].startScrollback();
         } else {
           this.currentRoom = undefined;
         }

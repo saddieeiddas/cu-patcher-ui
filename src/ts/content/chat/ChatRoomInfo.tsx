@@ -19,8 +19,13 @@ class ChatRoomInfo {
   type: chatType;
   players: number = 0;
   unread: number = 0;
-  constructor(roomId: RoomId) {
+  scrollback: number = 0;
+  scrollbackPageSize: number;
+  scrollbackThreshold: number;
+  constructor(roomId: RoomId, scrollbackThreshold: number = 50, scrollbackPageSize: number = 50) {
     this.roomId = roomId;
+    this.scrollbackThreshold = scrollbackThreshold;
+    this.scrollbackPageSize = scrollbackPageSize;
   }
   public addUser(user: UserInfo) : void {
     this.users.push(<User key={this.key++} info={user}/>);
@@ -52,6 +57,23 @@ class ChatRoomInfo {
   }
   public seen() : void {
     this.unread = 0;
+  }
+  public startScrollback() : void {
+    if (this.messages.length > this.scrollbackThreshold) { 
+      this.scrollback = this.messages.length - this.scrollbackThreshold;
+    } else {
+      this.scrollback = 0;
+    }
+  }
+  public cancelScrollback() : void {
+    this.scrollback = 0;
+  }
+  public nextScrollbackPage() : void {
+    if (this.scrollbackPageSize > this.scrollback) {
+      this.cancelScrollback();
+    } else {
+      this.scrollback -= this.scrollbackPageSize;
+    }
   }
 }
 
