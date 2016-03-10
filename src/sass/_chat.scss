@@ -504,3 +504,47 @@
 .switch label input[type=checkbox]:checked+.lever {
     background-color: #776329;    
 }
+
+.join-room-modal {
+  width: 400px;
+  height: 200px;
+  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -100px;
+  z-index: 999;
+  background: linear-gradient(#131313, rgba(0, 0, 0, 0.4));
+  border-width: 1px;
+  border-image: linear-gradient(to bottom left, transparent, rgba(132, 132, 132, 0.32), transparent);
+  border-image-slice: 1;    
+  padding: 1em;
+  ::-webkit-input-placeholder {
+    color: #776329;
+  }
+}
+
+.join-room-modal button {
+    background: linear-gradient(rgba(255, 209, 24, 0.2), rgba(189, 174, 0, 0.2));
+    border: solid #FFE14E 1px;
+    color: #eaeaea;
+    position: relative;
+    right: -22px;
+    top: 9px;
+    margin: 5px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.fullscreen-blackout {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 998;
+  background-color: rgba(20, 20, 20, 0.5);
+}
