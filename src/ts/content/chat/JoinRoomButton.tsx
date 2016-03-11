@@ -52,8 +52,8 @@ class JoinRoomButton extends React.Component<JoinRoomButtonProps, JoinRoomButton
     return (
       <div>
         <div className="chat-room-join-button" onClick={this.showModal}>+ Join Room</div>
-        <Animate animationEnter='bounceInUp' animationLeave='bounceOutDown'
-          durationEnter={700} durationLeave={500}>
+        <Animate animationEnter='slideInUp' animationLeave='slideOutDown'
+          durationEnter={400} durationLeave={500}>
           {modal}
         </Animate>
       </div>

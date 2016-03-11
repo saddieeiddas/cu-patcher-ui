@@ -507,7 +507,7 @@
 
 .join-room-modal {
   width: 400px;
-  height: 200px;
+  height: 165px;
   margin: 0 auto;
   position: fixed;
   left: 50%;
@@ -517,7 +517,7 @@
   z-index: 999;
   background: linear-gradient(#131313, rgba(0, 0, 0, 0.4));
   border-width: 1px;
-  border-image: linear-gradient(to bottom left, transparent, rgba(132, 132, 132, 0.32), transparent);
+  border-image: $gradient-border-modal;
   border-image-slice: 1;    
   padding: 1em;
   ::-webkit-input-placeholder {
@@ -526,17 +526,22 @@
 }
 
 .join-room-modal button {
-    background: linear-gradient(rgba(255, 209, 24, 0.2), rgba(189, 174, 0, 0.2));
-    border: solid #FFE14E 1px;
+    background: $gradient2;
+    border: solid $colorg2 1px;
     color: #eaeaea;
     position: relative;
-    right: -22px;
     top: 9px;
     margin: 5px;
-    height: 30px;
     line-height: 30px;
     font-weight: 700;
     text-align: center;
+    &[disabled]{
+        opacity: .5;
+    }
+    &:hover {
+      filter: brightness(1.2);
+      -webkit-filter: brightness(1.2);
+    }
 }
 
 .fullscreen-blackout {
