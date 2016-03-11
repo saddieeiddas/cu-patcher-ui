@@ -16,7 +16,7 @@ function fromText(text: string, keygen: () => number) : JSX.Element[] {
     let matchBeginChar: string = match[1] ? match[1] : '';
     let matchColor: string = match[2];
     let matchText: string = matchBeginChar + match[3];
-    return [<span key={keygen()} style={{ color: matchColor }}>{this.parse(matchText) || matchText}</span>];
+    return [<span key={keygen()} style={{ color: matchColor }}>{this.parse(matchText)}</span>];
   }
 }
 
@@ -26,7 +26,7 @@ function parse(text: string): JSX.Element[] {
 }
 
 function createRegExp() : RegExp {
-  return /(^|\s)::([A-Za-z]+|#[A-Fa-f0-9]{6})::([\S\s]+)/g;
+  return /(^|\s)::([A-Za-z]+|#[A-Fa-f0-9]{6})::([\S\s]+)$/g;
 }
 
 export default {

@@ -14,7 +14,7 @@ import Links from './Links';
 import Markdown from './Markdown';
 
 class ChatLineParser {
-  _key: number = 0;
+  _key: number = 1;
 
   _showColors: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showColors.key}`));
   _showEmoticons: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showEmoticons.key}`));
@@ -44,11 +44,11 @@ class ChatLineParser {
     const keygen = () : number => { return this._key++; };
     const tokens : ChatTextParserToken[] = [];
     // Parsers which need recursion should be first
-    if (this._showMarkdown) {
-      tokens.push({ token: ChatLineParser.MARKDOWN, expr: Markdown.createRegExp() });
-    }
     if (this._showColors) {
       tokens.push({ token: ChatLineParser.COLORS, expr: Colors.createRegExp() });
+    }
+    if (this._showMarkdown) {
+      tokens.push({ token: ChatLineParser.MARKDOWN, expr: Markdown.createRegExp() });
     }
     // Parsers with simple search/replace should be last
     tokens.push({ token: ChatLineParser.LINK, expr: Links.createRegExp()} );

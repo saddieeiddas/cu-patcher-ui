@@ -38,7 +38,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
       elements = parser.parseAction(text);
     } else {
       nick += ':';
-      elements = [ <span className="chat-line-message">{parser.parse(text)}</span> ];
+      elements = [ <span key="0" className="chat-line-message">{parser.parse(text)}</span> ];
     }
     return (
       <div className={'chat-line' + (classes ? ' ' + classes : '') }>

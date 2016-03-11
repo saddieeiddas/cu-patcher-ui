@@ -18,9 +18,9 @@ function fromText(text: string, keygen: () => number) : JSX.Element[] {
     let matchCount: number = match[2] ? match[2].length : match[4].length;
     let matchText: string = match[2] ? matchBeginChar + match[3] + matchEndChar : matchBeginChar + match[5] + matchEndChar;
     if (matchCount === 1) {
-      return [<i key={keygen()}>{this.parse(matchText) || matchText}</i>];
+      return [<i key={keygen()}>{this.parse(matchText)}</i>];
     } else {
-      return [<b key={keygen()}>{this.parse(matchText) || matchText}</b>];
+      return [<b key={keygen()}>{this.parse(matchText)}</b>];
     }
   }
 }
