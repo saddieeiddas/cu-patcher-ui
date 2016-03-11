@@ -6,22 +6,29 @@
 
 import * as React from 'react';
 import { ChatTextParser, ChatTextParserToken } from './ChatTextParser';
-import Emoji from './Emoji';
-import Links from './Links';
 import {prefixes, display} from './settings/chat-defaults';
+
+import Emoji from './Emoji';
+import Colors from './Colors';
+import Links from './Links';
+import Markdown from './Markdown';
 
 class ChatLineParser {
   _key: number = 0;
 
+  _showColors: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showColors.key}`));
   _showEmoticons: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showEmoticons.key}`));
+  _showMarkdown: boolean = JSON.parse(localStorage.getItem(`${prefixes.display}${display.showMarkdown.key}`));
 
   static LINK: number = ChatTextParser.TEXT + 1;
   static EMOJI: number = ChatTextParser.TEXT + 2;
-  
-  _parseText(text: string) : JSX.Element[] { 
-    return [ <span key={this._key++} className="chat-line-message">{text}</span> ];
+  static MARKDOWN: number = ChatTextParser.TEXT + 3;
+  static COLORS: number = ChatTextParser.TEXT + 4;
+
+  _parseText(text: string) : JSX.Element[] {
+    return [ <span key={this._key++}>{text}</span> ];
   }
-  
+
   parseAction(text: string): JSX.Element[] {
     const html: JSX.Element[] = [];
     const content : JSX.Element[] = this.parse(text.substr(4).trim());
@@ -34,18 +41,28 @@ class ChatLineParser {
   }
 
   parse(text: string): JSX.Element[] {
-    const keygen = () : number => { return this._key++; }; 
-    const tokens : ChatTextParserToken[] = [
-      { token: ChatLineParser.LINK,  expr: Links.createRegExp() },      
-    ];
+    const keygen = () : number => { return this._key++; };
+    const tokens : ChatTextParserToken[] = [];
+    // Parsers which need recursion should be first
+    if (this._showMarkdown) {
+      tokens.push({ token: ChatLineParser.MARKDOWN, expr: Markdown.createRegExp() });
+    }
+    if (this._showColors) {
+      tokens.push({ token: ChatLineParser.COLORS, expr: Colors.createRegExp() });
+    }
+    // Parsers with simple search/replace should be last
+    tokens.push({ token: ChatLineParser.LINK, expr: Links.createRegExp()} );
     if (this._showEmoticons) {
       tokens.push({ token: ChatLineParser.EMOJI, expr: Emoji.createRegExp() });
     }
+    // Run through each parser
     const parser : ChatTextParser = new ChatTextParser(tokens);
     return parser.parse(text, (token: number, text: string) => {
       switch(token) {
-        case ChatLineParser.LINK:  return Links.fromText(text, keygen);
+        case ChatLineParser.LINK: return Links.fromText(text, keygen);
         case ChatLineParser.EMOJI: return Emoji.fromText(text, keygen);
+        case ChatLineParser.MARKDOWN: return Markdown.fromText(text, keygen);
+        case ChatLineParser.COLORS: return Colors.fromText(text, keygen);
       }
       // treat everything else as just text
       return this._parseText(text);
