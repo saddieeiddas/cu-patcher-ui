@@ -15,7 +15,9 @@ export interface ChatDisplayProps {
 
 export interface ChatDisplayState {
   embedImages: boolean;
+  showColors: boolean;
   showEmoticons: boolean;
+  showMarkdown: boolean;
   timestamps: boolean;
 }
 
@@ -25,7 +27,7 @@ class ChatDisplay extends React.Component<ChatDisplayProps, ChatDisplayState> {
     super(props);
     this.state = this.initializeState();
   }
-  
+
   // initialize state from local storage
   initializeState = (): ChatDisplayState =>  {
     let state: any = {};
@@ -36,20 +38,20 @@ class ChatDisplay extends React.Component<ChatDisplayProps, ChatDisplayState> {
     }
     return state;
   }
-  
+
   updateItem = (key: string, value: any) => {
     localStorage.setItem(pre.prefix(key), value);
     this.setState(this.initializeState())
   }
-  
+
   setDefaults = () => {
     localStorage.setItem('embed-images', 'True');
-    
+
     return {
-      
+
     }
   }
-  
+
   generateBooleanOption = (option: any) => {
     let state: any = this.state;
     return <BooleanOption key={option.key}
@@ -62,7 +64,7 @@ class ChatDisplay extends React.Component<ChatDisplayProps, ChatDisplayState> {
   }
 
   render() {
-    
+
     let options = new Array();
     for (let key in display) {
       let option = (display as any)[key];
@@ -73,7 +75,7 @@ class ChatDisplay extends React.Component<ChatDisplayProps, ChatDisplayState> {
         default: break;
       }
     }
-    
+
     return (
       <div>
         {options}

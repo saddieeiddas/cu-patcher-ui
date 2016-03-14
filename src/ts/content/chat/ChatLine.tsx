@@ -38,7 +38,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
       elements = parser.parseAction(text);
     } else {
       nick += ':';
-      elements = parser.parse(text);
+      elements = [ <span key="0" className="chat-line-message">{parser.parse(text)}</span> ];
     }
     return (
       <div className={'chat-line' + (classes ? ' ' + classes : '') }>
@@ -52,7 +52,7 @@ class ChatLine extends React.Component<ChatLineProps, ChatLineState> {
     let element: JSX.Element = null;
     let showTimestamp = JSON.parse(localStorage.getItem(`${prefixes.display}${display.timestamps.key}`));
     let timestamp : JSX.Element = showTimestamp ? <span className="chat-timestamp">{ this.timestamp(this.props.message) }</span> : null;
-    
+
     let joinParts = JSON.parse(localStorage.getItem(`${prefixes.display}${display.joinParts.key}`));
     switch(this.props.message.type) {
       case chatType.AVAILABLE:

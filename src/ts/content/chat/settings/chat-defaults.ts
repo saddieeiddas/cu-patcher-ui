@@ -16,36 +16,50 @@ export const display = {
     key: 'embed-images',
     type:'boolean',
     default: true,
-    title: 'Embed images',
+    title: 'Embed Images',
     description: 'Display embedded images when a user posts a link to an image from a whitelisted host?'
   },
   embedVideos: {
     key: 'embed-videos',
     type:'boolean',
     default: true,
-    title: 'Embed videos',
+    title: 'Embed Videos',
     description: 'Display embedded videos and vines when a user posts a youtube, vimeo, vine link?'
+  },
+  showColors: {
+    key: 'show-colors',
+    type:'boolean',
+    default: true,
+    title: 'Show Colors',
+    description: 'Display modified text color styles.'
   },
   showEmoticons: {
     key: 'show-emoticons',
     type:'boolean',
     default: true,
-    title: 'Show emoticons',
+    title: 'Show Emoticons',
     description: 'Sometimes words just don`t say enough.'
+  },
+  showMarkdown: {
+    key: 'show-markdown',
+    type:'boolean',
+    default: true,
+    title: 'Show Markdown',
+    description: 'Display modified font styles when markdown is used.'
   },
   timestamps: {
     key: 'timestamps',
     type:'boolean',
     default: false,
-    title: 'Timestamps',
-    description: 'Show a timestamp on each message?'
+    title: 'Show Timestamps',
+    description: 'Display a timestamp on each message?'
   },
   joinParts: {
     key: 'join-parts',
     type:'boolean',
     default: false,
-    title: 'joinParts',
-    description: 'Show join and part messages when a user enter or leaves a channel?'
+    title: 'Show Joins/Parts',
+    description: 'Display join and part messages when a user enter or leaves a channel?'
   },
 };
 
@@ -55,7 +69,7 @@ export const rooms = [
 
 export function initLocalStorage() {
   // Init each of the settings groups here
-  
+
   for (let key in display) {
     let option = (display as any)[key];
     let v = JSON.parse(localStorage.getItem(`${prefixes.display}${option.key}`));
