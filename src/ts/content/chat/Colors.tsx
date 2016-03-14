@@ -26,7 +26,7 @@ function parse(text: string): JSX.Element[] {
 }
 
 function createRegExp() : RegExp {
-  return /(^|\s)::([A-Za-z]+|#[A-Fa-f0-9]{6})::([\S\s]+)$/g;
+  return /(^|\s)::([A-Za-z]+|#[A-Fa-f0-9]{3,6})::([\S\s]+)$/g;
 }
 
 export default {
