@@ -20,6 +20,7 @@ import {PatcherAlert} from '../redux/modules/patcherAlerts';
 
 export interface SidebarProps {
   alerts: Array<PatcherAlert>,
+  onApiUpdated: () => void,
 };
 
 export interface SidebarState {
@@ -56,6 +57,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
      characters: this.state.characters,
      activeServer: this.state.activeServer
     });
+    this.props.onApiUpdated();
   }
   
   onLogOut = () => {

@@ -22,6 +22,8 @@ export interface ChatState {
 }
 
 export interface ChatProps {
+  username: string,
+  userpass: string,
   hideChat: () => void;
 }
 
@@ -91,7 +93,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
   
   componentWillMount() : void {
     // hook up to chat 
-    this.state.chat.connect();
+    this.state.chat.connect(this.props.username, this.props.userpass);
   }
   componentDidMount() : void {
     if (!this.state.chat.currentRoom) {

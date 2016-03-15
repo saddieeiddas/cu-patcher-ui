@@ -6,23 +6,70 @@
 
 import * as React from 'react';
 
-export interface HeroProps {}
-export interface HeroState {}
+import HeroItem from './HeroItem';
+import {HeroContentItem} from '../redux/modules/heroContent';
+import Animate from '../Animate';
+
+export interface HeroProps {
+  isFetching: boolean;
+  didInvalidate: boolean;
+  lastUpdated: Date;
+  items: Array<HeroContentItem>;
+};
+
+export interface HeroState {
+  currentItem: number;
+}
 
 class Hero extends React.Component<HeroProps, HeroState> {
   public name:string = 'cse-patcher-hero';
-
+  private timeout: any = null;
+    
   constructor(props: HeroProps) {
     super(props);
+    this.state = {currentItem: 0};
+    //this.timeNext(1);
+  }
+  
+  renderHeroItem = (item: HeroContentItem) => {
+    return (
+      <div className='cse-patcher-hero-item' key={item.id}>
+        <HeroItem content={item.content}/>
+      </div>
+    )
+  }
+  
+  selectIndex = (index: number) => {
+    console.log(`select ${index}`)
+    clearTimeout(this.timeout);
+    this.setState({
+      currentItem: index
+    });
+    //this.timeNext(index++);
+  }
+  
+  timeNext = (index: number) => {
+    let next = this.state.currentItem++;
+    if (next >= this.props.items.length) next = 0;
+    this.timeout = setTimeout(() => this.selectIndex(next), 10000);
+  }
+  
+  componentWillUnmount() {
+    clearInterval(this.timeout);
   }
 
   render() {
+    var currentItem = this.props.items.length > 0 ? this.renderHeroItem(this.props.items[this.state.currentItem]) : null;
     return (
       <div id={this.name} className='main-content'>
-        <div className='content-area'>
-          <h2>{this.name}</h2>
-          <p>content</p>
-        </div>
+        <Animate animationEnter='fadeIn' animationLeave='fadeOut'
+          durationEnter={400} durationLeave={500}>
+          {currentItem}
+        </Animate>
+        // render controls
+        <ul className='hero-controls'>
+          {this.props.items.map((item, index) => <li key={index} className={`${this.state.currentItem == index ? 'active' : ''}`} onClick={this.selectIndex.bind(this, index)}>{index+1}</li>)}
+        </ul>
       </div>
     );
   }

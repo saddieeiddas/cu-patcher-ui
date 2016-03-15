@@ -21,12 +21,16 @@ let news = newsReducer;
 import patcherAlertsReducer from './patcherAlerts';
 let alerts = patcherAlertsReducer;
 
+import heroContentReducer from './heroContent';
+let heroContent = heroContentReducer;
+
 export default combineReducers({
   location,
   chat,
   channels,
   news,
   alerts,
+  heroContent,
 });
 
 /**
@@ -54,6 +58,12 @@ export default combineReducers({
  *      isFetching: boolean, -- are we currently fetching alert data? (default false)
  *      lastUpdated: Date, -- date of the last update to alerts (default null)
  *      alerts: Array<PatcherAlert>, -- array of alerts to be displayed (default [])
+ *      error?: ResponseError, -- last response error if any (default undefined)
+ *    },
+ *    heroItems: {
+ *      isFetching: boolean, -- are we currently fetching hero item data? (default false)
+ *      lastUpdated: Date, -- date of the last update to hero items (default null)
+ *      items: Array<HeroItem>, -- array of hero items to be displayed (default [])
  *      error?: ResponseError, -- last response error if any (default undefined)
  *    }
  * }

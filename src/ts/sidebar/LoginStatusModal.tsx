@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react';
-import {patcher} from '../core/PatcherAPI';
+import {patcher} from '../api/PatcherAPI';
 
 export enum LoginStatus {
   AUTHENTICATING,
@@ -22,6 +22,7 @@ export interface LoginStatusModalProps {
 
 export interface LoginStatusModalState {
   status: LoginStatus;
+  error?: string,
 };
 
 class LoginStatusModal extends React.Component<LoginStatusModalProps, LoginStatusModalState> {
@@ -48,21 +49,26 @@ class LoginStatusModal extends React.Component<LoginStatusModalProps, LoginStatu
       rememberMe: this.props.rememberMe
     });
     
+    this.setState({status: this.state.status, error: ''});
+    
     // start interval to check login status
     this.intervalCounter = 0;
     this.intervalHandle = setInterval(() => {
       this.intervalCounter += 100;
-      if (patcher.hasLoginToken() && this.intervalCounter > 4000) {
+      if (patcher.hasLoginToken()) {
         // we're logged in!
         sessionStorage.setItem('login', '1');
         clearInterval(this.intervalHandle);
         this.setState({status: LoginStatus.SUCCESS});
         setTimeout(this.props.closeModal, 1000);
-      } else if (this.intervalCounter> 5000) {
+      } else if (this.intervalCounter> 5000 || patcher.hasLoginError()) {
         clearInterval(this.intervalHandle);
         // login failed
-        this.setState({status: LoginStatus.FAILED});
-        setTimeout(this.props.closeModal, 1000);
+        this.setState({
+          status: LoginStatus.FAILED,
+          error: patcher.getLoginError()
+        });
+        setTimeout(this.props.closeModal, 3000);
       }
     }, 100)
   }
@@ -77,7 +83,7 @@ class LoginStatusModal extends React.Component<LoginStatusModalProps, LoginStatu
         break;
       case LoginStatus.FAILED:
         className = 'failed';
-        text = 'Login failed';
+        text = 'Login failed: ' + this.state.error;
         break;
       case LoginStatus.SUCCESS:
         className = 'success';

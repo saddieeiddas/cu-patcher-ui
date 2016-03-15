@@ -28,11 +28,21 @@ class Login extends React.Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
     super(props);
     this.state = {
-      email: '',
+      email: patcher.getUserEmail(),
       password: '',
-      rememberMe: false,
+      rememberMe: patcher.hasUserEmail(),
       showModal: false
     };
+    
+    // because patcherAPI is not ready immediately... hacky, but works enough I think
+    setTimeout(() => {
+      this.state = {
+      email: patcher.getUserEmail(),
+      password: '',
+      rememberMe: patcher.hasUserEmail(),
+      showModal: false
+    };
+    }, 500);
   }
   
   onEmailChanged = (evt: any) => {

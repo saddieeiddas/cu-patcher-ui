@@ -1,0 +1,47 @@
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+
+#cse-patcher-hero {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.cse-patcher-hero-item {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+}
+
+.hero-controls {
+  z-index: 10;
+  margin: auto 0 auto auto;
+  li {
+    opacity: 0.5;
+    cursor: pointer !important;
+    margin: 5px;
+    padding: 0px 5px;
+    border: 2px solid $colorg4;
+    color: $colorg4;
+    border-radius: 5px;
+    list-style: none;
+    &:hover {
+      opacity: 0.75;
+      border-color: $chat-line-emoji-color;
+      color: $chat-line-emoji-color;
+    }
+  }
+  .active {
+    color: white;
+    border-color: white;
+  }
+}

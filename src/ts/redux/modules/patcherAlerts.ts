@@ -51,7 +51,7 @@ export function validateAlerts() {
   return {
     type: VALIDATE_ALERTS,
     now: Date.now()
-  }
+  };
 }
 
 // async actions

@@ -41,8 +41,10 @@ export class PatcherAPI {
       // Install a dummy API (for testing)
       this._api = {
         userEmail: "someone@somewhere.com",
+        userPass: "modsquad",
         loginToken: "dasdakljdajdodaksjdasjd",
-        screenName: "Someone Else",
+        screenName: "chattester",
+        loginError: "",
         channelData: [
           { channelID: 4 },
           { channelID: 10 },
@@ -85,6 +87,20 @@ export class PatcherAPI {
   hasScreenName() :boolean {
     const screenName = this.getScreenName();
     return screenName && screenName.length > 0;
+  }
+  hasLoginError() :boolean {
+    const error = this.getLoginError();
+    return error && error.length > 0;
+  }
+  getLoginError() :string {
+    return this._api.loginError;
+  }
+  hasUserPass() :boolean {
+    const error = this.getUserPass();
+    return error && error.length > 0;
+  }
+  getUserPass() :string {
+    return this._api.userPass;
   }
   private getChannelValue(channel:Channel) : number {
     // force sort order to Hatchery, Wyrmling, Other Channels, and Editor last

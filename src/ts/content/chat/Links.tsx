@@ -31,7 +31,7 @@ function fromText(text: string, keygen:() => number) : JSX.Element[] {
         <iframe className='chat-line-video' src={videoMatch} allowFullScreen></iframe>
       </a>
     ];
-  } 
+  }
   
   // Vine link (vine)
   else if (vineMatch) {

@@ -42,7 +42,7 @@ class ChatSession {
       }
   }
 
-  connect() {
+  connect(username: string, password: string) {
     if (!this.client) {
       this.client = new ChatClient();
       this.client.on('connect', this.onconnect);
@@ -52,10 +52,7 @@ class ChatSession {
       this.client.on('message', this.onchat);
       this.client.on('groupmessage', this.onchat);
       this.client.on('disconnect', this.ondisconnect);
-      this.client.connect(
-        () => { return window.prompt('Username?'); },
-        () => { return window.prompt('Password?'); }
-      );
+      this.client.connect(username, password);
     }
   }
 
